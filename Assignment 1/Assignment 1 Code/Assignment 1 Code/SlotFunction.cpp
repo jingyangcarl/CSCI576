@@ -88,7 +88,10 @@ void Assignment1Code::play() {
 		// update frame
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				image.setPixel(j, i, qRgb(RGB[k * frameSize + i * width * 3 + 3 * j], RGB[k * frameSize + i * width * 3 + 3 * j + 1], RGB[k * frameSize + i * width * 3 + 3 * j + 2]));
+				int r = RGB[k * frameSize + i * width * 3 + 3 * j];
+				int g = RGB[k * frameSize + i * width * 3 + 3 * j + 1];
+				int b = RGB[k * frameSize + i * width * 3 + 3 * j + 2];
+				image.setPixel(j, i, qRgb(r, g, b));
 			}
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
@@ -100,8 +103,23 @@ void Assignment1Code::play() {
 		
 		// update 
 		QCoreApplication::processEvents();
+
+
+		Sleep(-20 * (fpsScaler/20) + 20);
 	}
 
 	// update frame info
 	ui.label_status->setText("Playing Finished");
+}
+
+void Assignment1Code::setWidthScalerVal(int val ) {
+	ui.label_width_scale_val->setText(QString::number(val/10.0));
+}
+
+void Assignment1Code::setHeightScalerVal(int val) {
+	ui.label_height_scale_val->setText(QString::number(val/10.0));
+}
+
+void Assignment1Code::setFPSScalerVal(int val) {
+	ui.label_fps_scale_val->setText(QString::number(val/20.0));
 }

@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include <qfile.h>
 #include <qfiledialog.h>
+#include <Windows.h>
 #include "FileLoader.h"
 #include "ui_Assignment1Code.h"
 
@@ -24,6 +25,9 @@ public:
 public slots:
 	void loadFile();
 	void play();
+	void setWidthScalerVal(int val);
+	void setHeightScalerVal(int val);
+	void setFPSScalerVal(int val);
 
 private:
 	Ui::Assignment1CodeClass ui;
