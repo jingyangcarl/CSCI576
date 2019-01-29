@@ -16,6 +16,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
@@ -30,7 +31,7 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout_2;
-    QGridLayout *gridLayout_3;
+    QGridLayout *gridLayout_1;
     QPushButton *pushButton_load;
     QPushButton *pushButton_play;
     QLabel *label_status;
@@ -53,7 +54,16 @@ public:
     QLabel *label_r_channel_size_val;
     QLabel *label_frames;
     QLabel *label_frames_val;
-    QVBoxLayout *verticalLayout_2_2;
+    QGridLayout *gridLayout_3;
+    QLabel *label_height_scale_val;
+    QLabel *label_width_scale_val;
+    QLabel *label_height_scale;
+    QLabel *label_fps_scale;
+    QSlider *horizontalSlider_height_scale;
+    QLabel *label_fps_scale_val;
+    QSlider *horizontalSlider_fps_scale;
+    QSlider *horizontalSlider_width_scale;
+    QLabel *label_width_scale;
     QTextEdit *textEdit;
     QVBoxLayout *verticalLayout_1;
     QLabel *label_image;
@@ -75,27 +85,27 @@ public:
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_1 = new QGridLayout();
+        gridLayout_1->setSpacing(6);
+        gridLayout_1->setObjectName(QString::fromUtf8("gridLayout_1"));
         pushButton_load = new QPushButton(centralWidget);
         pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
 
-        gridLayout_3->addWidget(pushButton_load, 0, 0, 1, 1);
+        gridLayout_1->addWidget(pushButton_load, 0, 0, 1, 1);
 
         pushButton_play = new QPushButton(centralWidget);
         pushButton_play->setObjectName(QString::fromUtf8("pushButton_play"));
 
-        gridLayout_3->addWidget(pushButton_play, 1, 0, 1, 1);
+        gridLayout_1->addWidget(pushButton_play, 1, 0, 1, 1);
 
         label_status = new QLabel(centralWidget);
         label_status->setObjectName(QString::fromUtf8("label_status"));
         label_status->setAlignment(Qt::AlignCenter);
 
-        gridLayout_3->addWidget(label_status, 2, 0, 1, 1);
+        gridLayout_1->addWidget(label_status, 2, 0, 1, 1);
 
 
-        verticalLayout_2->addLayout(gridLayout_3);
+        verticalLayout_2->addLayout(gridLayout_1);
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
@@ -193,16 +203,64 @@ public:
 
         verticalLayout_2->addLayout(gridLayout_2);
 
-        verticalLayout_2_2 = new QVBoxLayout();
-        verticalLayout_2_2->setSpacing(6);
-        verticalLayout_2_2->setObjectName(QString::fromUtf8("verticalLayout_2_2"));
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        label_height_scale_val = new QLabel(centralWidget);
+        label_height_scale_val->setObjectName(QString::fromUtf8("label_height_scale_val"));
+
+        gridLayout_3->addWidget(label_height_scale_val, 3, 1, 1, 1);
+
+        label_width_scale_val = new QLabel(centralWidget);
+        label_width_scale_val->setObjectName(QString::fromUtf8("label_width_scale_val"));
+
+        gridLayout_3->addWidget(label_width_scale_val, 0, 1, 1, 1);
+
+        label_height_scale = new QLabel(centralWidget);
+        label_height_scale->setObjectName(QString::fromUtf8("label_height_scale"));
+
+        gridLayout_3->addWidget(label_height_scale, 3, 0, 1, 1);
+
+        label_fps_scale = new QLabel(centralWidget);
+        label_fps_scale->setObjectName(QString::fromUtf8("label_fps_scale"));
+
+        gridLayout_3->addWidget(label_fps_scale, 8, 0, 1, 1);
+
+        horizontalSlider_height_scale = new QSlider(centralWidget);
+        horizontalSlider_height_scale->setObjectName(QString::fromUtf8("horizontalSlider_height_scale"));
+        horizontalSlider_height_scale->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_height_scale, 7, 0, 1, 2);
+
+        label_fps_scale_val = new QLabel(centralWidget);
+        label_fps_scale_val->setObjectName(QString::fromUtf8("label_fps_scale_val"));
+
+        gridLayout_3->addWidget(label_fps_scale_val, 8, 1, 1, 1);
+
+        horizontalSlider_fps_scale = new QSlider(centralWidget);
+        horizontalSlider_fps_scale->setObjectName(QString::fromUtf8("horizontalSlider_fps_scale"));
+        horizontalSlider_fps_scale->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_fps_scale, 9, 0, 1, 2);
+
+        horizontalSlider_width_scale = new QSlider(centralWidget);
+        horizontalSlider_width_scale->setObjectName(QString::fromUtf8("horizontalSlider_width_scale"));
+        horizontalSlider_width_scale->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_width_scale, 2, 0, 1, 2);
+
+        label_width_scale = new QLabel(centralWidget);
+        label_width_scale->setObjectName(QString::fromUtf8("label_width_scale"));
+
+        gridLayout_3->addWidget(label_width_scale, 0, 0, 1, 1);
+
+
+        verticalLayout_2->addLayout(gridLayout_3);
+
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
 
-        verticalLayout_2_2->addWidget(textEdit);
-
-
-        verticalLayout_2->addLayout(verticalLayout_2_2);
+        verticalLayout_2->addWidget(textEdit);
 
 
         gridLayout->addLayout(verticalLayout_2, 0, 1, 1, 1);
@@ -260,6 +318,12 @@ public:
         label_r_channel_size_val->setText(QApplication::translate("Assignment1CodeClass", "R_Channel_Size_Val", nullptr));
         label_frames->setText(QApplication::translate("Assignment1CodeClass", "Frames", nullptr));
         label_frames_val->setText(QApplication::translate("Assignment1CodeClass", "Frames_Val", nullptr));
+        label_height_scale_val->setText(QApplication::translate("Assignment1CodeClass", "Height Scale_Val", nullptr));
+        label_width_scale_val->setText(QApplication::translate("Assignment1CodeClass", "Width_Scale_Val", nullptr));
+        label_height_scale->setText(QApplication::translate("Assignment1CodeClass", "Height Scale", nullptr));
+        label_fps_scale->setText(QApplication::translate("Assignment1CodeClass", "FPS Scale", nullptr));
+        label_fps_scale_val->setText(QApplication::translate("Assignment1CodeClass", "FPS_Val", nullptr));
+        label_width_scale->setText(QApplication::translate("Assignment1CodeClass", "Width Scale", nullptr));
         label_image->setText(QApplication::translate("Assignment1CodeClass", "IImage", nullptr));
     } // retranslateUi
 

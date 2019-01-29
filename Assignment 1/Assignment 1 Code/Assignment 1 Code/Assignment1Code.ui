@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QGridLayout" name="gridLayout_3">
+       <layout class="QGridLayout" name="gridLayout_1">
         <item row="0" column="0">
          <widget class="QPushButton" name="pushButton_load">
           <property name="text">
@@ -176,11 +176,74 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2_2">
-        <item>
-         <widget class="QTextEdit" name="textEdit"/>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_height_scale_val">
+          <property name="text">
+           <string>Height Scale_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_width_scale_val">
+          <property name="text">
+           <string>Width_Scale_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_height_scale">
+          <property name="text">
+           <string>Height Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_fps_scale">
+          <property name="text">
+           <string>FPS Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_height_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_fps_scale_val">
+          <property name="text">
+           <string>FPS_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_fps_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_width_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_width_scale">
+          <property name="text">
+           <string>Width Scale</string>
+          </property>
+         </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="textEdit"/>
       </item>
      </layout>
     </item>

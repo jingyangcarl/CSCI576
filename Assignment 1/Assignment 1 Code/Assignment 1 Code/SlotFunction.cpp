@@ -80,6 +80,11 @@ void Assignment1Code::play() {
 	// play video
 	QImage image(width, height, QImage::Format_RGB32);
 	for (int k = frameIndex; k < frames; k++) {
+		// get current scaler
+		int widthScaler = ui.horizontalSlider_width_scale->value();
+		int heightScaler = ui.horizontalSlider_height_scale->value();
+		int fpsScaler = ui.horizontalSlider_fps_scale->value();
+
 		// update frame
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
