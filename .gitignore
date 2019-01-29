@@ -1,0 +1,6 @@
+# Visual C++ cache files
+**/*.opendb
+**/*.ipch
+
+# big files
+**/*.rgb
