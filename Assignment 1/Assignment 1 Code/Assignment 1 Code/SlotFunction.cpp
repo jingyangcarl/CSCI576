@@ -78,6 +78,10 @@ void Assignment1Code::loadFile() {
 
 void Assignment1Code::play() {
 	// play video
+
+	// intialize the frame index
+	frameIndex = 0;
+
 	QImage image(width, height, QImage::Format_RGB32);
 	for (int k = 0; k < frames; k++) {
 		// get current scaler
@@ -87,16 +91,21 @@ void Assignment1Code::play() {
 
 		// update frame
 		for (int i = 0; i < height; i++) {
+
+			// if (i % (10 / heightScaler) == 0) break;
+
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 				//int r = RGB[k * frameSize + i * width * 3 + 3 * j];
 				//int g = RGB[k * frameSize + i * width * 3 + 3 * j + 1];
 				//int b = RGB[k * frameSize + i * width * 3 + 3 * j + 2];
+
+				// if (j % (10 / widthScaler) == 0) break;
+				
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
 				int g = RGB[(3 * k + 1) * width * height + i * width + j];
 				int b = RGB[(3 * k + 2) * width * height + i * width + j];
 				image.setPixel(j, i, qRgb(r, g, b));
-				//image.setPixelColor(j, i, qRgb(r, g, b));
 			}
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));

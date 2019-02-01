@@ -11,12 +11,12 @@ void Assignment1Code::widgetInitialization() {
 	// set lable status
 	ui.label_status->setText("");
 	// set width scaler
-	ui.horizontalSlider_width_scale->setMinimum(0);
+	ui.horizontalSlider_width_scale->setMinimum(1);
 	ui.horizontalSlider_width_scale->setMaximum(10);
 	ui.horizontalSlider_width_scale->setValue(10);
 	ui.label_width_scale_val->setText(QString::number(1));
 	// set height scaler
-	ui.horizontalSlider_height_scale->setMinimum(0);
+	ui.horizontalSlider_height_scale->setMinimum(1);
 	ui.horizontalSlider_height_scale->setMaximum(10);
 	ui.horizontalSlider_height_scale->setValue(10);
 	ui.label_height_scale_val->setText(QString::number(1));
