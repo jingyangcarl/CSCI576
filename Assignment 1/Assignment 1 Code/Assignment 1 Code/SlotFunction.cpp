@@ -1,7 +1,7 @@
 #include "Assignment1Code.h"
 
 void Assignment1Code::loadFile() {
-	filePath = QFileDialog::getOpenFileName(this, tr("Select Image or Video File"), "./", tr("Image File(*.bmp)\n Video File(*.rgb)"));
+	filePath = QFileDialog::getOpenFileName(this, tr("Select Image or Video File"), "./", tr("Video File(*.rgb)\n Image File(*.bmp)"));
 	ui.textEdit->setText(filePath);
 
 	// initialization
@@ -79,7 +79,7 @@ void Assignment1Code::loadFile() {
 void Assignment1Code::play() {
 	// play video
 	QImage image(width, height, QImage::Format_RGB32);
-	for (int k = frameIndex; k < frames; k++) {
+	for (int k = 0; k < frames; k++) {
 		// get current scaler
 		int widthScaler = ui.horizontalSlider_width_scale->value();
 		int heightScaler = ui.horizontalSlider_height_scale->value();
@@ -88,10 +88,15 @@ void Assignment1Code::play() {
 		// update frame
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				int r = RGB[k * frameSize + i * width * 3 + 3 * j];
-				int g = RGB[k * frameSize + i * width * 3 + 3 * j + 1];
-				int b = RGB[k * frameSize + i * width * 3 + 3 * j + 2];
+				// the r, g, b are arranged in order of rrrr, gggg, bbbb
+				//int r = RGB[k * frameSize + i * width * 3 + 3 * j];
+				//int g = RGB[k * frameSize + i * width * 3 + 3 * j + 1];
+				//int b = RGB[k * frameSize + i * width * 3 + 3 * j + 2];
+				int r = RGB[(3 * k + 0) * width * height + i * width + j];
+				int g = RGB[(3 * k + 1) * width * height + i * width + j];
+				int b = RGB[(3 * k + 2) * width * height + i * width + j];
 				image.setPixel(j, i, qRgb(r, g, b));
+				//image.setPixelColor(j, i, qRgb(r, g, b));
 			}
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));

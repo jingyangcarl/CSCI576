@@ -21,7 +21,7 @@ void Assignment1Code::widgetInitialization() {
 	ui.horizontalSlider_height_scale->setValue(10);
 	ui.label_height_scale_val->setText(QString::number(1));
 	// set fps scaler
-	ui.horizontalSlider_fps_scale->setMinimum(0);
+	ui.horizontalSlider_fps_scale->setMinimum(1);
 	ui.horizontalSlider_fps_scale->setMaximum(20);
 	ui.horizontalSlider_fps_scale->setValue(20);
 	ui.label_fps_scale_val->setText(QString::number(1));

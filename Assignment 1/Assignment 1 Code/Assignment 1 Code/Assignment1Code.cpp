@@ -13,8 +13,8 @@ Assignment1Code::Assignment1Code(QWidget *parent)
 }
 
 void Assignment1Code::frameReader() {
-	//QFile file("./video_prison_960_540.rgb");
-	QFile file("./video_prison_960_540_10.rgb");
+	QFile file("./video_prison_960_540.rgb");
+	//QFile file("./video_prison_960_540_10.rgb");
 	// For 'video_prison_960_540.rgb', there are 155520000 bytes in the file
 	// where each frame takes up 960*540*3 = 1555200 bytes
 	// hence, there are 155520000/1555200 = 100 frames without head in each image.
@@ -25,14 +25,14 @@ void Assignment1Code::frameReader() {
 		ui.textEdit->setText("Cannot open the current file ");
 
 	// initialization
-	int width(960);
-	int height(540);
+	int width(960 / 3);
+	int height(540 / 3);
 	int size = 3 * width * height;
 
 	QVector<char> channelR;
 	QVector<char> channelG;
 	QVector<char> channelB;
-	int frame(0);
+	int frame(90);
 	int byteCounter(0);
 	char currentByte;
 
@@ -66,9 +66,9 @@ void Assignment1Code::frameSeparator() {
 	QFile iFile("./video_prison_960_540.rgb");
 	iFile.open(QIODevice::ReadOnly);
 	QByteArray byteArray = iFile.readAll();
-	int totalFrames(100*9);
-	int width(960/3);
-	int height(540/3);
+	int totalFrames(100 * 9);
+	int width(960 / 3);
+	int height(540 / 3);
 	int frameSize(width * height * 3);
 
 	for (int frame = 0; frame < totalFrames; frame++) {
