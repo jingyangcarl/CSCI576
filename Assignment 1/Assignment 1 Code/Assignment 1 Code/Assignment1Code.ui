@@ -47,17 +47,146 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_space_2">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QLabel" name="label_frame_rate_val">
+          <property name="text">
+           <string>Frame_Rate_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="1">
+         <widget class="QLabel" name="label_r_channel_size_val">
+          <property name="text">
+           <string>R_Channel_Size_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_height">
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="0">
+         <widget class="QLabel" name="label_g_channel_size">
+          <property name="text">
+           <string>G Channel Size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_width">
+          <property name="text">
+           <string>Width</string>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="1">
+         <widget class="QLabel" name="label_g_channel_size_val">
+          <property name="text">
+           <string>G_Channel_Size_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="0">
+         <widget class="QLabel" name="label_b_channel_size">
+          <property name="text">
+           <string>B Channel Size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_color_depth_val">
+          <property name="text">
+           <string>Color_Depth_Val</string>
+          </property>
+         </widget>
+        </item>
         <item row="5" column="0">
+         <widget class="QLabel" name="label_frames">
+          <property name="text">
+           <string>Frames</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_r_channel_size">
+          <property name="text">
+           <string>R Channel Size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
+         <widget class="QLabel" name="label_b_channel_size_val">
+          <property name="text">
+           <string>B_Channel_Size_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label_status_2">
+          <property name="text">
+           <string>Status</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_color_depth">
+          <property name="text">
+           <string>Color Depth</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_frame_index_val">
+          <property name="text">
+           <string>Frame_Index_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_frames_val">
+          <property name="text">
+           <string>Frames_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_width_val">
+          <property name="text">
+           <string>Width_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
          <widget class="QLabel" name="label_frame_index">
           <property name="text">
            <string>Frame Index</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="label_color_depth_val">
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_height_val">
           <property name="text">
-           <string>Color_Depth_Val</string>
+           <string>Heigh_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_frame_rate">
+          <property name="text">
+           <string>Frame Rate</string>
           </property>
          </widget>
         </item>
@@ -68,55 +197,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_height">
-          <property name="text">
-           <string>Height</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_width">
-          <property name="text">
-           <string>Width</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_width_val">
-          <property name="text">
-           <string>Width_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_height_val">
-          <property name="text">
-           <string>Heigh_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="label_r_channel_size">
-          <property name="text">
-           <string>R Channel Size</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="QLabel" name="label_b_channel_size_val">
-          <property name="text">
-           <string>B_Channel_Size_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QLabel" name="label_g_channel_size_val">
-          <property name="text">
-           <string>G_Channel_Size_Val</string>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="1">
          <widget class="QLabel" name="label_frame_size_val">
           <property name="text">
@@ -124,119 +204,87 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
-         <widget class="QLabel" name="label_frame_index_val">
-          <property name="text">
-           <string>Frame_Index_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="label_b_channel_size">
-          <property name="text">
-           <string>B Channel Size</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_color_depth">
-          <property name="text">
-           <string>Color Depth</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QLabel" name="label_g_channel_size">
-          <property name="text">
-           <string>G Channel Size</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLabel" name="label_r_channel_size_val">
-          <property name="text">
-           <string>R_Channel_Size_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_frames">
-          <property name="text">
-           <string>Frames</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_frames_val">
-          <property name="text">
-           <string>Frames_Val</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_height_scale_val">
-          <property name="text">
-           <string>Height Scale_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_width_scale_val">
-          <property name="text">
-           <string>Width_Scale_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_height_scale">
-          <property name="text">
-           <string>Height Scale</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="label_fps_scale">
-          <property name="text">
-           <string>FPS Scale</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0" colspan="2">
+        <item row="9" column="0" colspan="2">
          <widget class="QSlider" name="horizontalSlider_height_scale">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
-         <widget class="QLabel" name="label_fps_scale_val">
-          <property name="text">
-           <string>FPS_Val</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0" colspan="2">
-         <widget class="QSlider" name="horizontalSlider_fps_scale">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
+        <item row="4" column="0" colspan="2">
          <widget class="QSlider" name="horizontalSlider_width_scale">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_height_scale">
+          <property name="text">
+           <string>Height Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_fps_scale">
+          <property name="text">
+           <string>FPS Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="label_fps_scale_val">
+          <property name="text">
+           <string>FPS_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_height_scale_val">
+          <property name="text">
+           <string>Height Scale_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_width_scale_val">
+          <property name="text">
+           <string>Width_Scale_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label_control">
+          <property name="text">
+           <string>Control</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_fps_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
          <widget class="QLabel" name="label_width_scale">
           <property name="text">
            <string>Width Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_space">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>

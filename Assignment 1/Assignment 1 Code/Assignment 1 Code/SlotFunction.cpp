@@ -86,12 +86,18 @@ void Assignment1Code::play() {
 	int widthScaler = ui.horizontalSlider_width_scale->value();
 	int heightScaler = ui.horizontalSlider_height_scale->value();
 	int fpsScaler = ui.horizontalSlider_fps_scale->value();
+	ui.horizontalSlider_width_scale->setDisabled(true);
+	ui.horizontalSlider_height_scale->setDisabled(true);
+
+	// set up a timer
+	QElapsedTimer timer;
 
 	QImage image(width*widthScaler / 10, height*heightScaler / 10, QImage::Format_RGB32);
 	for (int k = 0; k < frames; k++) {
+		// start a timer
+		timer.start();
+
 		// get current scaler
-		widthScaler = ui.horizontalSlider_width_scale->value();
-		heightScaler = ui.horizontalSlider_height_scale->value();
 		fpsScaler = ui.horizontalSlider_fps_scale->value();
 		int y(0);
 
@@ -119,19 +125,26 @@ void Assignment1Code::play() {
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
+
 		// update frame infor
 		ui.label_status->setText("Playing");
 		frameIndex++;
 		ui.label_frame_index_val->setText(QString::number(frameIndex));
 
-		// update
+		// update QT events
 		QCoreApplication::processEvents();
 
-		Sleep(-20 * (fpsScaler / 20) + 20);
+		// update frame rate
+		Sleep(-100 * (fpsScaler / 100.0) + 100);
+		ui.label_frame_rate_val->setText(QString::number(1000 / (timer.elapsed())));
 	}
 
 	// update frame info
 	ui.label_status->setText("Playing Finished");
+
+	// update widgets
+	ui.horizontalSlider_width_scale->setEnabled(true);
+	ui.horizontalSlider_height_scale->setEnabled(true);
 }
 
 void Assignment1Code::setWidthScalerVal(int val) {
@@ -143,5 +156,5 @@ void Assignment1Code::setHeightScalerVal(int val) {
 }
 
 void Assignment1Code::setFPSScalerVal(int val) {
-	ui.label_fps_scale_val->setText(QString::number(val / 20.0));
+	ui.label_fps_scale_val->setText(QString::number(val / 100.0));
 }

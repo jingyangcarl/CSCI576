@@ -22,9 +22,9 @@ void Assignment1Code::widgetInitialization() {
 	ui.label_height_scale_val->setText(QString::number(1));
 	// set fps scaler
 	ui.horizontalSlider_fps_scale->setMinimum(1);
-	ui.horizontalSlider_fps_scale->setMaximum(20);
-	ui.horizontalSlider_fps_scale->setValue(20);
-	ui.label_fps_scale_val->setText(QString::number(1));
+	ui.horizontalSlider_fps_scale->setMaximum(100);
+	ui.horizontalSlider_fps_scale->setValue(50);
+	ui.label_fps_scale_val->setText(QString::number(0.5));
 }
 
 void Assignment1Code::connectionInitialization() {

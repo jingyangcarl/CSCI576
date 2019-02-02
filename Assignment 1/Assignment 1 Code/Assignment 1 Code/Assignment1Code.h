@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include <qfile.h>
 #include <qfiledialog.h>
+#include <qelapsedtimer.h>
 #include <Windows.h>
 #include "FileLoader.h"
 #include "ui_Assignment1Code.h"
