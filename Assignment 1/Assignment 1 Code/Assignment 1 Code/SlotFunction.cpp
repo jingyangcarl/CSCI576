@@ -86,6 +86,9 @@ void Assignment1Code::play() {
 	int widthScaler = ui.horizontalSlider_width_scale->value();
 	int heightScaler = ui.horizontalSlider_height_scale->value();
 	int fpsScaler = ui.horizontalSlider_fps_scale->value();
+	bool antiAliasingSwitch = ui.horizontalSlider_anti_aliasing_switch->value();
+	bool letterBoxingSwitch = ui.horizontalSlider_letter_boxing_switch->value();
+	bool seamCarvingSwitch = ui.horizontalSlider_seam_carving_switch->value();
 	ui.horizontalSlider_width_scale->setDisabled(true);
 	ui.horizontalSlider_height_scale->setDisabled(true);
 
@@ -102,6 +105,7 @@ void Assignment1Code::play() {
 
 		// get current scaler
 		fpsScaler = ui.horizontalSlider_fps_scale->value();
+		antiAliasingSwitch = ui.horizontalSlider_anti_aliasing_switch->value();
 		int x(0);
 
 		// update frame
@@ -110,14 +114,14 @@ void Assignment1Code::play() {
 
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
-				
+
 				// get rgb values
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
 				int g = RGB[(3 * k + 1) * width * height + i * width + j];
 				int b = RGB[(3 * k + 2) * width * height + i * width + j];
 
 				// set rgb values to pixel
-				if(x < currentHeight && y < currentWidth)
+				if (x < currentHeight && y < currentWidth)
 					image.setPixel(y, x, qRgb(r, g, b));
 
 				// width scale
@@ -126,8 +130,36 @@ void Assignment1Code::play() {
 			// height scale
 			if ((i % 10) < heightScaler) x++;
 		}
-		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
+		if (antiAliasingSwitch) {
+			// los pass filter
+			// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
+			currentHeight = image.height();
+			currentWidth = image.width();
+			for (int i = 1; i < currentHeight - 1; i++) {
+				for (int j = 1; j < currentWidth - 1; j++) {
+					// get rgb in the neighbors
+					int r(0), g(0), b(0);
+					for (int ii = -1; ii < 2; ii++) {
+						for (int jj = -1; jj < 2; jj++) {
+							r += image.pixelColor(j + jj, i + ii).red();
+							g += image.pixelColor(j + jj, i + ii).green();
+							b += image.pixelColor(j + jj, i + ii).blue();
+						}
+					}
+					if (i < currentHeight && j < currentWidth)
+						image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
+				}
+			}
+		}
+
+		if (letterBoxingSwitch) {
+		}
+
+		if (seamCarvingSwitch) {
+		}
+
+		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
 		// update frame infor
 		ui.label_status->setText("Playing");
