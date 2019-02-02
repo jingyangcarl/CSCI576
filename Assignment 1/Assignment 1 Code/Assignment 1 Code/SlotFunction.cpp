@@ -108,11 +108,8 @@ void Assignment1Code::play() {
 		for (int i = 0; i < height; i++) {
 			int y(0);
 
-			//if (i % (10 / heightScaler) != 0) continue;
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
-
-				//if ((j % (10 / widthScaler)) != 0) continue;
 				
 				// get rgb values
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
