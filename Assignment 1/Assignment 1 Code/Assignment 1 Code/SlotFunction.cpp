@@ -82,31 +82,39 @@ void Assignment1Code::play() {
 	// intialize the frame index
 	frameIndex = 0;
 
-	QImage image(width, height, QImage::Format_RGB32);
+	// initialize the frame parameters
+	int widthScaler = ui.horizontalSlider_width_scale->value();
+	int heightScaler = ui.horizontalSlider_height_scale->value();
+	int fpsScaler = ui.horizontalSlider_fps_scale->value();
+
+	QImage image(width*widthScaler/10, height*heightScaler/10, QImage::Format_RGB32);
 	for (int k = 0; k < frames; k++) {
 		// get current scaler
-		int widthScaler = ui.horizontalSlider_width_scale->value();
-		int heightScaler = ui.horizontalSlider_height_scale->value();
-		int fpsScaler = ui.horizontalSlider_fps_scale->value();
+		widthScaler = ui.horizontalSlider_width_scale->value();
+		heightScaler = ui.horizontalSlider_height_scale->value();
+		fpsScaler = ui.horizontalSlider_fps_scale->value();
+		int y(0);
 
 		// update frame
 		for (int i = 0; i < height; i++) {
-
-			// if (i % (10 / heightScaler) == 0) break;
+			int x(0);
 
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
-				//int r = RGB[k * frameSize + i * width * 3 + 3 * j];
-				//int g = RGB[k * frameSize + i * width * 3 + 3 * j + 1];
-				//int b = RGB[k * frameSize + i * width * 3 + 3 * j + 2];
 
-				// if (j % (10 / widthScaler) == 0) break;
-				
+				// get rgb values
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
 				int g = RGB[(3 * k + 1) * width * height + i * width + j];
 				int b = RGB[(3 * k + 2) * width * height + i * width + j];
-				image.setPixel(j, i, qRgb(r, g, b));
+
+				// set rgb values to pixel
+				image.setPixel(x, y, qRgb(r, g, b));
+
+				// width scale
+				if ((j % (10 / widthScaler)) == 0) x++;
 			}
+			// height scale
+			if (i % (10 / heightScaler) == 0) y++;
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
@@ -114,26 +122,25 @@ void Assignment1Code::play() {
 		ui.label_status->setText("Playing");
 		frameIndex++;
 		ui.label_frame_index_val->setText(QString::number(frameIndex));
-		
-		// update 
+
+		// update
 		QCoreApplication::processEvents();
 
-
-		Sleep(-20 * (fpsScaler/20) + 20);
+		Sleep(-20 * (fpsScaler / 20) + 20);
 	}
 
 	// update frame info
 	ui.label_status->setText("Playing Finished");
 }
 
-void Assignment1Code::setWidthScalerVal(int val ) {
-	ui.label_width_scale_val->setText(QString::number(val/10.0));
+void Assignment1Code::setWidthScalerVal(int val) {
+	ui.label_width_scale_val->setText(QString::number(val / 10.0));
 }
 
 void Assignment1Code::setHeightScalerVal(int val) {
-	ui.label_height_scale_val->setText(QString::number(val/10.0));
+	ui.label_height_scale_val->setText(QString::number(val / 10.0));
 }
 
 void Assignment1Code::setFPSScalerVal(int val) {
-	ui.label_fps_scale_val->setText(QString::number(val/20.0));
+	ui.label_fps_scale_val->setText(QString::number(val / 20.0));
 }
