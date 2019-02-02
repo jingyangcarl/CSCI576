@@ -48,4 +48,7 @@ void Assignment1Code::connectionInitialization() {
 	connect(ui.horizontalSlider_width_scale, SIGNAL(valueChanged(int)), this, SLOT(setWidthScalerVal(int)));
 	connect(ui.horizontalSlider_height_scale, SIGNAL(valueChanged(int)), this, SLOT(setHeightScalerVal(int)));
 	connect(ui.horizontalSlider_fps_scale, SIGNAL(valueChanged(int)), this, SLOT(setFPSScalerVal(int)));
+	connect(ui.horizontalSlider_anti_aliasing_switch, SIGNAL(valueChanged(int)), this, SLOT(setAntiAliasingVal(int)));
+	connect(ui.horizontalSlider_letter_boxing_switch, SIGNAL(valueChanged(int)), this, SLOT(setLetterBoxingVal(int)));
+	connect(ui.horizontalSlider_seam_carving_switch, SIGNAL(valueChanged(int)), this, SLOT(setSeamCarvingVal(int)));
 }
