@@ -161,3 +161,15 @@ void Assignment1Code::setHeightScalerVal(int val) {
 void Assignment1Code::setFPSScalerVal(int val) {
 	ui.label_fps_scale_val->setText(QString::number(val / 100.0));
 }
+
+void Assignment1Code::setAntiAliasingVal(int val) {
+	ui.label_anti_aliasing_switch_val->setText(val ? "ON" : "OFF");
+}
+
+void Assignment1Code::setLetterBoxingVal(int val) {
+	ui.label_letter_boxing_switch_val->setText(val ? "ON" : "OFF");
+}
+
+void Assignment1Code::setSeamCarvingVal(int val) {
+	ui.label_seam_carving_switch_val->setText(val ? "ON" : "OFF");
+}

@@ -22,13 +22,16 @@ public:
 	void frameReader();
 	void frameSeparator();
 
-	// SLOT function
+	/*-------------SLOTFunction .cpp------------*/
 public slots:
 	void loadFile();
 	void play();
 	void setWidthScalerVal(int val);
 	void setHeightScalerVal(int val);
 	void setFPSScalerVal(int val);
+	void setAntiAliasingVal(int val);
+	void setLetterBoxingVal(int val);
+	void setSeamCarvingVal(int val);
 
 private:
 	Ui::Assignment1CodeClass ui;

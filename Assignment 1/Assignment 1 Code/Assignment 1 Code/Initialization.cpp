@@ -29,17 +29,17 @@ void Assignment1Code::widgetInitialization() {
 	ui.horizontalSlider_anti_aliasing_switch->setMinimum(0);
 	ui.horizontalSlider_anti_aliasing_switch->setMaximum(1);
 	ui.horizontalSlider_anti_aliasing_switch->setValue(0);
-	ui.label_anti_aliasing_switch_val->setText("off");
+	ui.label_anti_aliasing_switch_val->setText("OFF");
 	// Letter Boxing
 	ui.horizontalSlider_letter_boxing_switch->setMinimum(0);
 	ui.horizontalSlider_letter_boxing_switch->setMaximum(1);
 	ui.horizontalSlider_letter_boxing_switch->setValue(0);
-	ui.label_letter_boxing_switch_val->setText("off");
+	ui.label_letter_boxing_switch_val->setText("OFF");
 	// seam carving
 	ui.horizontalSlider_seam_carving_switch->setMinimum(0);
 	ui.horizontalSlider_seam_carving_switch->setMaximum(1);
 	ui.horizontalSlider_seam_carving_switch->setValue(0);
-	ui.label_seam_carving_switch_val->setText("off");
+	ui.label_seam_carving_switch_val->setText("OFF");
 }
 
 void Assignment1Code::connectionInitialization() {
