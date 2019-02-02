@@ -208,38 +208,24 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="9" column="0" colspan="2">
-         <widget class="QSlider" name="horizontalSlider_height_scale">
+        <item row="16" column="1">
+         <widget class="QLabel" name="label_seam_carving_switch_val">
+          <property name="text">
+           <string>Seam_Carving_Switch_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="0">
+         <widget class="QLabel" name="label_seam_carving_switch">
+          <property name="text">
+           <string>Seam Carving Switch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_fps_scale">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0" colspan="2">
-         <widget class="QSlider" name="horizontalSlider_width_scale">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_height_scale">
-          <property name="text">
-           <string>Height Scale</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="label_fps_scale">
-          <property name="text">
-           <string>FPS Scale</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="QLabel" name="label_fps_scale_val">
-          <property name="text">
-           <string>FPS_Val</string>
           </property>
          </widget>
         </item>
@@ -250,10 +236,73 @@
           </property>
          </widget>
         </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_height_scale">
+          <property name="text">
+           <string>Height Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
+         <widget class="QLabel" name="label_letter_boxing_switch_val">
+          <property name="text">
+           <string>Letter_Boxing_Switch_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_height_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_anti_aliasing_switch">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="1">
          <widget class="QLabel" name="label_width_scale_val">
           <property name="text">
            <string>Width_Scale_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_fps_scale">
+          <property name="text">
+           <string>FPS Scale</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_width_scale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="1">
+         <widget class="QLabel" name="label_anti_aliasing_switch_val">
+          <property name="text">
+           <string>Anti_Aliasing_Switch_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="label_fps_scale_val">
+          <property name="text">
+           <string>FPS_Val</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_anti_aliasing_switch">
+          <property name="text">
+           <string>Anti Aliasing Switch</string>
           </property>
          </widget>
         </item>
@@ -267,10 +316,10 @@
           </property>
          </widget>
         </item>
-        <item row="11" column="0" colspan="2">
-         <widget class="QSlider" name="horizontalSlider_fps_scale">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_space">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
@@ -281,10 +330,24 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_space">
+        <item row="14" column="0">
+         <widget class="QLabel" name="label_letter_boxing_switch">
           <property name="text">
-           <string/>
+           <string>Letter Boxing Switch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_letter_boxing_switch">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="0" colspan="2">
+         <widget class="QSlider" name="horizontalSlider_seam_carving_switch">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>

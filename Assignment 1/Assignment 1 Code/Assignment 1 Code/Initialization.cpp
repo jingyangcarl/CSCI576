@@ -25,6 +25,21 @@ void Assignment1Code::widgetInitialization() {
 	ui.horizontalSlider_fps_scale->setMaximum(100);
 	ui.horizontalSlider_fps_scale->setValue(50);
 	ui.label_fps_scale_val->setText(QString::number(0.5));
+	// Anti aliasing switch
+	ui.horizontalSlider_anti_aliasing_switch->setMinimum(0);
+	ui.horizontalSlider_anti_aliasing_switch->setMaximum(1);
+	ui.horizontalSlider_anti_aliasing_switch->setValue(0);
+	ui.label_anti_aliasing_switch_val->setText("off");
+	// Letter Boxing
+	ui.horizontalSlider_letter_boxing_switch->setMinimum(0);
+	ui.horizontalSlider_letter_boxing_switch->setMaximum(1);
+	ui.horizontalSlider_letter_boxing_switch->setValue(0);
+	ui.label_letter_boxing_switch_val->setText("off");
+	// seam carving
+	ui.horizontalSlider_seam_carving_switch->setMinimum(0);
+	ui.horizontalSlider_seam_carving_switch->setMaximum(1);
+	ui.horizontalSlider_seam_carving_switch->setValue(0);
+	ui.label_seam_carving_switch_val->setText("off");
 }
 
 void Assignment1Code::connectionInitialization() {

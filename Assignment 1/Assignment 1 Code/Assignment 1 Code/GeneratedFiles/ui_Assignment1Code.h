@@ -59,17 +59,26 @@ public:
     QLabel *label_frame_size;
     QLabel *label_frame_size_val;
     QGridLayout *gridLayout_3;
-    QSlider *horizontalSlider_height_scale;
-    QSlider *horizontalSlider_width_scale;
-    QLabel *label_height_scale;
-    QLabel *label_fps_scale;
-    QLabel *label_fps_scale_val;
-    QLabel *label_height_scale_val;
-    QLabel *label_width_scale_val;
-    QLabel *label_control;
+    QLabel *label_seam_carving_switch_val;
+    QLabel *label_seam_carving_switch;
     QSlider *horizontalSlider_fps_scale;
-    QLabel *label_width_scale;
+    QLabel *label_height_scale_val;
+    QLabel *label_height_scale;
+    QLabel *label_letter_boxing_switch_val;
+    QSlider *horizontalSlider_height_scale;
+    QSlider *horizontalSlider_anti_aliasing_switch;
+    QLabel *label_width_scale_val;
+    QLabel *label_fps_scale;
+    QSlider *horizontalSlider_width_scale;
+    QLabel *label_anti_aliasing_switch_val;
+    QLabel *label_fps_scale_val;
+    QLabel *label_anti_aliasing_switch;
+    QLabel *label_control;
     QLabel *label_space;
+    QLabel *label_width_scale;
+    QLabel *label_letter_boxing_switch;
+    QSlider *horizontalSlider_letter_boxing_switch;
+    QSlider *horizontalSlider_seam_carving_switch;
     QTextEdit *textEdit;
     QVBoxLayout *verticalLayout_1;
     QLabel *label_image;
@@ -233,48 +242,15 @@ public:
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        horizontalSlider_height_scale = new QSlider(centralWidget);
-        horizontalSlider_height_scale->setObjectName(QString::fromUtf8("horizontalSlider_height_scale"));
-        horizontalSlider_height_scale->setOrientation(Qt::Horizontal);
+        label_seam_carving_switch_val = new QLabel(centralWidget);
+        label_seam_carving_switch_val->setObjectName(QString::fromUtf8("label_seam_carving_switch_val"));
 
-        gridLayout_3->addWidget(horizontalSlider_height_scale, 9, 0, 1, 2);
+        gridLayout_3->addWidget(label_seam_carving_switch_val, 16, 1, 1, 1);
 
-        horizontalSlider_width_scale = new QSlider(centralWidget);
-        horizontalSlider_width_scale->setObjectName(QString::fromUtf8("horizontalSlider_width_scale"));
-        horizontalSlider_width_scale->setOrientation(Qt::Horizontal);
+        label_seam_carving_switch = new QLabel(centralWidget);
+        label_seam_carving_switch->setObjectName(QString::fromUtf8("label_seam_carving_switch"));
 
-        gridLayout_3->addWidget(horizontalSlider_width_scale, 4, 0, 1, 2);
-
-        label_height_scale = new QLabel(centralWidget);
-        label_height_scale->setObjectName(QString::fromUtf8("label_height_scale"));
-
-        gridLayout_3->addWidget(label_height_scale, 5, 0, 1, 1);
-
-        label_fps_scale = new QLabel(centralWidget);
-        label_fps_scale->setObjectName(QString::fromUtf8("label_fps_scale"));
-
-        gridLayout_3->addWidget(label_fps_scale, 10, 0, 1, 1);
-
-        label_fps_scale_val = new QLabel(centralWidget);
-        label_fps_scale_val->setObjectName(QString::fromUtf8("label_fps_scale_val"));
-
-        gridLayout_3->addWidget(label_fps_scale_val, 10, 1, 1, 1);
-
-        label_height_scale_val = new QLabel(centralWidget);
-        label_height_scale_val->setObjectName(QString::fromUtf8("label_height_scale_val"));
-
-        gridLayout_3->addWidget(label_height_scale_val, 5, 1, 1, 1);
-
-        label_width_scale_val = new QLabel(centralWidget);
-        label_width_scale_val->setObjectName(QString::fromUtf8("label_width_scale_val"));
-
-        gridLayout_3->addWidget(label_width_scale_val, 2, 1, 1, 1);
-
-        label_control = new QLabel(centralWidget);
-        label_control->setObjectName(QString::fromUtf8("label_control"));
-        label_control->setAlignment(Qt::AlignCenter);
-
-        gridLayout_3->addWidget(label_control, 1, 0, 1, 2);
+        gridLayout_3->addWidget(label_seam_carving_switch, 16, 0, 1, 1);
 
         horizontalSlider_fps_scale = new QSlider(centralWidget);
         horizontalSlider_fps_scale->setObjectName(QString::fromUtf8("horizontalSlider_fps_scale"));
@@ -282,15 +258,96 @@ public:
 
         gridLayout_3->addWidget(horizontalSlider_fps_scale, 11, 0, 1, 2);
 
-        label_width_scale = new QLabel(centralWidget);
-        label_width_scale->setObjectName(QString::fromUtf8("label_width_scale"));
+        label_height_scale_val = new QLabel(centralWidget);
+        label_height_scale_val->setObjectName(QString::fromUtf8("label_height_scale_val"));
 
-        gridLayout_3->addWidget(label_width_scale, 2, 0, 1, 1);
+        gridLayout_3->addWidget(label_height_scale_val, 5, 1, 1, 1);
+
+        label_height_scale = new QLabel(centralWidget);
+        label_height_scale->setObjectName(QString::fromUtf8("label_height_scale"));
+
+        gridLayout_3->addWidget(label_height_scale, 5, 0, 1, 1);
+
+        label_letter_boxing_switch_val = new QLabel(centralWidget);
+        label_letter_boxing_switch_val->setObjectName(QString::fromUtf8("label_letter_boxing_switch_val"));
+
+        gridLayout_3->addWidget(label_letter_boxing_switch_val, 14, 1, 1, 1);
+
+        horizontalSlider_height_scale = new QSlider(centralWidget);
+        horizontalSlider_height_scale->setObjectName(QString::fromUtf8("horizontalSlider_height_scale"));
+        horizontalSlider_height_scale->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_height_scale, 9, 0, 1, 2);
+
+        horizontalSlider_anti_aliasing_switch = new QSlider(centralWidget);
+        horizontalSlider_anti_aliasing_switch->setObjectName(QString::fromUtf8("horizontalSlider_anti_aliasing_switch"));
+        horizontalSlider_anti_aliasing_switch->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_anti_aliasing_switch, 13, 0, 1, 2);
+
+        label_width_scale_val = new QLabel(centralWidget);
+        label_width_scale_val->setObjectName(QString::fromUtf8("label_width_scale_val"));
+
+        gridLayout_3->addWidget(label_width_scale_val, 2, 1, 1, 1);
+
+        label_fps_scale = new QLabel(centralWidget);
+        label_fps_scale->setObjectName(QString::fromUtf8("label_fps_scale"));
+
+        gridLayout_3->addWidget(label_fps_scale, 10, 0, 1, 1);
+
+        horizontalSlider_width_scale = new QSlider(centralWidget);
+        horizontalSlider_width_scale->setObjectName(QString::fromUtf8("horizontalSlider_width_scale"));
+        horizontalSlider_width_scale->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_width_scale, 4, 0, 1, 2);
+
+        label_anti_aliasing_switch_val = new QLabel(centralWidget);
+        label_anti_aliasing_switch_val->setObjectName(QString::fromUtf8("label_anti_aliasing_switch_val"));
+
+        gridLayout_3->addWidget(label_anti_aliasing_switch_val, 12, 1, 1, 1);
+
+        label_fps_scale_val = new QLabel(centralWidget);
+        label_fps_scale_val->setObjectName(QString::fromUtf8("label_fps_scale_val"));
+
+        gridLayout_3->addWidget(label_fps_scale_val, 10, 1, 1, 1);
+
+        label_anti_aliasing_switch = new QLabel(centralWidget);
+        label_anti_aliasing_switch->setObjectName(QString::fromUtf8("label_anti_aliasing_switch"));
+
+        gridLayout_3->addWidget(label_anti_aliasing_switch, 12, 0, 1, 1);
+
+        label_control = new QLabel(centralWidget);
+        label_control->setObjectName(QString::fromUtf8("label_control"));
+        label_control->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(label_control, 1, 0, 1, 2);
 
         label_space = new QLabel(centralWidget);
         label_space->setObjectName(QString::fromUtf8("label_space"));
 
         gridLayout_3->addWidget(label_space, 0, 0, 1, 1);
+
+        label_width_scale = new QLabel(centralWidget);
+        label_width_scale->setObjectName(QString::fromUtf8("label_width_scale"));
+
+        gridLayout_3->addWidget(label_width_scale, 2, 0, 1, 1);
+
+        label_letter_boxing_switch = new QLabel(centralWidget);
+        label_letter_boxing_switch->setObjectName(QString::fromUtf8("label_letter_boxing_switch"));
+
+        gridLayout_3->addWidget(label_letter_boxing_switch, 14, 0, 1, 1);
+
+        horizontalSlider_letter_boxing_switch = new QSlider(centralWidget);
+        horizontalSlider_letter_boxing_switch->setObjectName(QString::fromUtf8("horizontalSlider_letter_boxing_switch"));
+        horizontalSlider_letter_boxing_switch->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_letter_boxing_switch, 15, 0, 1, 2);
+
+        horizontalSlider_seam_carving_switch = new QSlider(centralWidget);
+        horizontalSlider_seam_carving_switch->setObjectName(QString::fromUtf8("horizontalSlider_seam_carving_switch"));
+        horizontalSlider_seam_carving_switch->setOrientation(Qt::Horizontal);
+
+        gridLayout_3->addWidget(horizontalSlider_seam_carving_switch, 17, 0, 1, 2);
 
 
         verticalLayout_2->addLayout(gridLayout_3);
@@ -360,14 +417,20 @@ public:
         label_frame_rate->setText(QApplication::translate("Assignment1CodeClass", "Frame Rate", nullptr));
         label_frame_size->setText(QApplication::translate("Assignment1CodeClass", "Frame Size", nullptr));
         label_frame_size_val->setText(QApplication::translate("Assignment1CodeClass", "Frame_Size_Val", nullptr));
-        label_height_scale->setText(QApplication::translate("Assignment1CodeClass", "Height Scale", nullptr));
-        label_fps_scale->setText(QApplication::translate("Assignment1CodeClass", "FPS Scale", nullptr));
-        label_fps_scale_val->setText(QApplication::translate("Assignment1CodeClass", "FPS_Val", nullptr));
+        label_seam_carving_switch_val->setText(QApplication::translate("Assignment1CodeClass", "Seam_Carving_Switch_Val", nullptr));
+        label_seam_carving_switch->setText(QApplication::translate("Assignment1CodeClass", "Seam Carving Switch", nullptr));
         label_height_scale_val->setText(QApplication::translate("Assignment1CodeClass", "Height Scale_Val", nullptr));
+        label_height_scale->setText(QApplication::translate("Assignment1CodeClass", "Height Scale", nullptr));
+        label_letter_boxing_switch_val->setText(QApplication::translate("Assignment1CodeClass", "Letter_Boxing_Switch_Val", nullptr));
         label_width_scale_val->setText(QApplication::translate("Assignment1CodeClass", "Width_Scale_Val", nullptr));
+        label_fps_scale->setText(QApplication::translate("Assignment1CodeClass", "FPS Scale", nullptr));
+        label_anti_aliasing_switch_val->setText(QApplication::translate("Assignment1CodeClass", "Anti_Aliasing_Switch_Val", nullptr));
+        label_fps_scale_val->setText(QApplication::translate("Assignment1CodeClass", "FPS_Val", nullptr));
+        label_anti_aliasing_switch->setText(QApplication::translate("Assignment1CodeClass", "Anti Aliasing Switch", nullptr));
         label_control->setText(QApplication::translate("Assignment1CodeClass", "Control", nullptr));
-        label_width_scale->setText(QApplication::translate("Assignment1CodeClass", "Width Scale", nullptr));
         label_space->setText(QString());
+        label_width_scale->setText(QApplication::translate("Assignment1CodeClass", "Width Scale", nullptr));
+        label_letter_boxing_switch->setText(QApplication::translate("Assignment1CodeClass", "Letter Boxing Switch", nullptr));
         label_image->setText(QApplication::translate("Assignment1CodeClass", "IImage", nullptr));
     } // retranslateUi
 
