@@ -92,36 +92,42 @@ void Assignment1Code::play() {
 	// set up a timer
 	QElapsedTimer timer;
 
-	QImage image(width*widthScaler / 10, height*heightScaler / 10, QImage::Format_RGB32);
+	// set current width and height
+	int currentWidth = width * widthScaler / 10.0;
+	int currentHeight = height * heightScaler / 10.0;
+	QImage image(currentWidth, currentHeight, QImage::Format_RGB32);
 	for (int k = 0; k < frames; k++) {
 		// start a timer
 		timer.start();
 
 		// get current scaler
 		fpsScaler = ui.horizontalSlider_fps_scale->value();
-		int y(0);
+		int x(0);
 
 		// update frame
 		for (int i = 0; i < height; i++) {
-			int x(0);
+			int y(0);
 
-			// height scale
-			if (i % (10 / heightScaler) != 0) continue;
+			//if (i % (10 / heightScaler) != 0) continue;
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 
-				// width scale
-				if ((j % (10 / widthScaler)) != 0) continue;
+				//if ((j % (10 / widthScaler)) != 0) continue;
+				
 				// get rgb values
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
 				int g = RGB[(3 * k + 1) * width * height + i * width + j];
 				int b = RGB[(3 * k + 2) * width * height + i * width + j];
 
 				// set rgb values to pixel
-				image.setPixel(x, y, qRgb(r, g, b));
-				x++;
+				if(x < currentHeight && y < currentWidth)
+					image.setPixel(y, x, qRgb(r, g, b));
+
+				// width scale
+				if ((j % 10) < widthScaler) y++;
 			}
-			y++;
+			// height scale
+			if ((i % 10) < heightScaler) x++;
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
@@ -136,7 +142,7 @@ void Assignment1Code::play() {
 
 		// update frame rate
 		Sleep(-100 * (fpsScaler / 100.0) + 100);
-		ui.label_frame_rate_val->setText(QString::number(1000 / (timer.elapsed())));
+		ui.label_frame_rate_val->setText(QString::number(1000.0 / (timer.elapsed())));
 	}
 
 	// update frame info
