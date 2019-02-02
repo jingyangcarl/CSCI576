@@ -87,7 +87,7 @@ void Assignment1Code::play() {
 	int heightScaler = ui.horizontalSlider_height_scale->value();
 	int fpsScaler = ui.horizontalSlider_fps_scale->value();
 
-	QImage image(width*widthScaler/10, height*heightScaler/10, QImage::Format_RGB32);
+	QImage image(width*widthScaler / 10, height*heightScaler / 10, QImage::Format_RGB32);
 	for (int k = 0; k < frames; k++) {
 		// get current scaler
 		widthScaler = ui.horizontalSlider_width_scale->value();
@@ -99,9 +99,13 @@ void Assignment1Code::play() {
 		for (int i = 0; i < height; i++) {
 			int x(0);
 
+			// height scale
+			if (i % (10 / heightScaler) != 0) continue;
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 
+				// width scale
+				if ((j % (10 / widthScaler)) != 0) continue;
 				// get rgb values
 				int r = RGB[(3 * k + 0) * width * height + i * width + j];
 				int g = RGB[(3 * k + 1) * width * height + i * width + j];
@@ -109,12 +113,9 @@ void Assignment1Code::play() {
 
 				// set rgb values to pixel
 				image.setPixel(x, y, qRgb(r, g, b));
-
-				// width scale
-				if ((j % (10 / widthScaler)) == 0) x++;
+				x++;
 			}
-			// height scale
-			if (i % (10 / heightScaler) == 0) y++;
+			y++;
 		}
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
 
