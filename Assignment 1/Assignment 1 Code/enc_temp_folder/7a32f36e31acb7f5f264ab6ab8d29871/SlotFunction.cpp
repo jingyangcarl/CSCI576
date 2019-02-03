@@ -300,7 +300,7 @@ void Assignment1Code::play() {
 			QVector<float> minEnergyLine(height);
 			int index = 0;
 			QVector<QVector<float>>::iterator lastM = M.end() - 1;
-			for (int i = 1; i < M[0].size(); i++) {
+			for (int i = 0; i < M[0].size(); i++) {
 				if ((*lastM)[i] < (*lastM)[index])
 					index = i;
 			}
@@ -327,18 +327,6 @@ void Assignment1Code::play() {
 			}
 
 			// delete the line
-			QImage newImage(currentHeight, currentWidth - 1, QImage::Format_RGB32);
-			for (int i = 0; i < newImage.height(); i++) {
-				int k = minEnergyLine[i];
-				for (int j = 0; j < k; j++) {
-					QColor color = image.pixelColor(j, i);
-					newImage.setPixel(j, i, qRgb(color.red(), color.green(), color.blue()));
-				}
-				for (int j = k; j < newImage.width() - 1; j++) {
-					QColor color = image.pixelColor(j, i);
-					newImage.setPixel(j, i, qRgb(color.red(), color.green(), color.blue()));
-				}
-			}
 		}
 
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
