@@ -106,6 +106,8 @@ void Assignment1Code::play() {
 		// get current scaler
 		fpsScaler = ui.horizontalSlider_fps_scale->value();
 		antiAliasingSwitch = ui.horizontalSlider_anti_aliasing_switch->value();
+		letterBoxingSwitch = ui.horizontalSlider_letter_boxing_switch->value();
+		seamCarvingSwitch = ui.horizontalSlider_seam_carving_switch->value();
 		int x(0);
 
 		// update frame
