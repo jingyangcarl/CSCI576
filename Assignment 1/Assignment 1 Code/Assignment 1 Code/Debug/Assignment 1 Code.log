@@ -1,2 +1,7 @@
-﻿  SlotFunction.cpp
+﻿  moc_Assignment1Code.cpp
+  Assignment1Code.cpp
+  Initialization.cpp
+  SeamCarvingOperator.cpp
+  SlotFunction.cpp
+  main.cpp
   Assignment 1 Code.vcxproj -> D:\CSCI576\Assignment 1\Assignment 1 Code\Win32\Debug\Assignment 1 Code.exe

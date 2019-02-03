@@ -102,12 +102,12 @@ int FileLoader::load() {
 		RGB = file.readAll();
 
 		// width
-		//int width = 960;
-		int width = 1280;
+		int width = 960;
+		//int width = 1280;
 		fileDetail.push_back(width);
 		// height
-		//int height = 540;
-		int height = 1024;
+		int height = 540;
+		//int height = 1024;
 		fileDetail.push_back(height);
 		// color depth
 		fileDetail.push_back(24);

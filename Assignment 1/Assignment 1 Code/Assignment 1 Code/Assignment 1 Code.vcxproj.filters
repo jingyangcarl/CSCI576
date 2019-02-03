@@ -14,6 +14,9 @@
     <ClCompile Include="SlotFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SeamCarvingOperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -54,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeamCarvingOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

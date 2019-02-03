@@ -200,13 +200,12 @@ void Assignment1Code::play() {
 		}
 
 		if (seamCarvingSwitch) {
-
 			// only for test on "seamCarving.rgbs"
-			for (int i = 0; i < height; i++) {
+			/*for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
 					image.setPixel(j, i, qRgb(RGB[i*width * 3 + 3 * j], RGB[i*width * 3 + 3 * j + 1], RGB[i*width * 3 + 3 * j + 2]));
 				}
-			}
+			}*/
 
 			// conver the image to gray image
 			QVector<QVector<int>> image_gray(height, QVector<int>(width, 0));
@@ -240,6 +239,8 @@ void Assignment1Code::play() {
 					//image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
 				}
 			}
+			// ui.label_image->setPixmap(QPixmap::fromImage(image));
+			// QCoreApplication::processEvents();
 
 			// calculate energy matrix M, as well as flag matrix R
 			QVector<QVector<float>> M(G);
@@ -289,12 +290,14 @@ void Assignment1Code::play() {
 			}
 
 			// check M
-			//for (int i = 0; i < currentHeight; i++) {
-			//	for (int j = 0; j < currentWidth; j++) {
-			//		image.setPixel(j, i, qRgb(M[i][j], M[i][j], M[i][j]));
-			//		// image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
-			//	}
-			//}
+			for (int i = 0; i < currentHeight; i++) {
+				for (int j = 0; j < currentWidth; j++) {
+					// image.setPixel(j, i, qRgb(M[i][j]/20, M[i][j]/20, M[i][j]/20));
+					image.setPixel(j, i, qRgb(G[i][j] * 5, G[i][j] * 5, G[i][j] * 5));
+				}
+			}
+			ui.label_image->setPixmap(QPixmap::fromImage(image));
+			QCoreApplication::processEvents();
 
 			// find the line with minimum energy
 			QVector<float> minEnergyLine(height);
@@ -321,10 +324,10 @@ void Assignment1Code::play() {
 			}
 
 			// show the line
-			for (int i = 0; i < currentHeight; i++) {
+			/*for (int i = 0; i < currentHeight; i++) {
 				int k = minEnergyLine[i];
 				image.setPixel(k, i, qRgb(0, 0, 0));
-			}
+			}*/
 
 			// delete the line
 			QImage newImage(currentHeight, currentWidth - 1, QImage::Format_RGB32);
@@ -339,6 +342,18 @@ void Assignment1Code::play() {
 					newImage.setPixel(j, i, qRgb(color.red(), color.green(), color.blue()));
 				}
 			}
+		}
+		else {
+			QImage desImage(currentWidth, currentHeight, QImage::Format_RGB32);
+			SeamCarvingOperator scOperator(image, desImage);
+			scOperator.start();
+
+			while (scOperator.isRunning()) {
+				QCoreApplication::processEvents();
+			}
+
+			scOperator.wait();
+			image = desImage;
 		}
 
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
