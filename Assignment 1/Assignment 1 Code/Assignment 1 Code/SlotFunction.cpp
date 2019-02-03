@@ -116,28 +116,28 @@ void Assignment1Code::play() {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 
 				// set rgb values to pixel
-				if (antiAliasingSwitch) {
-					if (x >= 1 && x < currentHeight - 1 && y >= 1 && y < currentWidth - 1) {
-						int r(0), g(0), b(0);
-						for (int ii = -1; ii < 2; ii++) {
-							for (int jj = -1; jj < 2; jj++) {
-								r += RGB[(3 * k + 0) * width * height + (i + ii) * width + j + jj];
-								g += RGB[(3 * k + 1) * width * height + (i + ii) * width + j + jj];
-								b += RGB[(3 * k + 2) * width * height + (i + ii) * width + j + jj];
-							}
-						}
-						if (x < currentHeight && y < currentWidth)
-							image.setPixel(y, x, qRgb(r / 9, g / 9, b / 9));
-					}
-					else {
-						int r = RGB[(3 * k + 0) * width * height + i * width + j];
-						int g = RGB[(3 * k + 1) * width * height + i * width + j];
-						int b = RGB[(3 * k + 2) * width * height + i * width + j];
-						if (x < currentHeight && y < currentWidth)
-							image.setPixel(y, x, qRgb(r, g, b));
-					}
-				}
-				else {
+				//if (antiAliasingSwitch) {
+				//	if (x >= 1 && x < currentHeight - 1 && y >= 1 && y < currentWidth - 1) {
+				//		int r(0), g(0), b(0);
+				//		for (int ii = -1; ii < 2; ii++) {
+				//			for (int jj = -1; jj < 2; jj++) {
+				//				r += RGB[(3 * k + 0) * width * height + (i + ii) * width + j + jj];
+				//				g += RGB[(3 * k + 1) * width * height + (i + ii) * width + j + jj];
+				//				b += RGB[(3 * k + 2) * width * height + (i + ii) * width + j + jj];
+				//			}
+				//		}
+				//		if (x < currentHeight && y < currentWidth)
+				//			image.setPixel(y, x, qRgb(r / 9, g / 9, b / 9));
+				//	}
+				//	else {
+				//		int r = RGB[(3 * k + 0) * width * height + i * width + j];
+				//		int g = RGB[(3 * k + 1) * width * height + i * width + j];
+				//		int b = RGB[(3 * k + 2) * width * height + i * width + j];
+				//		if (x < currentHeight && y < currentWidth)
+				//			image.setPixel(y, x, qRgb(r, g, b));
+				//	}
+				//}
+				{
 					// get rgb values
 					int r = RGB[(3 * k + 0) * width * height + i * width + j];
 					int g = RGB[(3 * k + 1) * width * height + i * width + j];
@@ -153,32 +153,140 @@ void Assignment1Code::play() {
 			if ((i % 10) < heightScaler) x++;
 		}
 
-		//if (antiAliasingSwitch) {
-		//	// los pass filter
-		//	// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
-		//	currentHeight = image.height();
-		//	currentWidth = image.width();
-		//	for (int i = 1; i < currentHeight - 1; i++) {
-		//		for (int j = 1; j < currentWidth - 1; j++) {
-		//			// get rgb in the neighbors
-		//			int r(0), g(0), b(0);
-		//			for (int ii = -1; ii < 2; ii++) {
-		//				for (int jj = -1; jj < 2; jj++) {
-		//					r += image.pixelColor(j + jj, i + ii).red();
-		//					g += image.pixelColor(j + jj, i + ii).green();
-		//					b += image.pixelColor(j + jj, i + ii).blue();
-		//				}
-		//			}
-		//			if (i < currentHeight && j < currentWidth)
-		//				image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
-		//		}
-		//	}
-		//}
+		if (antiAliasingSwitch) {
+			// los pass filter
+			// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
+			currentHeight = image.height();
+			currentWidth = image.width();
+			for (int i = 1; i < currentHeight - 1; i++) {
+				for (int j = 1; j < currentWidth - 1; j++) {
+					// get rgb in the neighbors
+					int r(0), g(0), b(0);
+					for (int ii = -1; ii < 2; ii++) {
+						for (int jj = -1; jj < 2; jj++) {
+							r += image.pixelColor(j + jj, i + ii).red();
+							g += image.pixelColor(j + jj, i + ii).green();
+							b += image.pixelColor(j + jj, i + ii).blue();
+						}
+					}
+					if (i < currentHeight && j < currentWidth)
+						image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
+				}
+			}
+		}
 
 		if (letterBoxingSwitch) {
 		}
 
 		if (seamCarvingSwitch) {
+			// conver the image to gray image
+			QVector<QVector<int>> image_gray(height, QVector<int>(width, 0));
+			for (int i = 0; i < currentHeight; i++) {
+				for (int j = 0; j < currentWidth; j++) {
+					int r = image.pixelColor(j, i).red();
+					int g = image.pixelColor(j, i).green();
+					int b = image.pixelColor(j, i).blue();
+					image_gray[i][j] = qGray(r, g, b);
+					// see the grayscale image
+					// image.setPixel(j, i, qRgb(image_gray[i][j], image_gray[i][j], image_gray[i][j]));
+				}
+			}
+
+			// calculate energy matrix G
+			QVector<QVector<float>> G(height, QVector<float>(width, 0));
+			QVector<int> kernal_H = { 1, 2, 1, 0, 0, 0, -1, -2, -1 };
+			QVector<int> kernal_V = { -1, 0, 1, -2, 0, 2, -1, 0, 1 };
+			for (int i = 1; i < currentHeight - 1; i++) {
+				for (int j = 1; j < currentWidth - 1; j++) {
+					int val_H(0);
+					int val_V(0);
+					for (int ii = -1; ii < 2; ii++) {
+						for (int jj = -1; jj < 2; jj++) {
+							val_H += kernal_H[(ii + 1) * 3 + jj + 1] * image_gray[i][j];
+							val_V += kernal_V[(ii + 1) * 3 + jj + 1] * image_gray[i][j];
+						}
+					}
+					G[i][j] = abs(val_H / 9.0) + abs(val_V / 9.0);
+					// see the energy matrix G
+					image.setPixel(j, i, qRgb(G[i][j] / 2, G[i][j] / 2, G[i][j] / 2));
+				}
+			}
+
+			// calculate energy matrix M, as well as flag matrix R
+			QVector<QVector<float>> M(G);
+			QVector<QVector<float>> R(height, QVector<float>(width, 0));
+
+			for (int i = 1; i < G.size(); i++) {
+				QVector<QVector<float>>::iterator currentG = G.begin() + i;
+				QVector<QVector<float>>::iterator currentM = M.begin() + i;
+				QVector<QVector<float>>::iterator currentR = R.begin() + i;
+				QVector<QVector<float>>::iterator previousM = M.begin() + i - 1;
+
+				// for the first row
+				if ((*previousM)[0] <= (*previousM)[1]) {
+					(*currentM)[0] = (*currentG)[0] + (*previousM)[0];
+					(*currentR)[0] = 1;
+				}
+				else {
+					(*currentM)[0] = (*currentG)[0] + (*previousM)[1];
+					(*currentR)[0] = 2;
+				}
+
+				// for the middle rows
+				for (int j = 1; j < G[0].size() - 1; j++) {
+					float k[3];
+					k[0] = (*previousM)[j - 1];
+					k[1] = (*previousM)[j];
+					k[2] = (*previousM)[j + 1];
+
+					int index(0);
+					if (k[1] < k[0])
+						index = 1;
+					if (k[2] < k[index])
+						index = 2;
+					(*currentM)[j] = (*currentG)[j] + (*previousM)[j - 1 + index];
+					(*currentR)[j] = index;
+				}
+
+				// for the last row
+				if ((*previousM)[G[0].size() - 1] <= (*previousM)[G[0].size() - 2]) {
+					(*currentM)[G[0].size() - 1] = (*currentG)[G[0].size() - 1] + (*previousM)[G[0].size() - 1];
+					(*currentR)[G[0].size() - 1] = 1;
+				}
+				else {
+					(*currentM)[G[0].size() - 1] = (*currentG)[G[0].size() - 1] + (*previousM)[G[0].size() - 2];
+					(*currentR)[G[0].size() - 1] = 0;
+				}
+			}
+
+			// find the line with minimum energy
+			QVector<float> minEnergyLine(height);
+			int index = 0;
+			QVector<QVector<float>>::iterator lastM = M.end() - 1;
+			for (int i = 0; i < M.size(); i++) {
+				if ((*lastM)[i] < (*lastM)[index])
+					index = i;
+			}
+
+			minEnergyLine[minEnergyLine.size() - 1] = index;
+			int tmpIndex = index;
+
+			for (int i = minEnergyLine.size() - 1; i > 0; i--) {
+				QVector<QVector<float>>::iterator currentR = R.begin() + i;
+				int temp = (*currentR)[tmpIndex];
+
+				if (temp == 0)
+					tmpIndex = tmpIndex - 1;
+				else if (temp == 2)
+					tmpIndex = tmpIndex + 1;
+
+				minEnergyLine[i - 1] = tmpIndex;
+			}
+
+			// show the line
+
+			// delete the line
+
 		}
 
 		ui.label_image->setPixmap(QPixmap::fromImage(image));

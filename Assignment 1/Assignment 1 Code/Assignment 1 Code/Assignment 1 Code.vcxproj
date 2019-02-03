@@ -117,6 +117,7 @@
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SeamCarving.cpp" />
     <ClCompile Include="SlotFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
