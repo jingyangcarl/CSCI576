@@ -115,14 +115,36 @@ void Assignment1Code::play() {
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 
-				// get rgb values
-				int r = RGB[(3 * k + 0) * width * height + i * width + j];
-				int g = RGB[(3 * k + 1) * width * height + i * width + j];
-				int b = RGB[(3 * k + 2) * width * height + i * width + j];
-
 				// set rgb values to pixel
-				if (x < currentHeight && y < currentWidth)
-					image.setPixel(y, x, qRgb(r, g, b));
+				if (antiAliasingSwitch) {
+					if (x >= 1 && x < currentHeight - 1 && y >= 1 && y < currentWidth - 1) {
+						int r(0), g(0), b(0);
+						for (int ii = -1; ii < 2; ii++) {
+							for (int jj = -1; jj < 2; jj++) {
+								r += RGB[(3 * k + 0) * width * height + (i + ii) * width + j + jj];
+								g += RGB[(3 * k + 1) * width * height + (i + ii) * width + j + jj];
+								b += RGB[(3 * k + 2) * width * height + (i + ii) * width + j + jj];
+							}
+						}
+						if (x < currentHeight && y < currentWidth)
+							image.setPixel(y, x, qRgb(r / 9, g / 9, b / 9));
+					}
+					else {
+						int r = RGB[(3 * k + 0) * width * height + i * width + j];
+						int g = RGB[(3 * k + 1) * width * height + i * width + j];
+						int b = RGB[(3 * k + 2) * width * height + i * width + j];
+						if (x < currentHeight && y < currentWidth)
+							image.setPixel(y, x, qRgb(r, g, b));
+					}
+				}
+				else {
+					// get rgb values
+					int r = RGB[(3 * k + 0) * width * height + i * width + j];
+					int g = RGB[(3 * k + 1) * width * height + i * width + j];
+					int b = RGB[(3 * k + 2) * width * height + i * width + j];
+					if (x < currentHeight && y < currentWidth)
+						image.setPixel(y, x, qRgb(r, g, b));
+				}
 
 				// width scale
 				if ((j % 10) < widthScaler) y++;
@@ -131,27 +153,27 @@ void Assignment1Code::play() {
 			if ((i % 10) < heightScaler) x++;
 		}
 
-		if (antiAliasingSwitch) {
-			// los pass filter
-			// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
-			currentHeight = image.height();
-			currentWidth = image.width();
-			for (int i = 1; i < currentHeight - 1; i++) {
-				for (int j = 1; j < currentWidth - 1; j++) {
-					// get rgb in the neighbors
-					int r(0), g(0), b(0);
-					for (int ii = -1; ii < 2; ii++) {
-						for (int jj = -1; jj < 2; jj++) {
-							r += image.pixelColor(j + jj, i + ii).red();
-							g += image.pixelColor(j + jj, i + ii).green();
-							b += image.pixelColor(j + jj, i + ii).blue();
-						}
-					}
-					if (i < currentHeight && j < currentWidth)
-						image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
-				}
-			}
-		}
+		//if (antiAliasingSwitch) {
+		//	// los pass filter
+		//	// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
+		//	currentHeight = image.height();
+		//	currentWidth = image.width();
+		//	for (int i = 1; i < currentHeight - 1; i++) {
+		//		for (int j = 1; j < currentWidth - 1; j++) {
+		//			// get rgb in the neighbors
+		//			int r(0), g(0), b(0);
+		//			for (int ii = -1; ii < 2; ii++) {
+		//				for (int jj = -1; jj < 2; jj++) {
+		//					r += image.pixelColor(j + jj, i + ii).red();
+		//					g += image.pixelColor(j + jj, i + ii).green();
+		//					b += image.pixelColor(j + jj, i + ii).blue();
+		//				}
+		//			}
+		//			if (i < currentHeight && j < currentWidth)
+		//				image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
+		//		}
+		//	}
+		//}
 
 		if (letterBoxingSwitch) {
 		}
