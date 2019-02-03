@@ -70,7 +70,6 @@ void Assignment1Code::loadFile() {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			image.setPixel(j, i, qRgb(RGB[i*width * 3 + 3 * j], RGB[i*width * 3 + 3 * j + 1], RGB[i*width * 3 + 3 * j + 2]));
-			//image.setPixel(j, i, qRgb(channelR[i*width + j], channelG[i*width + j], channelB[i*width + j]));
 		}
 	}
 	ui.label_image->setPixmap(QPixmap::fromImage(image));
@@ -224,13 +223,13 @@ void Assignment1Code::play() {
 					int val_V(0);
 					for (int ii = -1; ii < 2; ii++) {
 						for (int jj = -1; jj < 2; jj++) {
-							val_H += kernal_H[(ii + 1) * 3 + jj + 1] * image_gray[i][j];
-							val_V += kernal_V[(ii + 1) * 3 + jj + 1] * image_gray[i][j];
+							val_H += kernal_H[(ii + 1) * 3 + jj + 1] * image_gray[i + ii][j + jj];
+							val_V += kernal_V[(ii + 1) * 3 + jj + 1] * image_gray[i + ii][j + jj];
 						}
 					}
 					G[i][j] = abs(val_H / 9.0) + abs(val_V / 9.0);
 					// see the energy matrix G
-					image.setPixel(j, i, qRgb(G[i][j] / 2, G[i][j] / 2, G[i][j] / 2));
+					// image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
 				}
 			}
 
