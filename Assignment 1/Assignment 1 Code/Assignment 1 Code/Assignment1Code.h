@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include "FileLoader.h"
 #include "SeamCarvingOperator.h"
+#include "AntiAliasingOperator.h"
 #include "ui_Assignment1Code.h"
 
 class Assignment1Code : public QMainWindow {

@@ -113,6 +113,7 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AntiAliasingOperator.cpp" />
     <ClCompile Include="Assignment1Code.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Initialization.cpp" />
@@ -130,6 +131,7 @@
     <QtRcc Include="Assignment1Code.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AntiAliasingOperator.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="SeamCarvingOperator.h" />
   </ItemGroup>

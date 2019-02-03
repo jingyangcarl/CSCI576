@@ -1,3 +1,7 @@
-﻿  SeamCarvingOperator.cpp
-d:\csci576\assignment 1\assignment 1 code\assignment 1 code\seamcarvingoperator.cpp(84): warning C4700: 使用了未初始化的局部变量“index”
+﻿  Moc'ing Assignment1Code.h...
+  moc_Assignment1Code.cpp
+  Assignment1Code.cpp
+  Initialization.cpp
+  SlotFunction.cpp
+  main.cpp
   Assignment 1 Code.vcxproj -> D:\CSCI576\Assignment 1\Assignment 1 Code\Win32\Debug\Assignment 1 Code.exe

@@ -17,6 +17,9 @@
     <ClCompile Include="SeamCarvingOperator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AntiAliasingOperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SeamCarvingOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAliasingOperator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

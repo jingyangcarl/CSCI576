@@ -132,25 +132,17 @@ void Assignment1Code::play() {
 		}
 
 		if (antiAliasingSwitch) {
-			// los pass filter
-			// where the kernal of the filter is defined as [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9]
-			currentHeight = image.height();
-			currentWidth = image.width();
-			for (int i = 1; i < currentHeight - 1; i++) {
-				for (int j = 1; j < currentWidth - 1; j++) {
-					// get rgb in the neighbors
-					int r(0), g(0), b(0);
-					for (int ii = -1; ii < 2; ii++) {
-						for (int jj = -1; jj < 2; jj++) {
-							r += image.pixelColor(j + jj, i + ii).red();
-							g += image.pixelColor(j + jj, i + ii).green();
-							b += image.pixelColor(j + jj, i + ii).blue();
-						}
-					}
-					if (i < currentHeight && j < currentWidth)
-						image.setPixel(j, i, qRgb(r / 9, g / 9, b / 9));
-				}
+			// low pass filter
+			QImage desImage(currentWidth, currentHeight, QImage::Format_RGB32);
+			AntiAliasingOperator aaOperator(image, desImage);
+			aaOperator.start();
+
+			while (aaOperator.isRunning()) {
+				QCoreApplication::processEvents();
 			}
+
+			aaOperator.wait();
+			image = desImage;
 		}
 
 		if (letterBoxingSwitch && heightScaler != widthScaler) {
