@@ -115,36 +115,13 @@ void Assignment1Code::play() {
 			for (int j = 0; j < width; j++) {
 				// the r, g, b are arranged in order of rrrr, gggg, bbbb
 
-				// set rgb values to pixel
-				//if (antiAliasingSwitch) {
-				//	if (x >= 1 && x < currentHeight - 1 && y >= 1 && y < currentWidth - 1) {
-				//		int r(0), g(0), b(0);
-				//		for (int ii = -1; ii < 2; ii++) {
-				//			for (int jj = -1; jj < 2; jj++) {
-				//				r += RGB[(3 * k + 0) * width * height + (i + ii) * width + j + jj];
-				//				g += RGB[(3 * k + 1) * width * height + (i + ii) * width + j + jj];
-				//				b += RGB[(3 * k + 2) * width * height + (i + ii) * width + j + jj];
-				//			}
-				//		}
-				//		if (x < currentHeight && y < currentWidth)
-				//			image.setPixel(y, x, qRgb(r / 9, g / 9, b / 9));
-				//	}
-				//	else {
-				//		int r = RGB[(3 * k + 0) * width * height + i * width + j];
-				//		int g = RGB[(3 * k + 1) * width * height + i * width + j];
-				//		int b = RGB[(3 * k + 2) * width * height + i * width + j];
-				//		if (x < currentHeight && y < currentWidth)
-				//			image.setPixel(y, x, qRgb(r, g, b));
-				//	}
-				//}
-				{
-					// get rgb values
-					int r = RGB[(3 * k + 0) * width * height + i * width + j];
-					int g = RGB[(3 * k + 1) * width * height + i * width + j];
-					int b = RGB[(3 * k + 2) * width * height + i * width + j];
-					if (x < currentHeight && y < currentWidth)
-						image.setPixel(y, x, qRgb(r, g, b));
-				}
+				// get rgb values
+				int r = RGB[(3 * k + 0) * width * height + i * width + j];
+				int g = RGB[(3 * k + 1) * width * height + i * width + j];
+				int b = RGB[(3 * k + 2) * width * height + i * width + j];
+
+				if (x < currentHeight && y < currentWidth)
+					image.setPixel(y, x, qRgb(r, g, b));
 
 				// width scale
 				if ((j % 10) < widthScaler) y++;
@@ -175,7 +152,50 @@ void Assignment1Code::play() {
 			}
 		}
 
-		if (letterBoxingSwitch) {
+		if (letterBoxingSwitch && heightScaler != widthScaler) {
+			// non linear mapping
+			QImage desImage = image;
+			int srcHeight = image.height();
+			int srcWidth = image.width();
+
+			if (widthScaler < heightScaler) {
+				int desHeight = srcWidth * height / width;
+				int desX(srcHeight / 2 - desHeight / 2);
+
+				for (int srcX = 0; srcX < srcHeight; srcX++) {
+					int desY(0);
+					for (int srcY = 0; srcY < srcWidth; srcY++) {
+						int r = desImage.pixelColor(srcY, srcX).red();
+						int g = desImage.pixelColor(srcY, srcX).green();
+						int b = desImage.pixelColor(srcY, srcX).blue();
+
+						if (desX < srcHeight / 2 + desHeight / 2)
+							image.setPixel(desY, desX, qRgb(r, g, b));
+
+						if ((srcY % widthScaler) < widthScaler) desY++;
+					}
+					if ((srcX % heightScaler) < widthScaler) desX++;
+				}
+			}
+			else {
+				int desWidth = srcHeight * width / height;
+				int desX(0);
+
+				for (int srcX = 0; srcX < srcHeight; srcX++) {
+					int desY(srcWidth / 2 - desWidth / 2);
+					for (int srcY = 0; srcY < srcWidth; srcY++) {
+						int r = desImage.pixelColor(srcY, srcX).red();
+						int g = desImage.pixelColor(srcY, srcX).green();
+						int b = desImage.pixelColor(srcY, srcX).blue();
+
+						if (desY < srcWidth / 2 + srcWidth / 2)
+							image.setPixel(desY, desX, qRgb(r, g, b));
+
+						if ((srcY % widthScaler) < heightScaler) desY++;
+					}
+					if ((srcX % heightScaler) < heightScaler) desX++;
+				}
+			}
 		}
 
 		if (seamCarvingSwitch) {
@@ -286,7 +306,6 @@ void Assignment1Code::play() {
 			// show the line
 
 			// delete the line
-
 		}
 
 		ui.label_image->setPixmap(QPixmap::fromImage(image));
