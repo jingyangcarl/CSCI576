@@ -19,9 +19,6 @@ public:
 	void widgetInitialization();
 	void connectionInitialization();
 
-	void frameReader();
-	void frameSeparator();
-
 	/*-------------SLOTFunction .cpp------------*/
 public slots:
 	void loadFile();

@@ -200,6 +200,14 @@ void Assignment1Code::play() {
 		}
 
 		if (seamCarvingSwitch) {
+
+			// only for test on "seamCarving.rgbs"
+			for (int i = 0; i < height; i++) {
+				for (int j = 0; j < width; j++) {
+					image.setPixel(j, i, qRgb(RGB[i*width * 3 + 3 * j], RGB[i*width * 3 + 3 * j + 1], RGB[i*width * 3 + 3 * j + 2]));
+				}
+			}
+
 			// conver the image to gray image
 			QVector<QVector<int>> image_gray(height, QVector<int>(width, 0));
 			for (int i = 0; i < currentHeight; i++) {
@@ -229,7 +237,7 @@ void Assignment1Code::play() {
 					}
 					G[i][j] = abs(val_H / 9.0) + abs(val_V / 9.0);
 					// see the energy matrix G
-					// image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
+					//image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
 				}
 			}
 
@@ -238,9 +246,9 @@ void Assignment1Code::play() {
 			QVector<QVector<float>> R(height, QVector<float>(width, 0));
 
 			for (int i = 1; i < G.size(); i++) {
+				QVector<QVector<float>>::iterator currentR = R.begin() + i;
 				QVector<QVector<float>>::iterator currentG = G.begin() + i;
 				QVector<QVector<float>>::iterator currentM = M.begin() + i;
-				QVector<QVector<float>>::iterator currentR = R.begin() + i;
 				QVector<QVector<float>>::iterator previousM = M.begin() + i - 1;
 
 				// for the first row
@@ -279,6 +287,14 @@ void Assignment1Code::play() {
 					(*currentR)[G[0].size() - 1] = 0;
 				}
 			}
+
+			// check M
+			//for (int i = 0; i < currentHeight; i++) {
+			//	for (int j = 0; j < currentWidth; j++) {
+			//		image.setPixel(j, i, qRgb(M[i][j], M[i][j], M[i][j]));
+			//		// image.setPixel(j, i, qRgb(G[i][j], G[i][j], G[i][j]));
+			//	}
+			//}
 
 			// find the line with minimum energy
 			QVector<float> minEnergyLine(height);
