@@ -1,0 +1,12 @@
+﻿  Moc'ing Assignment1Code.h...
+  AntiAliasingOperator.cpp
+  Assignment1Code.cpp
+  FileLoader.cpp
+  Initialization.cpp
+  main.cpp
+  SeamCarvingOperator.cpp
+  SlotFunction.cpp
+  qrc_Assignment1Code.cpp
+  moc_Assignment1Code.cpp
+d:\csci576\assignment 1\assignment 1 code\assignment 1 code\seamcarvingoperator.cpp(84): warning C4700: 使用了未初始化的局部变量“index”
+  Assignment 1 Code.vcxproj -> D:\CSCI576\Assignment 1\Assignment 1 Code\Win32\Release\Assignment 1 Code.exe

@@ -161,9 +161,9 @@ void SeamCarvingOperator::run() {
 	CalculateGradiant();
 	//OutputGradiant();
 	CalculateEnergy();
-	//OutputEnergy();
+	OutputEnergy();
 	//OutputFlag();
 	CalculateMinEnergyLine();
 	//OutputMinEnergyLine();
-	DeleteMinEnergyLine();
+	//DeleteMinEnergyLine();
 }

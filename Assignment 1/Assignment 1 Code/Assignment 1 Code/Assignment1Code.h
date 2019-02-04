@@ -37,7 +37,6 @@ private:
 
 	// private variable
 	QString filePath;
-	//QVector<QVector<char>> RGB;
 	QByteArray RGB;
 	QVector<int> fileDetail;
 	bool loadStatus;
