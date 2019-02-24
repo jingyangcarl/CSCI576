@@ -10,12 +10,20 @@ void Assignment2Code::PushButtonLoadFile() {
 
 	// Load File
 	fileLoader.start();
+	TextBrowserPrint("Start Loading File.");
 
 	// Update UI
+	TextBrowserPrint("Loading...");
 	while (fileLoader.isRunning()) {
 		QCoreApplication::processEvents();
 	}
 
 	// Waite Thread
 	fileLoader.wait();
+	TextBrowserPrint("Loading Finished.");
+
+}
+
+void Assignment2Code::TextBrowserPrint(QString output) {
+	ui.textBrowser_output->append(output + '\n');
 }

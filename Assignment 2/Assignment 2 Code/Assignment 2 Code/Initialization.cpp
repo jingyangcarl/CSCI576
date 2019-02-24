@@ -1,4 +1,3 @@
-#pragma once
 #include "Assignment2Code.h"
 
 void Assignment2Code::ConnectionInitialization() {

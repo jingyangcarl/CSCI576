@@ -11,6 +11,9 @@
     <ClCompile Include="FileLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Initialization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -51,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Initialization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
