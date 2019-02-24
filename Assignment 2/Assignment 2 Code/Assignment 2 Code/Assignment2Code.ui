@@ -22,6 +22,9 @@
         <property name="text">
          <string>label_image</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
      </layout>

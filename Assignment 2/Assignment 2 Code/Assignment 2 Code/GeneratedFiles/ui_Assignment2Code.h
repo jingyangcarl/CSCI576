@@ -53,6 +53,7 @@ public:
         gridLayout_display->setObjectName(QString::fromUtf8("gridLayout_display"));
         label_image = new QLabel(centralWidget);
         label_image->setObjectName(QString::fromUtf8("label_image"));
+        label_image->setAlignment(Qt::AlignCenter);
 
         gridLayout_display->addWidget(label_image, 0, 0, 1, 1);
 

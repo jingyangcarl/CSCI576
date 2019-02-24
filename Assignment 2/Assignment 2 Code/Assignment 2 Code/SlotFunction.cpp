@@ -22,19 +22,8 @@ void Assignment2Code::PushButtonLoad() {
 	fileLoader.wait();
 	TextBrowserOutputPrint("Loading Finished.");
 
-	/*QImage image(512, 512, QImage::Format_RGB32);
-	int height = image.height();
-	int width = image.width();
-
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
-			int r = rgb[i*width * 3 + 3 * j];
-			int g = rgb[i*width * 3 + 3 * j + 1];
-			int b = rgb[i*width * 3 + 3 * j + 2];
-			image.setPixel(j, i, qRgb(r, g, b));
-		}
-	}
-	ui.label_image->setPixmap(QPixmap::fromImage(image));*/
+	// Output Image
+	LabelImagePrint(rgb);
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
