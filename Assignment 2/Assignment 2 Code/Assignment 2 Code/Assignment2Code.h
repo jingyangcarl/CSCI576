@@ -14,8 +14,9 @@ public:
 	void ConnectionInitialization();
 
 public slots:
-	void PushButtonLoadFile();
-	void TextBrowserPrint(QString output);
+	void PushButtonLoad();
+	void TextBrowserOutputPrint(QString output);
+	void LabelImagePrint(QByteArray & rgb);
 
 private:
 	Ui::Assignment2CodeClass ui;
