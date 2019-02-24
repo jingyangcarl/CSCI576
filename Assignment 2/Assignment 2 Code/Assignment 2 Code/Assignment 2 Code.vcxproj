@@ -114,7 +114,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Assignment2Code.cpp" />
+    <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SlotFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Assignment2Code.h" />
@@ -124,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Assignment2Code.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

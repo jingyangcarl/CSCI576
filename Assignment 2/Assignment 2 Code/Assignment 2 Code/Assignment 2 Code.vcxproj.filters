@@ -5,6 +5,12 @@
     <ClCompile Include="Assignment2Code.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SlotFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -42,5 +48,10 @@
     <QtRcc Include="Assignment2Code.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

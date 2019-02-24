@@ -35,6 +35,9 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QTextBrowser" name="textBrowser_output"/>
+      </item>
      </layout>
     </item>
    </layout>

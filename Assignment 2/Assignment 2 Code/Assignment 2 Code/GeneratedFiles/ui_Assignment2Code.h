@@ -11,8 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -22,25 +25,59 @@ QT_BEGIN_NAMESPACE
 class Ui_Assignment2CodeClass
 {
 public:
+    QWidget *centralWidget;
+    QGridLayout *gridLayout;
+    QGridLayout *gridLayout_display;
+    QLabel *label_image;
+    QGridLayout *gridLayout_control;
+    QPushButton *pushButton_load;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
-    QWidget *centralWidget;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *Assignment2CodeClass)
     {
         if (Assignment2CodeClass->objectName().isEmpty())
             Assignment2CodeClass->setObjectName(QString::fromUtf8("Assignment2CodeClass"));
-        Assignment2CodeClass->resize(600, 400);
+        Assignment2CodeClass->resize(1191, 735);
+        centralWidget = new QWidget(Assignment2CodeClass);
+        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout_display = new QGridLayout();
+        gridLayout_display->setSpacing(6);
+        gridLayout_display->setObjectName(QString::fromUtf8("gridLayout_display"));
+        label_image = new QLabel(centralWidget);
+        label_image->setObjectName(QString::fromUtf8("label_image"));
+
+        gridLayout_display->addWidget(label_image, 0, 0, 1, 1);
+
+
+        gridLayout->addLayout(gridLayout_display, 0, 0, 1, 1);
+
+        gridLayout_control = new QGridLayout();
+        gridLayout_control->setSpacing(6);
+        gridLayout_control->setObjectName(QString::fromUtf8("gridLayout_control"));
+        pushButton_load = new QPushButton(centralWidget);
+        pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
+
+        gridLayout_control->addWidget(pushButton_load, 0, 0, 1, 1);
+
+
+        gridLayout->addLayout(gridLayout_control, 0, 1, 1, 1);
+
+        gridLayout->setColumnStretch(0, 4);
+        gridLayout->setColumnStretch(1, 1);
+        Assignment2CodeClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Assignment2CodeClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 1191, 26));
         Assignment2CodeClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(Assignment2CodeClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        Assignment2CodeClass->addToolBar(mainToolBar);
-        centralWidget = new QWidget(Assignment2CodeClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        Assignment2CodeClass->setCentralWidget(centralWidget);
+        Assignment2CodeClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(Assignment2CodeClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         Assignment2CodeClass->setStatusBar(statusBar);
@@ -53,6 +90,8 @@ public:
     void retranslateUi(QMainWindow *Assignment2CodeClass)
     {
         Assignment2CodeClass->setWindowTitle(QApplication::translate("Assignment2CodeClass", "Assignment2Code", nullptr));
+        label_image->setText(QApplication::translate("Assignment2CodeClass", "label_image", nullptr));
+        pushButton_load->setText(QApplication::translate("Assignment2CodeClass", "Load Image", nullptr));
     } // retranslateUi
 
 };

@@ -1,9 +1,6 @@
 ﻿  Uic'ing Assignment2Code.ui...
-  Rcc'ing Assignment2Code.qrc...
   Moc'ing Assignment2Code.h...
-   RCC: Warning: No resources in 'D:\CSCI576\Assignment 2\Assignment 2 Code\Assignment 2 Code\Assignment2Code.qrc'.
   Assignment2Code.cpp
-  main.cpp
-  qrc_Assignment2Code.cpp
   moc_Assignment2Code.cpp
+  main.cpp
   Assignment 2 Code.vcxproj -> D:\CSCI576\Assignment 2\Assignment 2 Code\Win32\Debug\Assignment 2 Code.exe
