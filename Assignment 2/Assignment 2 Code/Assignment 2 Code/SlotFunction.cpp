@@ -1,7 +1,6 @@
 #include "Assignment2Code.h"
 
 void Assignment2Code::PushButtonLoad() {
-
 	// Initialization
 	filePath = QFileDialog::getOpenFileName(this, tr("Please Select Image"), "./Resources", tr("RGB File(*.rgb)\n BMP File(*.bmp)"));
 	rgb = QByteArray();
@@ -40,9 +39,9 @@ void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
 	int r(0), g(0), b(0);
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			int r = rgb[i*width * 3 + 3 * j];
-			int g = rgb[i*width * 3 + 3 * j + 1];
-			int b = rgb[i*width * 3 + 3 * j + 2];
+			int r = rgb[0 * width * height + i * width + j];
+			int g = rgb[1 * width * height + i * width + j];
+			int b = rgb[2 * width * height + i * width + j];
 			image.setPixel(j, i, qRgb(r, g, b));
 		}
 	}
