@@ -3,5 +3,3 @@
 **/*.ipch
 
 # big files
-**/*.rgb
-**/*.bmp
