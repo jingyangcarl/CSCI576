@@ -3,8 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_Assignment2Code.h"
 
-class Assignment2Code : public QMainWindow
-{
+class Assignment2Code : public QMainWindow {
 	Q_OBJECT
 
 public:
