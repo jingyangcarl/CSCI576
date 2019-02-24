@@ -20,10 +20,10 @@ void FileLoader::load() {
 	else {
 		// the file is exist and opened successfully
 
-		if (fileInfo.suffix == "rgb") {
+		if (fileInfo.suffix() == "rgb") {
 			rgb = file.readAll();
 		}
-		else if (fileInfo.suffix = "bmp") {
+		else if (fileInfo.suffix() == "bmp") {
 
 		}
 		loadStatus = true;

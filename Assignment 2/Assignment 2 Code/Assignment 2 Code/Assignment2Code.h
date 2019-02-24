@@ -11,9 +11,11 @@ class Assignment2Code : public QMainWindow {
 public:
 	Assignment2Code(QWidget *parent = Q_NULLPTR);
 
+	void ConnectionInitialization();
 
 public slots:
 	void PushButtonLoadFile();
+	void TextBrowserPrint(QString output);
 
 private:
 	Ui::Assignment2CodeClass ui;

@@ -17,6 +17,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -31,6 +32,7 @@ public:
     QLabel *label_image;
     QGridLayout *gridLayout_control;
     QPushButton *pushButton_load;
+    QTextBrowser *textBrowser_output;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -64,6 +66,11 @@ public:
         pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
 
         gridLayout_control->addWidget(pushButton_load, 0, 0, 1, 1);
+
+        textBrowser_output = new QTextBrowser(centralWidget);
+        textBrowser_output->setObjectName(QString::fromUtf8("textBrowser_output"));
+
+        gridLayout_control->addWidget(textBrowser_output, 1, 0, 1, 1);
 
 
         gridLayout->addLayout(gridLayout_control, 0, 1, 1, 1);
