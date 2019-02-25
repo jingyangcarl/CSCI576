@@ -116,6 +116,7 @@
     <ClCompile Include="Assignment2Code.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="JPEGDecoder.cpp" />
     <ClCompile Include="JPEGEncoder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SlotFunction.cpp" />
