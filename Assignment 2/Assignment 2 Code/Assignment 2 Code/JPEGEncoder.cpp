@@ -16,8 +16,10 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 }
 
 void JPEGEncoder::run() {
+	// Convert RGB color space to YCrCb color space 
 	RGBToYCrCb();
-	y = DiscreteCosinTransform(y);
+
+	y = BlockDCT(y);
 	PrintGrayScale(y);
 }
 
@@ -60,7 +62,7 @@ QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<floa
 	return matrixDCT;
 }
 
-QVector<QVector<int>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matrix) {
+QVector<QVector<float>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matrix) {
 	// The input of this function has to be limited to 8 by 8
 	// The 8 by 8 DCT quantization table is listed as follows
 	// 16, 11, 10, 16, 24, 40, 51, 61
@@ -84,7 +86,7 @@ QVector<QVector<int>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matri
 	};
 
 	if (matrix.size() == 8 && matrix[0].size() == 8) {
-		QVector<QVector<int>> quantizedMatrix(8, QVector<int>(8, 0));
+		QVector<QVector<float>> quantizedMatrix(8, QVector<float>(8, 0));
 		for (int i = 0; i < matrix.size(); i++) {
 			for (int j = 0; j < matrix[0].size(); j++) {
 				quantizedMatrix[i][j] = round(quantizedMatrix[i][j] / (float)quantizationTable[i][j]);
@@ -92,7 +94,31 @@ QVector<QVector<int>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matri
 		}
 		return quantizedMatrix;
 	}
-	else return QVector<QVector<int>>();
+	else return QVector<QVector<float>>();
+}
+
+QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
+	// Divide an image into several 8 by 8 blocks and conduct DCT as well as quantization
+
+	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
+	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
+	else {
+		for (int i = 0; i < matrix.size() / 8; i++) {
+			for (int j = 0; j < matrix[0].size() / 8; j++) {
+				QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+				for (int ii = 0; ii < 8; ii++) {
+					for (int jj = 0; jj < 8; jj++) {
+						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
+					}
+				}
+				subMatrix = DiscreteCosinTransform(subMatrix);
+				subMatrix = DCTQuantization(subMatrix);
+			}
+		}
+	}
+
+
+
 }
 
 void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {

@@ -1,2 +1,3 @@
 ﻿  JPEGEncoder.cpp
+d:\csci576\assignment 2\assignment 2 code\assignment 2 code\jpegencoder.cpp(122): warning C4715: “JPEGEncoder::BlockDCT”: 不是所有的控件路径都返回值
   Assignment 2 Code.vcxproj -> D:\CSCI576\Assignment 2\Assignment 2 Code\Win32\Debug\Assignment 2 Code.exe
