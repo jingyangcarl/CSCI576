@@ -28,5 +28,6 @@ private:
 	// Function
 	void RGBToYCrCb();
 	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> matrix);
+	QVector<QVector<int>> DCTQuantization(QVector<QVector<float>> matrix);
 	void PrintGrayScale(QVector<QVector<float>> grayScale);
 };

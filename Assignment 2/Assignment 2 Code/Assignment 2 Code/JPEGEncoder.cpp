@@ -2,7 +2,6 @@
 
 JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 	rgb(rgb), encodeStatus(encodeStatus) {
-
 	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
@@ -51,14 +50,49 @@ QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<floa
 			matrixDCT[u][v] = 0;
 			for (int i = 0; i < m; i++) {
 				for (int j = 0; j < n; j++) {
-					matrixDCT[u][v] += matrix[i][j] * cos(M_PI/((float)m)*(i + 1.0/2.0) * u) * cos(M_PI/((float)n)*(j + 1.0/2.0) * v);
+					matrixDCT[u][v] += matrix[i][j] * cos(M_PI / ((float)m)*(i + 1.0 / 2.0) * u) * cos(M_PI / ((float)n)*(j + 1.0 / 2.0) * v);
 				}
 			}
-			matrixDCT[u][v] *= sqrt(2.0/m) * sqrt(2.0/n) * (u == 0 ? 1.0/sqrt(2) : 1) * (v == 0 ? 1.0/sqrt(2) : 1);
+			matrixDCT[u][v] *= sqrt(2.0 / m) * sqrt(2.0 / n) * (u == 0 ? 1.0 / sqrt(2) : 1) * (v == 0 ? 1.0 / sqrt(2) : 1);
 		}
 	}
 
 	return matrixDCT;
+}
+
+QVector<QVector<int>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matrix) {
+	// The input of this function has to be limited to 8 by 8
+	// The 8 by 8 DCT quantization table is listed as follows
+	// 16, 11, 10, 16, 24, 40, 51, 61
+	// 12, 12, 14, 19, 26, 58, 60, 55
+	// 14, 13, 16, 24, 40, 57, 69, 56
+	// 14, 17, 22, 29, 51, 87, 80, 62
+	// 18, 22, 37, 56, 68, 109, 103, 77
+	// 24, 35, 55, 64, 81, 104, 113, 92
+	// 49, 64, 78, 87, 103, 121, 120, 101
+	// 72, 92, 96, 98, 112, 100, 103, 99
+
+	int const quantizationTable[8][8] = {
+		{16, 11, 10, 16, 24, 40, 51, 61},
+		{12, 12, 14, 19, 26, 58, 60, 55},
+		{14, 13, 16, 24, 40, 57, 69, 56},
+		{14, 17, 22, 29, 51, 87, 80, 62},
+		{18, 22, 37, 56, 68, 109, 103, 77},
+		{24, 35, 55, 64, 81, 104, 113, 92},
+		{49, 64, 78, 87, 103, 121, 120, 101},
+		{72, 92, 96, 98, 112, 100, 103, 99}
+	};
+
+	if (matrix.size() == 8 && matrix[0].size() == 8) {
+		QVector<QVector<int>> quantizedMatrix(8, QVector<int>(8, 0));
+		for (int i = 0; i < matrix.size(); i++) {
+			for (int j = 0; j < matrix[0].size(); j++) {
+				quantizedMatrix[i][j] = round(quantizedMatrix[i][j] / (float)quantizationTable[i][j]);
+			}
+		}
+		return quantizedMatrix;
+	}
+	else return QVector<QVector<int>>();
 }
 
 void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {
