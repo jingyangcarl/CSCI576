@@ -16,9 +16,9 @@ private:
 	bool &encodeStatus;
 
 	// RGB Color Spaces
-	QVector<QVector<int>> r;
-	QVector<QVector<int>> g;
-	QVector<QVector<int>> b;
+	QVector<QVector<float>> r;
+	QVector<QVector<float>> g;
+	QVector<QVector<float>> b;
 
 	// YCbCr Color Spaces
 	QVector<QVector<float>> y;
@@ -28,5 +28,5 @@ private:
 	// Function
 	void RGBToYCrCb();
 	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> matrix);
-	void PrintGrayScale(QVector<QVector<int>> grayScale);
+	void PrintGrayScale(QVector<QVector<float>> grayScale);
 };

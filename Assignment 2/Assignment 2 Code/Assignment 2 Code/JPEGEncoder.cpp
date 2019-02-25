@@ -3,9 +3,9 @@
 JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 	rgb(rgb), encodeStatus(encodeStatus) {
 
-	r = QVector<QVector<int>>(512, QVector<int>(512, 0));
-	g = QVector<QVector<int>>(512, QVector<int>(512, 0));
-	b = QVector<QVector<int>>(512, QVector<int>(512, 0));
+	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
@@ -17,24 +17,9 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 }
 
 void JPEGEncoder::run() {
-	// RGBToYCrCb();
-
-	QVector<QVector<float>> test(3, QVector<float>(4, 0));
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 4; j++) {
-			test[i][j] = r[i][j];
-		}
-	}
-
-	test = DiscreteCosinTransform(test);
-
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 4; j++) {
-			r[i][j] = test[i][j];
-		}
-	}
-
-	PrintGrayScale(r);
+	RGBToYCrCb();
+	y = DiscreteCosinTransform(y);
+	PrintGrayScale(y);
 }
 
 void JPEGEncoder::RGBToYCrCb() {
@@ -76,7 +61,7 @@ QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<floa
 	return matrixDCT;
 }
 
-void JPEGEncoder::PrintGrayScale(QVector<QVector<int>> grayScale) {
+void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {
 	// print gray scale image
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
