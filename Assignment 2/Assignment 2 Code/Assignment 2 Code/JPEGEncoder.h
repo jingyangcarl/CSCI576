@@ -1,6 +1,7 @@
 #pragma once
 #include <qthread.h>
 #include <qvector.h>
+#include <qmath.h>
 
 class JPEGEncoder : public QThread {
 public:
@@ -24,8 +25,7 @@ private:
 	QVector<QVector<float>> cb;
 	QVector<QVector<float>> cr;
 
-
 	// Function
 	void RGBToYCrCb();
-	void DiscreteCosinTransform(QVector<QVector<int>> matrix);
+	QVector<QVector<int>> DiscreteCosinTransform(QVector<QVector<int>> matrix);
 };

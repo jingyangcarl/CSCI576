@@ -44,6 +44,25 @@ void JPEGEncoder::RGBToYCrCb() {
 	}
 }
 
-void JPEGEncoder::DiscreteCosinTransform(QVector<QVector<int>> matrix) {
+QVector<QVector<int>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<int>> matrix) {
+	// Basic DCT for a M by N matrix, where M denotes the number of rows, and N denotes the number of columns
+	// the general equation for a 2D (M by N) DCT is defined as
 
+	QVector<QVector<int>> matrixDCT = matrix;
+	int m = matrix.size();
+	int n = matrix[0].size();
+
+	for (int u = 0; u < m; u++) {
+		for (int v = 0; v < n; v++) {
+			matrixDCT[u][v] = 0;
+			for (int i = 0; i < m; i++) {
+				for (int j = 0; j < n; j++) {
+					matrixDCT[u][v] += matrix[i][j] * cos(M_PI/((float)m)*(i + 1.0/2.0) * u) * cos(M_PI/((float)n)*(j + 1.0/2.0) * v);
+				}
+			}
+			matrixDCT[u][v] *= 1.0 / 4.0 * (u == 0 ? 1.0 / sqrt(2) : 1) * (v == 0 ? 1 / 0 / sqrt(2) : 1);
+		}
+	}
+
+	return matrixDCT;
 }
