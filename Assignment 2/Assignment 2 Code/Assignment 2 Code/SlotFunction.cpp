@@ -48,6 +48,9 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	LabelImagePrint(rgb);
 }
 
+void Assignment2Code::PushButtonJPEGDecoder() {
+}
+
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
 	ui.textBrowser_output->append(output);
 }

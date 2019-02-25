@@ -34,6 +34,7 @@ public:
     QTextBrowser *textBrowser_output;
     QPushButton *pushButton_load;
     QPushButton *pushButton_jpeg_encoder;
+    QPushButton *pushButton_jpeg_decoder;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -67,7 +68,7 @@ public:
         textBrowser_output = new QTextBrowser(centralWidget);
         textBrowser_output->setObjectName(QString::fromUtf8("textBrowser_output"));
 
-        gridLayout_control->addWidget(textBrowser_output, 2, 0, 1, 1);
+        gridLayout_control->addWidget(textBrowser_output, 3, 0, 1, 1);
 
         pushButton_load = new QPushButton(centralWidget);
         pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
@@ -78,6 +79,11 @@ public:
         pushButton_jpeg_encoder->setObjectName(QString::fromUtf8("pushButton_jpeg_encoder"));
 
         gridLayout_control->addWidget(pushButton_jpeg_encoder, 1, 0, 1, 1);
+
+        pushButton_jpeg_decoder = new QPushButton(centralWidget);
+        pushButton_jpeg_decoder->setObjectName(QString::fromUtf8("pushButton_jpeg_decoder"));
+
+        gridLayout_control->addWidget(pushButton_jpeg_decoder, 2, 0, 1, 1);
 
 
         gridLayout->addLayout(gridLayout_control, 0, 1, 1, 1);
@@ -107,6 +113,7 @@ public:
         label_image->setText(QApplication::translate("Assignment2CodeClass", "label_image", nullptr));
         pushButton_load->setText(QApplication::translate("Assignment2CodeClass", "Load Image", nullptr));
         pushButton_jpeg_encoder->setText(QApplication::translate("Assignment2CodeClass", "JPEG Encoder", nullptr));
+        pushButton_jpeg_decoder->setText(QApplication::translate("Assignment2CodeClass", "JPEG Decoder", nullptr));
     } // retranslateUi
 
 };

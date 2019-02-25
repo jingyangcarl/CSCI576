@@ -62,5 +62,8 @@
     <ClInclude Include="JPEGEncoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JPEGDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

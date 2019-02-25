@@ -17,6 +17,7 @@ public:
 public slots:
 	void PushButtonLoad();
 	void PushButtonJPEGEncoder();
+	void PushButtonJPEGDecoder();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 

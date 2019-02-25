@@ -31,7 +31,7 @@
     </item>
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_control">
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QTextBrowser" name="textBrowser_output"/>
       </item>
       <item row="0" column="0">
@@ -45,6 +45,13 @@
        <widget class="QPushButton" name="pushButton_jpeg_encoder">
         <property name="text">
          <string>JPEG Encoder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_jpeg_decoder">
+        <property name="text">
+         <string>JPEG Decoder</string>
         </property>
        </widget>
       </item>
