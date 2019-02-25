@@ -26,7 +26,7 @@ void Assignment2Code::PushButtonLoad() {
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
-	ui.textBrowser_output->append(output + '\n');
+	ui.textBrowser_output->append(output);
 }
 
 void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
@@ -40,8 +40,11 @@ void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			int r = rgb[0 * width * height + i * width + j];
+			this->r.append(r);
 			int g = rgb[1 * width * height + i * width + j];
+			this->g.append(g);
 			int b = rgb[2 * width * height + i * width + j];
+			this->b.append(b);
 			image.setPixel(j, i, qRgb(r, g, b));
 		}
 	}

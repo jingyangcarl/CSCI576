@@ -24,7 +24,8 @@ void FileLoader::load() {
 			rgb = file.readAll();
 		}
 		else if (fileInfo.suffix() == "bmp") {
-
+			rgb = file.readAll();
+			rgb = rgb.mid(0);
 		}
 		loadStatus = true;
 	}

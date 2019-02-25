@@ -25,4 +25,9 @@ private:
 	QString filePath;
 	QByteArray rgb;
 	bool loadStatus;
+
+	// rgb variable
+	QByteArray r;
+	QByteArray g;
+	QByteArray b;
 };
