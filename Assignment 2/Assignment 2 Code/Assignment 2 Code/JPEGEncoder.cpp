@@ -17,10 +17,10 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 
 void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
-	// RGBToYCrCb();
+	 RGBToYCrCb();
 
-	r = BlockDCT(r);
-	PrintGrayScale(r);
+	y = BlockDCT(y);
+	PrintGrayScale(y);
 }
 
 void JPEGEncoder::RGBToYCrCb() {
@@ -119,6 +119,12 @@ QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
 		}
 		return resultMatrix;
 	}
+}
+
+QBitArray JPEGEncoder::EntropyEncode(QVector<QVector<float>> matrix) {
+	// encode submatrix using Huffman and Runlength
+
+	return QBitArray();
 }
 
 void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {
