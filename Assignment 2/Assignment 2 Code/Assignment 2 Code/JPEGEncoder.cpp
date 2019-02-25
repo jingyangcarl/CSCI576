@@ -19,7 +19,7 @@ void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
 	 RGBToYCrCb();
 
-	y = BlockDCT(y);
+	y = BlockDCT_512(y);
 	PrintGrayScale(y);
 }
 
@@ -39,9 +39,15 @@ void JPEGEncoder::RGBToYCrCb() {
 	}
 }
 
+/*
+Description:
+	This function is used to transform any given matrix from time domain to frequency domain
+Input:
+	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix, which needed to be transform to frequency domain
+Output:
+	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix representing frequency infomation
+*/
 QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<float>> matrix) {
-	// Basic DCT for a M by N matrix, where M denotes the number of rows, and N denotes the number of columns
-	// the general equation for a 2D (M by N) DCT is defined as
 
 	QVector<QVector<float>> matrixDCT = matrix;
 	int m = matrix.size();
@@ -62,17 +68,26 @@ QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<floa
 	return matrixDCT;
 }
 
-QVector<QVector<float>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> matrix) {
-	// The input of this function has to be limited to 8 by 8
-	// The 8 by 8 DCT quantization table is listed as follows
-	// 16, 11, 10, 16, 24, 40, 51, 61
-	// 12, 12, 14, 19, 26, 58, 60, 55
-	// 14, 13, 16, 24, 40, 57, 69, 56
-	// 14, 17, 22, 29, 51, 87, 80, 62
-	// 18, 22, 37, 56, 68, 109, 103, 77
-	// 24, 35, 55, 64, 81, 104, 113, 92
-	// 49, 64, 78, 87, 103, 121, 120, 101
-	// 72, 92, 96, 98, 112, 100, 103, 99
+/*
+Description:
+	This function is used to quantize the given 8 by 8 matrix using the quantization table, 
+	where the quantization table is:
+	quantizationTable = {
+		{16, 11, 10, 16, 24, 40, 51, 61},
+		{12, 12, 14, 19, 26, 58, 60, 55},
+		{14, 13, 16, 24, 40, 57, 69, 56},
+		{14, 17, 22, 29, 51, 87, 80, 62},
+		{18, 22, 37, 56, 68, 109, 103, 77},
+		{24, 35, 55, 64, 81, 104, 113, 92},
+		{49, 64, 78, 87, 103, 121, 120, 101},
+		{72, 92, 96, 98, 112, 100, 103, 99}
+	}
+Input:
+	@ QVector<QVector<float>> matrix: an 8 by 8 matrix that needs to be quantized
+Output:
+	@ QVector<QVector<float>> matrix: an 8 by 8 matrix after quantization
+*/
+QVector<QVector<float>> JPEGEncoder::DCTQuantization_8(QVector<QVector<float>> matrix) {
 
 	int const quantizationTable[8][8] = {
 		{16, 11, 10, 16, 24, 40, 51, 61},
@@ -97,8 +112,17 @@ QVector<QVector<float>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> mat
 	else return QVector<QVector<float>>();
 }
 
-QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
-	// Divide an image into several 8 by 8 blocks and conduct DCT as well as quantization
+/*
+Description:
+	This function is used to divide an given 512 by 512 matrix into several blocks of size 8 by 8.
+	For each block, a DiscreteCosinTransform(DCT) is conducted to transform the block from time domain to frequency domain.
+	Next, a quantization is performed on the block using the quantization table
+Input:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix needed to be transformed
+Output:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block DCT transformation and quantization
+*/
+QVector<QVector<float>> JPEGEncoder::BlockDCT_512(QVector<QVector<float>> matrix) {\
 
 	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
 	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
@@ -111,7 +135,7 @@ QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
 					for (int jj = 0; jj < 8; jj++)
 						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
 				subMatrix = DiscreteCosinTransform(subMatrix);
-				subMatrix = DCTQuantization(subMatrix);
+				subMatrix = DCTQuantization_8(subMatrix);
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)
 						resultMatrix[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
@@ -120,6 +144,36 @@ QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
 		return resultMatrix;
 	}
 }
+/*
+Description:
+	This funtion is used to transform the given matrix to an array in zig-zag order
+Input:
+	@ QVector<QVector<float>> matrix: input matrix
+Output:
+	@ QVector<float> array: array holds entries in matrix in a zig-zag order
+*/
+QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> matrix) {
+
+	QVector<float> zigzag;
+	bool direction(false);
+	if (matrix.size() == 0) return QVector<float>();
+	for (int i = 0; i < matrix.size() + matrix[0].size - 1; i++) {
+		int j = i;
+		while (j > 0) {
+			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
+				zigzag.push_back(matrix[j][i - j]);
+			if (direction && (i - j) < matrix.size() && j < matrix[0].size())
+				zigzag.push_back(matrix[i - j][j]);
+			j--;
+		}
+		direction = !direction;
+	}
+	return zigzag;
+}
+
+QMap<QString, QBitArray> JPEGEncoder::HuffmanEncode(QMap<QString, double> input) {
+	return QMap<QString, QBitArray>();
+}
 
 QBitArray JPEGEncoder::EntropyEncode(QVector<QVector<float>> matrix) {
 	// encode submatrix using Huffman and Runlength
@@ -127,13 +181,21 @@ QBitArray JPEGEncoder::EntropyEncode(QVector<QVector<float>> matrix) {
 	return QBitArray();
 }
 
-void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {
+/*
+Description:
+	Ourput the given matrix to main QT thread for display using rgb byte stream
+Input:
+	@ QVector<QVector<float>> matrix: an matrix need to be displayed
+Output:
+	@ void
+*/
+void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> matrix) {
 	// print gray scale image
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			rgb[0 * 512 * 512 + i * 512 + j] = grayScale[i][j];
-			rgb[1 * 512 * 512 + i * 512 + j] = grayScale[i][j];
-			rgb[2 * 512 * 512 + i * 512 + j] = grayScale[i][j];
+			rgb[0 * 512 * 512 + i * 512 + j] = matrix[i][j];
+			rgb[1 * 512 * 512 + i * 512 + j] = matrix[i][j];
+			rgb[2 * 512 * 512 + i * 512 + j] = matrix[i][j];
 		}
 	}
 }

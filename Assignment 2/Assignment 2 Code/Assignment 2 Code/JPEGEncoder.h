@@ -3,6 +3,7 @@
 #include <qvector.h>
 #include <qmath.h>
 #include <qbitarray.h>
+#include <qmap.h>
 
 class JPEGEncoder : public QThread {
 public:
@@ -29,8 +30,10 @@ private:
 	// Function
 	void RGBToYCrCb();
 	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> matrix);
-	QVector<QVector<float>> DCTQuantization(QVector<QVector<float>> matrix);
-	QVector<QVector<float>> BlockDCT(QVector<QVector<float>> matrix);
+	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> matrix);
+	QVector<QVector<float>> BlockDCT_512(QVector<QVector<float>> matrix);
+	QVector<float> ZigZagSeries(QVector<QVector<float>> matrix);
+	QMap<QString, QBitArray> HuffmanEncode(QMap<QString, double> input);
 	QBitArray EntropyEncode(QVector<QVector<float>> matrix);
 	void PrintGrayScale(QVector<QVector<float>> grayScale);
 };
