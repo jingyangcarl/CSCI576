@@ -116,6 +116,7 @@
     <ClCompile Include="Assignment2Code.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="JPEGEncoder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SlotFunction.cpp" />
   </ItemGroup>
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h" />
+    <ClInclude Include="JPEGEncoder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

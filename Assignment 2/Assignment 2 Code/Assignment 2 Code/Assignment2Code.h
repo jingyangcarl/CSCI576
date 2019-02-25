@@ -4,6 +4,7 @@
 #include <qfiledialog.h>
 #include "ui_Assignment2Code.h"
 #include "FileLoader.h"
+#include "JPEGEncoder.h"
 
 class Assignment2Code : public QMainWindow {
 	Q_OBJECT
@@ -15,6 +16,7 @@ public:
 
 public slots:
 	void PushButtonLoad();
+	void PushButtonJPEGEncoder();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 
@@ -24,10 +26,4 @@ private:
 	// private variable
 	QString filePath;
 	QByteArray rgb;
-	bool loadStatus;
-
-	// rgb variable
-	QByteArray r;
-	QByteArray g;
-	QByteArray b;
 };

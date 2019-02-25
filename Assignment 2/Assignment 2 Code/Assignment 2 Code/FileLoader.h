@@ -2,7 +2,6 @@
 #include <qthread.h>
 #include <qfile.h>
 #include <qfileinfo.h>
-#include <qvector.h>
 
 class FileLoader : public QThread {
 public:

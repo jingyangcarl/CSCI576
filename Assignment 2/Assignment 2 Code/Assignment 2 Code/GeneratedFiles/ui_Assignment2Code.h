@@ -31,8 +31,9 @@ public:
     QGridLayout *gridLayout_display;
     QLabel *label_image;
     QGridLayout *gridLayout_control;
-    QPushButton *pushButton_load;
     QTextBrowser *textBrowser_output;
+    QPushButton *pushButton_load;
+    QPushButton *pushButton_jpeg_encoder;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -63,15 +64,20 @@ public:
         gridLayout_control = new QGridLayout();
         gridLayout_control->setSpacing(6);
         gridLayout_control->setObjectName(QString::fromUtf8("gridLayout_control"));
+        textBrowser_output = new QTextBrowser(centralWidget);
+        textBrowser_output->setObjectName(QString::fromUtf8("textBrowser_output"));
+
+        gridLayout_control->addWidget(textBrowser_output, 2, 0, 1, 1);
+
         pushButton_load = new QPushButton(centralWidget);
         pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
 
         gridLayout_control->addWidget(pushButton_load, 0, 0, 1, 1);
 
-        textBrowser_output = new QTextBrowser(centralWidget);
-        textBrowser_output->setObjectName(QString::fromUtf8("textBrowser_output"));
+        pushButton_jpeg_encoder = new QPushButton(centralWidget);
+        pushButton_jpeg_encoder->setObjectName(QString::fromUtf8("pushButton_jpeg_encoder"));
 
-        gridLayout_control->addWidget(textBrowser_output, 1, 0, 1, 1);
+        gridLayout_control->addWidget(pushButton_jpeg_encoder, 1, 0, 1, 1);
 
 
         gridLayout->addLayout(gridLayout_control, 0, 1, 1, 1);
@@ -100,6 +106,7 @@ public:
         Assignment2CodeClass->setWindowTitle(QApplication::translate("Assignment2CodeClass", "Assignment2Code", nullptr));
         label_image->setText(QApplication::translate("Assignment2CodeClass", "label_image", nullptr));
         pushButton_load->setText(QApplication::translate("Assignment2CodeClass", "Load Image", nullptr));
+        pushButton_jpeg_encoder->setText(QApplication::translate("Assignment2CodeClass", "JPEG Encoder", nullptr));
     } // retranslateUi
 
 };
