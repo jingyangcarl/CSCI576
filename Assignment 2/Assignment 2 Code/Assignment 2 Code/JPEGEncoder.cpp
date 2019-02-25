@@ -16,11 +16,11 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 }
 
 void JPEGEncoder::run() {
-	// Convert RGB color space to YCrCb color space 
-	RGBToYCrCb();
+	// Convert RGB color space to YCrCb color space
+	// RGBToYCrCb();
 
-	y = BlockDCT(y);
-	PrintGrayScale(y);
+	r = BlockDCT(r);
+	PrintGrayScale(r);
 }
 
 void JPEGEncoder::RGBToYCrCb() {
@@ -89,7 +89,7 @@ QVector<QVector<float>> JPEGEncoder::DCTQuantization(QVector<QVector<float>> mat
 		QVector<QVector<float>> quantizedMatrix(8, QVector<float>(8, 0));
 		for (int i = 0; i < matrix.size(); i++) {
 			for (int j = 0; j < matrix[0].size(); j++) {
-				quantizedMatrix[i][j] = round(quantizedMatrix[i][j] / (float)quantizationTable[i][j]);
+				quantizedMatrix[i][j] = round(matrix[i][j] / (float)quantizationTable[i][j]);
 			}
 		}
 		return quantizedMatrix;
@@ -103,22 +103,22 @@ QVector<QVector<float>> JPEGEncoder::BlockDCT(QVector<QVector<float>> matrix) {
 	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
 	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
 	else {
+		QVector<QVector<float>> resultMatrix(matrix.size(), QVector<float>(matrix[0].size(), 0));
 		for (int i = 0; i < matrix.size() / 8; i++) {
 			for (int j = 0; j < matrix[0].size() / 8; j++) {
 				QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
-				for (int ii = 0; ii < 8; ii++) {
-					for (int jj = 0; jj < 8; jj++) {
+				for (int ii = 0; ii < 8; ii++)
+					for (int jj = 0; jj < 8; jj++)
 						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
-					}
-				}
 				subMatrix = DiscreteCosinTransform(subMatrix);
 				subMatrix = DCTQuantization(subMatrix);
+				for (int ii = 0; ii < 8; ii++)
+					for (int jj = 0; jj < 8; jj++)
+						resultMatrix[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
 			}
 		}
+		return resultMatrix;
 	}
-
-
-
 }
 
 void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> grayScale) {
