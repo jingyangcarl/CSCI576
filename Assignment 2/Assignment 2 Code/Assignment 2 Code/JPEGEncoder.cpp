@@ -19,13 +19,7 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 void JPEGEncoder::run() {
 	RGBToYCrCb();
 
-	for (int i = 0; i < 512; i++) {
-		for (int j = 0; j < 512; j++) {
-			rgb[0 * 512 * 512 + i * 512 + j] = y[i][j];
-			rgb[1 * 512 * 512 + i * 512 + j] = y[i][j];
-			rgb[2 * 512 * 512 + i * 512 + j] = y[i][j];
-		}
-	}
+	PrintGrayScale(y);
 }
 
 void JPEGEncoder::RGBToYCrCb() {
@@ -35,7 +29,13 @@ void JPEGEncoder::RGBToYCrCb() {
 	cb = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	cr = QVector<QVector<float>>(512, QVector<float>(512, 0));
 
-	PrintGrayScale(y);
+	for (int i = 0; i < 512; i++) {
+		for (int j = 0; j < 512; j++) {
+			y[i][j] = 0.2989*r[i][j] + 0.5866*g[i][j] + 0.1145*b[i][j];
+			cb[i][j] = -0.1687*r[i][j] - 0.3313*g[i][j] + 0.5000*b[i][j];
+			cr[i][j] = 0.5000*r[i][j] - 0.4184*g[i][j] - 0.0816*b[i][j];
+		}
+	}
 }
 
 QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<float>> matrix) {
