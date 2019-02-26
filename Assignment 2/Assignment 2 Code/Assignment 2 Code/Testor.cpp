@@ -1,26 +1,24 @@
 #include "Testor.h"
 #include "qvector.h"
+#include "qbitarray.h"
 
 void Testor::run() {
 
-	QVector<QVector<float>> matrix = {
-		{1, 2, 3},
-		{4, 5, 6},
-		{7, 8, 9}
-	};
+	int number = -10;
+	QVector<QString> stringList;
 
-	QVector<float> zigzag;
-	bool direction(false);
-	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
-		int j = i;
-		while (j >= 0) {
-			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
-				zigzag.push_back(matrix[j][i - j]);
-			if (direction && (i - j) < matrix.size() && j < matrix[0].size())
-				zigzag.push_back(matrix[i - j][j]);
-			j--;
+	while (number != 10) {
+		bool positive = (abs(number) == number);
+		QString bits(QString::number(abs(number), 2));
+		if (!positive) {
+			for (int i = 0; i < bits.size(); i++)
+				bits[i] = bits[i] == '0' ? '1' : '0';
 		}
-		direction = !direction;
+		stringList.append(bits);
+		number++;
 	}
 
+	int a(0);
+	a += number;
+	return;
 }
