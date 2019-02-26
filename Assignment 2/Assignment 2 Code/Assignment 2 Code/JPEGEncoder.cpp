@@ -180,8 +180,8 @@ QMap<QString, QBitArray> JPEGEncoder::HuffmanEncode(QMap<QString, double> input)
 QBitArray JPEGEncoder::VLIEncode(int number) {
 	// given a number, transform the number to VLI code
 	bool flag = abs(number) == number;
-	QString s =  QString::number(number, 2);
-	QBitArray::fromBits(s.toStdString().c_str(),);
+
+	return QBitArray();
 }
 
 QBitArray JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {

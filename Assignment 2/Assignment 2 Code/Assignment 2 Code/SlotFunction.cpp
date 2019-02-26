@@ -51,6 +51,14 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 void Assignment2Code::PushButtonJPEGDecoder() {
 }
 
+void Assignment2Code::PushButtonTest() {
+	Testor testor;
+	testor.start();
+	while (testor.isRunning())
+		QCoreApplication::processEvents();
+	testor.wait();
+}
+
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
 	ui.textBrowser_output->append(output);
 }

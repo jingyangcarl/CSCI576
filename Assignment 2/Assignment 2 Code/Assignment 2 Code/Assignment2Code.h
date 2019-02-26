@@ -5,6 +5,7 @@
 #include "ui_Assignment2Code.h"
 #include "FileLoader.h"
 #include "JPEGEncoder.h"
+#include "Testor.h"
 
 class Assignment2Code : public QMainWindow {
 	Q_OBJECT
@@ -18,6 +19,7 @@ public slots:
 	void PushButtonLoad();
 	void PushButtonJPEGEncoder();
 	void PushButtonJPEGDecoder();
+	void PushButtonTest();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 
