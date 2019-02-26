@@ -47,7 +47,7 @@ Input:
 Output:
 	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix representing frequency infomation
 */
-QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<float>> matrix) {
+QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<float>> const & matrix) {
 
 	QVector<QVector<float>> matrixDCT = matrix;
 	int m = matrix.size();
@@ -87,7 +87,7 @@ Input:
 Output:
 	@ QVector<QVector<float>> matrix: an 8 by 8 matrix after quantization
 */
-QVector<QVector<float>> JPEGEncoder::DCTQuantization_8(QVector<QVector<float>> matrix) {
+QVector<QVector<float>> JPEGEncoder::DCTQuantization_8(QVector<QVector<float>> const & matrix) {
 
 	int const quantizationTable[8][8] = {
 		{16, 11, 10, 16, 24, 40, 51, 61},
@@ -122,7 +122,7 @@ Input:
 Output:
 	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block DCT transformation and quantization
 */
-QVector<QVector<float>> JPEGEncoder::BlockDCT_512(QVector<QVector<float>> matrix) {\
+QVector<QVector<float>> JPEGEncoder::BlockDCT_512(QVector<QVector<float>> const & matrix) {
 
 	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
 	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
@@ -152,12 +152,12 @@ Input:
 Output:
 	@ QVector<float> array: array holds entries in matrix in a zig-zag order
 */
-QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> matrix) {
+QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
 
 	QVector<float> zigzag;
 	bool direction(false);
 	if (matrix.size() == 0) return QVector<float>();
-	for (int i = 0; i < matrix.size() + matrix[0].size - 1; i++) {
+	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
 		int j = i;
 		while (j > 0) {
 			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
@@ -189,7 +189,7 @@ Input:
 Output:
 	@ void
 */
-void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> matrix) {
+void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> const & matrix) {
 	// print gray scale image
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {

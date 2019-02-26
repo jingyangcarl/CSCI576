@@ -29,11 +29,11 @@ private:
 
 	// Function
 	void RGBToYCrCb();
-	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> matrix);
-	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> matrix);
-	QVector<QVector<float>> BlockDCT_512(QVector<QVector<float>> matrix);
-	QVector<float> ZigZagSeries(QVector<QVector<float>> matrix);
+	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> const & matrix);
+	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> const & matrix);
+	QVector<QVector<float>> BlockDCT_512(QVector<QVector<float>> const & matrix);
+	QVector<float> ZigZagSeries(QVector<QVector<float>> const & matrix);
 	QMap<QString, QBitArray> HuffmanEncode(QMap<QString, double> input);
 	QBitArray EntropyEncode(QVector<QVector<float>> matrix);
-	void PrintGrayScale(QVector<QVector<float>> grayScale);
+	void PrintGrayScale(QVector<QVector<float>> const & grayScale);
 };
