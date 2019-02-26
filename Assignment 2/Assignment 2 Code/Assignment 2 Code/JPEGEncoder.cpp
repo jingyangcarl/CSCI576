@@ -159,7 +159,7 @@ QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix)
 	if (matrix.size() == 0) return QVector<float>();
 	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
 		int j = i;
-		while (j > 0) {
+		while (j >= 0) {
 			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
 				zigzag.push_back(matrix[j][i - j]);
 			if (direction && (i - j) < matrix.size() && j < matrix[0].size())
