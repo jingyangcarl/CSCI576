@@ -172,12 +172,26 @@ QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix)
 }
 
 QMap<QString, QBitArray> JPEGEncoder::HuffmanEncode(QMap<QString, double> input) {
+
+
 	return QMap<QString, QBitArray>();
 }
 
-QBitArray JPEGEncoder::EntropyEncode(QVector<QVector<float>> matrix) {
-	// encode submatrix using Huffman and Runlength
+QBitArray JPEGEncoder::VLIEncode(int number) {
+	// given a number, transform the number to VLI code
+	bool flag = abs(number) == number;
+	QString s =  QString::number(number, 2);
+	QBitArray::fromBits(s.toStdString().c_str(),);
+}
 
+QBitArray JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {
+	// encode submatrix using Huffman and Runlength
+	
+	for (int i = 0; i < matrix.size() / 8; i++) {
+		for (int j = 0; j < matrix[0].size() / 8; j++) {
+
+		}
+	}
 	return QBitArray();
 }
 
