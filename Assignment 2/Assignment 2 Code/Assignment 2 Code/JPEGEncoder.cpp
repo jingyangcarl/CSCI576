@@ -172,11 +172,24 @@ QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix)
 }
 
 QMap<QString, QString> JPEGEncoder::HuffmanEncode(QMap<QString, double> input) {
-
+	// input contains "<2, 3>" with its frequency
+	// output will transform frequency to its code in QString form
 
 	return QMap<QString, QString>();
 }
 
+/*
+Description:
+	This function returns the Variable Length Integer code for given number, which is encoded in following patterns
+	1 -> 1 | -1 -> 0
+	2 -> 10 | -2 -> 01
+	3 -> 11 | -3 -> 00
+	4 -> 100 | -4 -> 011
+Input:
+	@ int number: a number in decimal form
+Output:
+	@ QString number: a number in binary form
+*/
 QString JPEGEncoder::VLIEncode(int number) {
 	// given a number, transform the number to VLI code
 	bool positive = (abs(number) == number);
