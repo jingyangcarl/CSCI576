@@ -4,6 +4,7 @@
 #include <qmath.h>
 #include <qbitarray.h>
 #include <qmap.h>
+#include <queue>
 
 class JPEGEncoder : public QThread {
 public:
@@ -33,7 +34,7 @@ private:
 	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> BlockDCT_512(QVector<QVector<float>> const & matrix);
 	QVector<float> ZigZagSeries(QVector<QVector<float>> const & matrix);
-	QMap<QString, QString> HuffmanEncode(QMap<QString, double> input);
+	QMap<QString, QString> HuffmanEncode(QMap<QString, int> input);
 	QString VLIEncode(int number);
 	QString EntropyEncode_512(QVector<QVector<float>> matrix);
 	void PrintGrayScale(QVector<QVector<float>> const & grayScale);

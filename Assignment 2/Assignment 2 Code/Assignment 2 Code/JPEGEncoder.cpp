@@ -171,11 +171,86 @@ QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix)
 	return zigzag;
 }
 
-QMap<QString, QString> JPEGEncoder::HuffmanEncode(QMap<QString, double> input) {
+/*
+Description:
+	This function is used to encode given vocabularies with frequences
+Input:
+	@ QMap<QString, int> input: a map holds the vocabularies with frequences
+		@ QString: vocabulary in a string form
+		@ int: frequency for each vocabulary (the time that vocabulary appears)
+	@ QMap<QString, QString> output: a map holds vocabularies with its binary huffmand code
+		@ QString: vocabulary in a string form
+		@ QString: huffman code for vocabulary
+*/
+QMap<QString, QString> JPEGEncoder::HuffmanEncode(QMap<QString, int> input) {
 	// input contains "<2, 3>" with its frequency
 	// output will transform frequency to its code in QString form
 
-	return QMap<QString, QString>();
+	struct BinaryTreeNode {
+		QString content;
+		int frequency;
+		BinaryTreeNode * left;
+		BinaryTreeNode * right;
+
+		BinaryTreeNode(int frequency) {
+			this->content = "";
+			this->frequency = frequency;
+			this->left = this->right = NULL;
+		}
+		BinaryTreeNode(QString content, int frequency) {
+			this->content = content;
+			this->frequency = frequency;
+			this->left = this->right = NULL;
+		}
+		BinaryTreeNode(const BinaryTreeNode & node) {
+			this->content = node.content;
+			this->frequency = node.frequency;
+			this->left = node.left;
+			this->right = node.right;
+		}
+		constexpr bool operator< (const BinaryTreeNode & node) const {
+			return frequency > node.frequency;
+		}
+	};
+
+	// Build Huffman Tree
+	std::priority_queue<BinaryTreeNode> minHeap;
+
+	for (int i = 0; i < input.size(); i++) {
+		QMap<QString, int>::iterator iter = input.begin() + i;
+		BinaryTreeNode node(iter.key(), iter.value());
+		minHeap.push(node);
+	}
+
+	while (minHeap.size() != 1) {
+		BinaryTreeNode node_1(minHeap.top());
+		minHeap.pop();
+		BinaryTreeNode node_2(minHeap.top());
+		minHeap.pop();
+		BinaryTreeNode node(node_1.frequency + node_2.frequency);
+		node.left = new BinaryTreeNode(node_1);
+		node.right = new BinaryTreeNode(node_2);
+		minHeap.push(node);
+	}
+
+	// Huffmand Encode
+	struct Encode {
+		static void HuffmanEncode(BinaryTreeNode *huffmanTree, QString code, QMap<QString, QString> & huffmanCode) {
+			if (!huffmanTree->left && !huffmanTree->right) {
+				huffmanCode.insert(huffmanTree->content, code);
+			}
+			else {
+				HuffmanEncode(huffmanTree->left, code + '1', huffmanCode);
+				HuffmanEncode(huffmanTree->right, code + '0', huffmanCode);
+			}
+		};
+	};
+
+	BinaryTreeNode * huffmanTree = new BinaryTreeNode(minHeap.top());
+	QMap<QString, QString> huffmanCode;
+	Encode::HuffmanEncode(huffmanTree, QString(), huffmanCode);
+
+	return huffmanCode;
 }
 
 /*
