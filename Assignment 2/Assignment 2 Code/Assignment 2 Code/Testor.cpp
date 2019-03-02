@@ -5,7 +5,8 @@
 #include "qstack.h"
 
 void Testor::run() {
-	Shrink_2Test();
+	//Shrink_2Test();
+	Expand_2Test();
 }
 
 void Testor::HuffmanEncode() {
@@ -98,6 +99,26 @@ void Testor::Shrink_2Test() {
 		for (int j = 0; j < matrix[0].size(); j++) {
 			if (!(i % 2) && !(j % 2))
 				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
+		}
+	}
+
+}
+
+void Testor::Expand_2Test() {
+
+	QVector<QVector<float>> matrix = {
+		{1, 3},
+		{9, 1},
+	};
+
+	QVector<QVector<float>> expandMatrix(matrix.size() * 2, QVector<float>(matrix[0].size() * 2));
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			expandMatrix[2 * i][2 * j] = matrix[i][j];
+			expandMatrix[2 * i + 1][2 * j] = matrix[i][j];
+			expandMatrix[2 * i][2 * j + 1] = matrix[i][j];
+			expandMatrix[2 * i + 1][2 * j + 1] = matrix[i][j];
 		}
 	}
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <qthread.h>
 #include <qvector.h>
+#include <qmath.h>
 
 class JPEGDecoder : public QThread {
 public:
