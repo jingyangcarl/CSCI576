@@ -17,12 +17,21 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 
 void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
-	 RGBToYCrCb();
+	RGBToYCrCb();
 
 	y = BlockDCT_512(y);
+
 	PrintGrayScale(y);
 }
 
+/*
+Description:
+	This function is used to transform RGB color space to YCrCb color space
+Input:
+	@
+Output:
+	@
+*/
 void JPEGEncoder::RGBToYCrCb() {
 	// convert rgb color space to ycbcr color space
 
@@ -41,6 +50,27 @@ void JPEGEncoder::RGBToYCrCb() {
 
 /*
 Description:
+	This function is used to shrink the matrix to half of its size
+Input:
+	@QVector<QVector<float>> matrix: the given color matrix
+Output:
+	@QVector<QVector<float>> matrix: the matrix after shrinking
+*/
+QVector<QVector<float>> JPEGEncoder::Shrink_2(QVector<QVector<float>>& matrix) {
+	QVector<QVector<float>> shrinkMatrix(matrix.size() / 2, QVector<float>(matrix[0].size() / 2));
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			if (!(i % 2) && !(j % 2))
+				shrinkMatrix[i / 2][j / 2] = matrix[i][2];
+		}
+	}
+
+	return shrinkMatrix;
+}
+
+/*
+Description:
 	This function is used to transform any given matrix from time domain to frequency domain
 Input:
 	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix, which needed to be transform to frequency domain
@@ -48,7 +78,6 @@ Output:
 	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix representing frequency infomation
 */
 QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<float>> const & matrix) {
-
 	QVector<QVector<float>> matrixDCT = matrix;
 	int m = matrix.size();
 	int n = matrix[0].size();
@@ -70,7 +99,7 @@ QVector<QVector<float>> JPEGEncoder::DiscreteCosinTransform(QVector<QVector<floa
 
 /*
 Description:
-	This function is used to quantize the given 8 by 8 matrix using the quantization table, 
+	This function is used to quantize the given 8 by 8 matrix using the quantization table,
 	where the quantization table is:
 	quantizationTable = {
 		{16, 11, 10, 16, 24, 40, 51, 61},
@@ -88,7 +117,6 @@ Output:
 	@ QVector<QVector<float>> matrix: an 8 by 8 matrix after quantization
 */
 QVector<QVector<float>> JPEGEncoder::DCTQuantization_8(QVector<QVector<float>> const & matrix) {
-
 	int const quantizationTable[8][8] = {
 		{16, 11, 10, 16, 24, 40, 51, 61},
 		{12, 12, 14, 19, 26, 58, 60, 55},
@@ -123,7 +151,6 @@ Output:
 	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block DCT transformation and quantization
 */
 QVector<QVector<float>> JPEGEncoder::BlockDCT_512(QVector<QVector<float>> const & matrix) {
-
 	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
 	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
 	else {
@@ -153,7 +180,6 @@ Output:
 	@ QVector<float> array: array holds entries in matrix in a zig-zag order
 */
 QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
-
 	QVector<float> zigzag;
 	bool direction(false);
 	if (matrix.size() == 0) return QVector<float>();
@@ -278,10 +304,9 @@ QString JPEGEncoder::VLIEncode(int number) {
 
 QString JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {
 	// encode submatrix using Huffman and Runlength
-	
+
 	for (int i = 0; i < matrix.size() / 8; i++) {
 		for (int j = 0; j < matrix[0].size() / 8; j++) {
-
 		}
 	}
 	return QString();

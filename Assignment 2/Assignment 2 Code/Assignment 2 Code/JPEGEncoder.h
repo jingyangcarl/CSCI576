@@ -30,6 +30,7 @@ private:
 
 	// Function
 	void RGBToYCrCb();
+	QVector<QVector<float>> Shrink_2(QVector<QVector<float>> & matrix);
 	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> BlockDCT_512(QVector<QVector<float>> const & matrix);
