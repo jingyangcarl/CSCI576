@@ -15,13 +15,35 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 	}
 }
 
+QByteArray JPEGEncoder::GetY() {
+	if (y.size()) {
+
+	}
+}
+
+QByteArray JPEGEncoder::GetCr() {
+	return QByteArray();
+}
+
+QByteArray JPEGEncoder::GetCb() {
+	return QByteArray();
+}
+
 void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
 	RGBToYCrCb();
 
-	y = BlockDCT_512(y);
+	// Using 4:2:0 mode
+	cr = Shrink_2(cr);
+	cb = Shrink_2(cb);
 
-	PrintGrayScale(y);
+	// Conduct DCT
+	y = SquareBlockDCT(y);
+	cr = SquareBlockDCT(cr);
+	cb = SquareBlockDCT(cb);
+
+	//PrintGrayScale(y);
+	PrintGrayScale(cr);
 }
 
 /*
@@ -150,7 +172,7 @@ Input:
 Output:
 	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block DCT transformation and quantization
 */
-QVector<QVector<float>> JPEGEncoder::BlockDCT_512(QVector<QVector<float>> const & matrix) {
+QVector<QVector<float>> JPEGEncoder::SquareBlockDCT(QVector<QVector<float>> const & matrix) {
 	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
 	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
 	else {
@@ -322,11 +344,19 @@ Output:
 */
 void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> const & matrix) {
 	// print gray scale image
-	for (int i = 0; i < 512; i++) {
-		for (int j = 0; j < 512; j++) {
-			rgb[0 * 512 * 512 + i * 512 + j] = matrix[i][j];
-			rgb[1 * 512 * 512 + i * 512 + j] = matrix[i][j];
-			rgb[2 * 512 * 512 + i * 512 + j] = matrix[i][j];
+	rgb = rgb.mid(0, 3 * matrix.size() * matrix[0].size());
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			if (matrix.size() == 512 && matrix[0].size() == 512) {
+				rgb[0 * 512 * 512 + i * 512 + j] = matrix[i][j];
+				rgb[1 * 512 * 512 + i * 512 + j] = matrix[i][j];
+				rgb[2 * 512 * 512 + i * 512 + j] = matrix[i][j];
+			}
+			else if (matrix.size() == 256 && matrix[0].size() == 256) {
+				rgb[0 * 256 * 256 + i * 256 + j] = matrix[i][j];
+				rgb[1 * 256 * 256 + i * 256 + j] = matrix[i][j];
+				rgb[2 * 256 * 256 + i * 256 + j] = matrix[i][j];
+			}
 		}
 	}
 }

@@ -67,7 +67,11 @@ void Assignment2Code::TextBrowserOutputPrint(QString output) {
 
 void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
 	// Initialization
-	QImage image(512, 512, QImage::Format_RGB32);
+	QImage image;
+	if (rgb.size() / 3 == 512*512)
+		image = QImage(512, 512, QImage::Format_RGB32);
+	else if (rgb.size() / 3 == 256*256)
+		image = QImage(256, 256, QImage::Format_RGB32);
 	int height = image.height();
 	int width = image.width();
 
