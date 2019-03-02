@@ -5,29 +5,17 @@ JPEGDecoder::JPEGDecoder(QByteArray & rgb, bool & decodeStatus) :
 }
 
 void JPEGDecoder::run() {
-}
+	// Conduct iDCT
+	y = SquareBlockInverseDCT(y);
+	cr = SquareBlockInverseDCT(cr);
+	cb = SquareBlockInverseDCT(cb);
 
-/*
-Description:
-	This function is used to expand the matrix to twice of its size
-Input:
-	@QVector<QVector<float>> matrix: the given color matrix
-Output:
-	@QVector<QVector<float>> matrix: the matrix after expanding
-*/
-QVector<QVector<float>> JPEGDecoder::Expand_2(QVector<QVector<float>>& matrix) {
-	QVector<QVector<float>> expandMatrix(matrix.size() * 2, QVector<float>(matrix[0].size() * 2));
+	// Decode 4:2:0
+	cr = Expand_2(cr);
+	cb = Expand_2(cb);
 
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[0].size(); j++) {
-			expandMatrix[2 * i][2 * j] = matrix[i][j];
-			expandMatrix[2 * i + 1][2 * j] = matrix[i][j];
-			expandMatrix[2 * i][2 * j + 1] = matrix[i][j];
-			expandMatrix[2 * i + 1][2 * j + 1] = matrix[i][j];
-		}
-	}
+	// Convert YCrCb color space to RGB color spac
 
-	return expandMatrix;
 }
 
 /*
@@ -58,10 +46,100 @@ QVector<QVector<float>> JPEGDecoder::InverseDiscreteCosinTransform(QVector<QVect
 	return inverseMatrixDCT;
 }
 
+/*
+Description:
+	This function is used to dequantize the given 8 by 8 matrix using the quantization table,
+	where the quantization table is:
+	quantizationTable = {
+		{16, 11, 10, 16, 24, 40, 51, 61},
+		{12, 12, 14, 19, 26, 58, 60, 55},
+		{14, 13, 16, 24, 40, 57, 69, 56},
+		{14, 17, 22, 29, 51, 87, 80, 62},
+		{18, 22, 37, 56, 68, 109, 103, 77},
+		{24, 35, 55, 64, 81, 104, 113, 92},
+		{49, 64, 78, 87, 103, 121, 120, 101},
+		{72, 92, 96, 98, 112, 100, 103, 99}
+	}
+Input:
+	@ QVector<QVector<float>> matrix: an 8 by 8 matrix that needs to be dequantized
+Output:
+	@ QVector<QVector<float>> matrix: an 8 by 8 matrix after dequantization
+*/
 QVector<QVector<float>> JPEGDecoder::DCTDequantization_8(QVector<QVector<float>> const & matrix) {
-	return QVector<QVector<float>>();
+	int const quantizationTable[8][8] = {
+		{16, 11, 10, 16, 24, 40, 51, 61},
+		{12, 12, 14, 19, 26, 58, 60, 55},
+		{14, 13, 16, 24, 40, 57, 69, 56},
+		{14, 17, 22, 29, 51, 87, 80, 62},
+		{18, 22, 37, 56, 68, 109, 103, 77},
+		{24, 35, 55, 64, 81, 104, 113, 92},
+		{49, 64, 78, 87, 103, 121, 120, 101},
+		{72, 92, 96, 98, 112, 100, 103, 99}
+	};
+
+	if (matrix.size() == 8 && matrix[0].size() == 8) {
+		QVector<QVector<float>> deQuantizedMatrix(8, QVector<float>(8, 0));
+		for (int i = 0; i < matrix.size(); i++) {
+			for (int j = 0; j < matrix[0].size(); j++) {
+				deQuantizedMatrix[i][j] = round(matrix[i][j] * (float)quantizationTable[i][j]);
+			}
+		}
+		return deQuantizedMatrix;
+	}
+	else return QVector<QVector<float>>();
 }
 
+/*
+Description:
+	This function is used to divide an given 512 by 512 matrix into several blocks of size 8 by 8.
+	For each block, an InverseDiscreteCosinTransform(DCT) is conducted to transform the block from frequency domain to time domain.
+	Next, a dequantization is performed on the block using the quantization table
+Input:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix needed to be transformed
+Output:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block DCT transformation and dequantization
+*/
 QVector<QVector<float>> JPEGDecoder::SquareBlockInverseDCT(QVector<QVector<float>> const & matrix) {
-	return QVector<QVector<float>>();
+	if (matrix.size() % 8 != 0) return QVector<QVector<float>>();
+	else if (matrix[0].size() % 8 != 0) return QVector<QVector<float>>();
+	else {
+		QVector<QVector<float>> resultMatrix(matrix.size(), QVector<float>(matrix[0].size(), 0));
+		for (int i = 0; i < matrix.size() / 8; i++) {
+			for (int j = 0; j < matrix[0].size() / 8; j++) {
+				QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+				for (int ii = 0; ii < 8; ii++)
+					for (int jj = 0; jj < 8; jj++)
+						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
+				subMatrix = InverseDiscreteCosinTransform(subMatrix);
+				subMatrix = DCTDequantization_8(subMatrix);
+				for (int ii = 0; ii < 8; ii++)
+					for (int jj = 0; jj < 8; jj++)
+						resultMatrix[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+			}
+		}
+		return resultMatrix;
+	}
+}
+
+/*
+Description:
+	This function is used to expand the matrix to twice of its size
+Input:
+	@QVector<QVector<float>> matrix: the given color matrix
+Output:
+	@QVector<QVector<float>> matrix: the matrix after expanding
+*/
+QVector<QVector<float>> JPEGDecoder::Expand_2(QVector<QVector<float>>& matrix) {
+	QVector<QVector<float>> expandMatrix(matrix.size() * 2, QVector<float>(matrix[0].size() * 2));
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			expandMatrix[2 * i][2 * j] = matrix[i][j];
+			expandMatrix[2 * i + 1][2 * j] = matrix[i][j];
+			expandMatrix[2 * i][2 * j + 1] = matrix[i][j];
+			expandMatrix[2 * i + 1][2 * j + 1] = matrix[i][j];
+		}
+	}
+
+	return expandMatrix;
 }
