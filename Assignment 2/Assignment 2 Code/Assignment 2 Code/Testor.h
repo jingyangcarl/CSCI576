@@ -4,4 +4,7 @@
 class Testor : public QThread {
 protected:
 	void run();
+	void HuffmanEncode();
+	void Shrink_2Test();
+
 };

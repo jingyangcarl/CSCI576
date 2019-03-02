@@ -5,6 +5,10 @@
 #include "qstack.h"
 
 void Testor::run() {
+	Shrink_2Test();
+}
+
+void Testor::HuffmanEncode() {
 	QMap<QString, float> input;
 	input.insert("1", 5);
 	input.insert("2", 7);
@@ -77,4 +81,24 @@ void Testor::run() {
 	};
 
 	Encode::HuffmanEncode(huffmanTree, QString(), huffmanCode);
+}
+
+void Testor::Shrink_2Test() {
+
+	QVector<QVector<float>> matrix = {
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 0, 1, 2},
+		{3, 4, 5, 6}
+	};
+
+	QVector<QVector<float>> shrinkMatrix(matrix.size() / 2, QVector<float>(matrix[0].size() / 2));
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			if (!(i % 2) && !(j % 2))
+				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
+		}
+	}
+
 }

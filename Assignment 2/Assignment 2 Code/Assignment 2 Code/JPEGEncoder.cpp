@@ -62,7 +62,7 @@ QVector<QVector<float>> JPEGEncoder::Shrink_2(QVector<QVector<float>>& matrix) {
 	for (int i = 0; i < matrix.size(); i++) {
 		for (int j = 0; j < matrix[0].size(); j++) {
 			if (!(i % 2) && !(j % 2))
-				shrinkMatrix[i / 2][j / 2] = matrix[i][2];
+				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
 		}
 	}
 
