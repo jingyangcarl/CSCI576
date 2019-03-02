@@ -13,13 +13,18 @@ class Assignment2Code : public QMainWindow {
 public:
 	Assignment2Code(QWidget *parent = Q_NULLPTR);
 
+	/*-----------------Initialization.cpp---------------------*/
 	void ConnectionInitialization();
 
+	/*-----------------SlogFunction.cpp---------------------*/
 public slots:
 	void PushButtonLoad();
 	void PushButtonJPEGEncoder();
 	void PushButtonJPEGDecoder();
 	void PushButtonTest();
+	void PushButtonDCTY();
+	void PushButtonDCTCr();
+	void PushButtonDCTCb();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 
@@ -29,4 +34,7 @@ private:
 	// private variable
 	QString filePath;
 	QByteArray rgb;
+	QByteArray dctY;
+	QByteArray dctCr;
+	QByteArray dctCb;
 };

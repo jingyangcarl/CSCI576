@@ -44,8 +44,10 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	encoder.wait();
 	TextBrowserOutputPrint("Encoding Finished.");
 
-	// Output Image
-	LabelImagePrint(rgb);
+	// Load dctY, dctCr, DctCb
+	dctY = encoder.GetYDCT();
+	dctCr = encoder.GetCrDCT();
+	dctCb = encoder.GetCbDCT();
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
@@ -61,16 +63,28 @@ void Assignment2Code::PushButtonTest() {
 	TextBrowserOutputPrint("Test Finished");
 }
 
+void Assignment2Code::PushButtonDCTY() {
+	LabelImagePrint(dctY);
+}
+
+void Assignment2Code::PushButtonDCTCr() {
+	LabelImagePrint(dctCr);
+}
+
+void Assignment2Code::PushButtonDCTCb() {
+	LabelImagePrint(dctCb);
+}
+
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
 	ui.textBrowser_output->append(output);
 }
 
-void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
+void Assignment2Code::LabelImagePrint(QByteArray & imageData) {
 	// Initialization
 	QImage image;
-	if (rgb.size() / 3 == 512*512)
+	if (imageData.size() / 3 == 512*512)
 		image = QImage(512, 512, QImage::Format_RGB32);
-	else if (rgb.size() / 3 == 256*256)
+	else if (imageData.size() / 3 == 256*256)
 		image = QImage(256, 256, QImage::Format_RGB32);
 	int height = image.height();
 	int width = image.width();
@@ -79,9 +93,9 @@ void Assignment2Code::LabelImagePrint(QByteArray & rgb) {
 	int r(0), g(0), b(0);
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			int r = rgb[0 * width * height + i * width + j];
-			int g = rgb[1 * width * height + i * width + j];
-			int b = rgb[2 * width * height + i * width + j];
+			int r = imageData[0 * width * height + i * width + j];
+			int g = imageData[1 * width * height + i * width + j];
+			int b = imageData[2 * width * height + i * width + j];
 			image.setPixel(j, i, qRgb(r, g, b));
 		}
 	}

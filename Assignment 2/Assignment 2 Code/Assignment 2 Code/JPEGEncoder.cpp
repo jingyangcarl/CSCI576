@@ -57,9 +57,6 @@ void JPEGEncoder::run() {
 	y = SquareBlockDCT(y);
 	cr = SquareBlockDCT(cr);
 	cb = SquareBlockDCT(cb);
-
-	//PrintGrayScale(y);
-	PrintGrayScale(cr);
 }
 
 /*
