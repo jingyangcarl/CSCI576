@@ -9,9 +9,9 @@
 class JPEGEncoder : public QThread {
 public:
 	JPEGEncoder(QByteArray &rgb, bool &encodeStatus);
-	QByteArray GetY();
-	QByteArray GetCr();
-	QByteArray GetCb();
+	QByteArray GetYDCT();
+	QByteArray GetCrDCT();
+	QByteArray GetCbDCT();
 
 protected:
 	void run();

@@ -15,18 +15,34 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 	}
 }
 
-QByteArray JPEGEncoder::GetY() {
+QByteArray JPEGEncoder::GetYDCT() {
+	QByteArray yByte;
 	if (y.size()) {
-
+		for (int i = 0; i < y.size(); i++)
+			for (int j = 0; j < y[0].size(); j++)
+				yByte.append(y[i][j]);
 	}
+	return yByte;
 }
 
-QByteArray JPEGEncoder::GetCr() {
-	return QByteArray();
+QByteArray JPEGEncoder::GetCrDCT() {
+	QByteArray crByte;
+	if (cr.size()) {
+		for (int i = 0; i < cr.size(); i++)
+			for (int j = 0; j < cr[0].size(); j++)
+				crByte.append(cr[i][j]);
+	}
+	return crByte;
 }
 
-QByteArray JPEGEncoder::GetCb() {
-	return QByteArray();
+QByteArray JPEGEncoder::GetCbDCT() {
+	QByteArray cbByte;
+	if (cb.size()) {
+		for (int i = 0; i < cb.size(); i++)
+			for (int j = 0; j < cb[0].size(); j++)
+				cbByte.append(cb[i][j]);
+	}
+	return cbByte;
 }
 
 void JPEGEncoder::run() {
