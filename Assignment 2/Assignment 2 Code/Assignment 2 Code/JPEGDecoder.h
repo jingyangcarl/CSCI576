@@ -23,4 +23,10 @@ private:
 	QVector<QVector<float>> y;
 	QVector<QVector<float>> cb;
 	QVector<QVector<float>> cr;
+
+	// Function
+	QVector<QVector<float>> Expand_2(QVector<QVector<float>> & matrix);
+	QVector<QVector<float>> InverseDiscreteCosinTransform(QVector<QVector<float>> const & matrix);
+	QVector<QVector<float>> DCTDequantization_8(QVector<QVector<float>> const & matrix);
+	QVector<QVector<float>> SquareBlockInverseDCT(QVector<QVector<float>> const & matrix);
 };

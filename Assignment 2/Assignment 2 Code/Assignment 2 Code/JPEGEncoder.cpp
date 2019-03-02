@@ -16,31 +16,40 @@ JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
 }
 
 QByteArray JPEGEncoder::GetYDCT() {
-	QByteArray yByte;
+	QByteArray yByte(3 * y.size() * y[0].size(), 0);
 	if (y.size()) {
 		for (int i = 0; i < y.size(); i++)
-			for (int j = 0; j < y[0].size(); j++)
-				yByte.append(y[i][j]);
+			for (int j = 0; j < y[0].size(); j++) {
+				yByte[0 * y.size() * y[0].size() + i * y.size() + j] = y[i][j];
+				yByte[1 * y.size() * y[0].size() + i * y.size() + j] = y[i][j];
+				yByte[2 * y.size() * y[0].size() + i * y.size() + j] = y[i][j];
+			}
 	}
 	return yByte;
 }
 
 QByteArray JPEGEncoder::GetCrDCT() {
-	QByteArray crByte;
+	QByteArray crByte(3 * cr.size() * cr[0].size(), 0);
 	if (cr.size()) {
 		for (int i = 0; i < cr.size(); i++)
-			for (int j = 0; j < cr[0].size(); j++)
-				crByte.append(cr[i][j]);
+			for (int j = 0; j < cr[0].size(); j++) {
+				crByte[0 * cr.size() * cr[0].size() + i * cr.size() + j] = cr[i][j];
+				crByte[1 * cr.size() * cr[0].size() + i * cr.size() + j] = cr[i][j];
+				crByte[2 * cr.size() * cr[0].size() + i * cr.size() + j] = cr[i][j];
+			}
 	}
 	return crByte;
 }
 
 QByteArray JPEGEncoder::GetCbDCT() {
-	QByteArray cbByte;
+	QByteArray cbByte(3 * cb.size() * cb[0].size(), 0);
 	if (cb.size()) {
 		for (int i = 0; i < cb.size(); i++)
-			for (int j = 0; j < cb[0].size(); j++)
-				cbByte.append(cb[i][j]);
+			for (int j = 0; j < cb[0].size(); j++) {
+				cbByte[0 * cb.size() * cb[0].size() + i * cb.size() + j] = cb[i][j];
+				cbByte[1 * cb.size() * cb[0].size() + i * cb.size() + j] = cb[i][j];
+				cbByte[2 * cb.size() * cb[0].size() + i * cb.size() + j] = cb[i][j];
+			}
 	}
 	return cbByte;
 }
