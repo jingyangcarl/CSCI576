@@ -4,6 +4,33 @@ JPEGDecoder::JPEGDecoder(QByteArray & rgb, bool & decodeStatus) :
 	rgb(rgb), decodeStatus(decodeStatus) {
 }
 
+void JPEGDecoder::GetRIDCT() {
+	QByteArray rByte(r.size() * r[0].size(), 0);
+	if (r.size()) {
+		for (int i = 0; i < r.size(); i++)
+			for (int j = 0; j < r[0].size(); j++)
+				rByte.append(r[i][j]);
+	}
+}
+
+void JPEGDecoder::GetGIDCT() {
+	QByteArray gByte(g.size() * g[0].size(), 0);
+	if (g.size()) {
+		for (int i = 0; i < g.size(); i++)
+			for (int j = 0; j < g[0].size(); j++)
+				gByte.append(g[i][j]);
+	}
+}
+
+void JPEGDecoder::GetBIDCT() {
+	QByteArray bByte(b.size() * b[0].size(), 0);
+	if (b.size()) {
+		for (int i = 0; i < b.size(); i++)
+			for (int j = 0; j < b[0].size(); j++)
+				bByte.append(b[i][j]);
+	}
+}
+
 void JPEGDecoder::run() {
 	// Conduct iDCT
 	y = SquareBlockInverseDCT(y);
@@ -15,7 +42,7 @@ void JPEGDecoder::run() {
 	cb = Expand_2(cb);
 
 	// Convert YCrCb color space to RGB color spac
-
+	YCrCbToRGB();
 }
 
 /*
@@ -142,4 +169,26 @@ QVector<QVector<float>> JPEGDecoder::Expand_2(QVector<QVector<float>>& matrix) {
 	}
 
 	return expandMatrix;
+}
+
+/*
+Description:
+	This function is used to transform YCrCb color space to RGB color space
+Input:
+	@
+Output:
+	@
+*/
+void JPEGDecoder::YCrCbToRGB() {
+	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
+
+	for (int i = 0; i < 512; i++) {
+		for (int j = 0; j < 512; j++) {
+			r[i][j] = y[i][j] + (cr[i][j] - 128) * 1.40200;
+			g[i][j] = y[i][j] + (cb[i][j] - 128) * -0.34414 + (cr[i][j] - 128) * -0.71414;
+			b[i][j] = y[i][j] + (cb[i][j] - 128) * 1.77200;
+		}
+	}
 }

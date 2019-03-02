@@ -27,8 +27,7 @@ void Assignment2Code::PushButtonLoad() {
 
 void Assignment2Code::PushButtonJPEGEncoder() {
 	// Initialization
-	bool encodeStatus = false;
-	JPEGEncoder encoder(rgb, encodeStatus);
+	JPEGEncoder encoder(rgb);
 
 	// Encode
 	encoder.start();
@@ -51,6 +50,9 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
+	// Initialization
+	bool decodeStatus = false;
+	
 }
 
 void Assignment2Code::PushButtonTest() {

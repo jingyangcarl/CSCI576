@@ -1,7 +1,7 @@
 #include "JPEGEncoder.h"
 
-JPEGEncoder::JPEGEncoder(QByteArray & rgb, bool & encodeStatus) :
-	rgb(rgb), encodeStatus(encodeStatus) {
+JPEGEncoder::JPEGEncoder(QByteArray & rgb) :
+	rgb(rgb) {
 	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
@@ -85,9 +85,9 @@ void JPEGEncoder::RGBToYCrCb() {
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			y[i][j] = 0.2989*r[i][j] + 0.5866*g[i][j] + 0.1145*b[i][j];
-			cb[i][j] = -0.1687*r[i][j] - 0.3313*g[i][j] + 0.5000*b[i][j];
-			cr[i][j] = 0.5000*r[i][j] - 0.4184*g[i][j] - 0.0816*b[i][j];
+			y[i][j] = 0.29900*r[i][j] + 0.58700*g[i][j] + 0.11400*b[i][j];
+			cb[i][j] = -0.16874*r[i][j] - 0.33126*g[i][j] + 0.50000*b[i][j] + 128;
+			cr[i][j] = 0.50000*r[i][j] - 0.41869*g[i][j] - 0.08131*b[i][j] + 128;
 		}
 	}
 }

@@ -8,7 +8,7 @@
 
 class JPEGEncoder : public QThread {
 public:
-	JPEGEncoder(QByteArray &rgb, bool &encodeStatus);
+	JPEGEncoder(QByteArray &rgb);
 	QByteArray GetYDCT();
 	QByteArray GetCrDCT();
 	QByteArray GetCbDCT();
@@ -19,7 +19,6 @@ protected:
 private:
 	// Variable References
 	QByteArray & rgb;
-	bool &encodeStatus;
 
 	// RGB Color Spaces
 	QVector<QVector<float>> r;
