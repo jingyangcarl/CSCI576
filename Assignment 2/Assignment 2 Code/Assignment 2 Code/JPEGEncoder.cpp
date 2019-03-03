@@ -54,6 +54,20 @@ QByteArray JPEGEncoder::GetCbDCT() {
 	return cbByte;
 }
 
+QByteArray JPEGEncoder::YCrCbSerielization() {
+	QByteArray ycrcb;
+	for (int i = 0; i < y.size(); i++)
+		for (int j = 0; j < y[0].size(); j++)
+			ycrcb.append(y[i][j]);
+	for (int i = 0; i < cr.size(); i++)
+		for (int j = 0; j < cr[0].size(); j++)
+			ycrcb.append(cr[i][j]);
+	for (int i = 0; i < cb.size(); i++)
+		for (int j = 0; j < cb[0].size(); j++)
+			ycrcb.append(cb[i][j]);
+	return ycrcb;
+}
+
 void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
 	RGBToYCrCb();
@@ -66,9 +80,6 @@ void JPEGEncoder::run() {
 	y = SquareBlockDCT(y);
 	cr = SquareBlockDCT(cr);
 	cb = SquareBlockDCT(cb);
-
-	// Serialization
-
 }
 
 /*
@@ -218,6 +229,7 @@ QVector<QVector<float>> JPEGEncoder::SquareBlockDCT(QVector<QVector<float>> cons
 		return resultMatrix;
 	}
 }
+
 /*
 Description:
 	This funtion is used to transform the given matrix to an array in zig-zag order
@@ -358,3 +370,4 @@ QString JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {
 	}
 	return QString();
 }
+

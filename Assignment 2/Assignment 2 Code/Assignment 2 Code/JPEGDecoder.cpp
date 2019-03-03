@@ -2,6 +2,17 @@
 
 JPEGDecoder::JPEGDecoder(QByteArray & ycrcb) :
 	ycrcb(ycrcb) {
+	y = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	cr = QVector<QVector<float>>(256, QVector<float>(256, 0));
+	cb = QVector<QVector<float>>(256, QVector<float>(256, 0));
+
+	for (int i = 0; i < 512; i++) {
+		for (int j = 0; j < 512; j++) {
+			y[i][j] = (uchar)ycrcb[i * 512 + j];
+			cr[i / 2][j / 2] = (uchar)ycrcb[512 * 512 + (i / 2) * 256 + (j / 2)];
+			cb[i / 2][j / 2] = (uchar)ycrcb[512 * 512 + 256 * 256 + (i / 2) * 256 + (j / 2)];
+		}
+	}
 }
 
 void JPEGDecoder::GetRIDCT() {
@@ -29,6 +40,20 @@ void JPEGDecoder::GetBIDCT() {
 			for (int j = 0; j < b[0].size(); j++)
 				bByte.append(b[i][j]);
 	}
+}
+
+QByteArray JPEGDecoder::RGBSerielization() {
+	QByteArray rgb;
+	for (int i = 0; i < r.size(); i++)
+		for (int j = 0; j < r[0].size(); j++)
+			rgb.append(r[i][j]);
+	for (int i = 0; i < g.size(); i++)
+		for (int j = 0; j < g[0].size(); j++)
+			rgb.append(g[i][j]);
+	for (int i = 0; i < b.size(); i++)
+		for (int j = 0; j < b[0].size(); j++)
+			rgb.append(b[i][j]);
+	return rgb;
 }
 
 void JPEGDecoder::run() {

@@ -5,10 +5,11 @@
 
 class JPEGDecoder : public QThread {
 public:
-	JPEGDecoder(QByteArray & rgb);
+	JPEGDecoder(QByteArray & ycrcb);
 	void GetRIDCT();
 	void GetGIDCT();
 	void GetBIDCT();
+	QByteArray RGBSerielization();
 
 protected:
 	void run();

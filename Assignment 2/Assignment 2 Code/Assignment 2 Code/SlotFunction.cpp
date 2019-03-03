@@ -19,7 +19,7 @@ void Assignment2Code::PushButtonLoad() {
 
 	// Waite Thread
 	fileLoader.wait();
-	TextBrowserOutputPrint("Loading Finished.");
+	TextBrowserOutputPrint("Loading Finished.\n");
 
 	// Output Image
 	LabelImagePrint(rgb);
@@ -41,18 +41,39 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 
 	// Waite Thread
 	encoder.wait();
-	TextBrowserOutputPrint("Encoding Finished.");
+	TextBrowserOutputPrint("Encoding Finished.\n");
 
-	// Load dctY, dctCr, DctCb
+	// get Y matrix, Cr matrix, as well as Cb matrix for display
 	dctY = encoder.GetYDCT();
 	dctCr = encoder.GetCrDCT();
 	dctCb = encoder.GetCbDCT();
+
+	// get YCrCb series
+	ycrcb = encoder.YCrCbSerielization();
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
 	// Initialization
-	JPEGDecoder decoder(rgb);
-	
+	JPEGDecoder decoder(ycrcb);
+
+	// Decode
+	decoder.start();
+	TextBrowserOutputPrint("Start Performing JPEG Decoding.");
+
+	// Update UI
+	TextBrowserOutputPrint("Decoding...");
+	while (decoder.isRunning()) {
+		QCoreApplication::processEvents();
+	}
+
+	// Waite Thread
+	decoder.wait();
+	TextBrowserOutputPrint("Decoding Finished.\n");
+
+	// get rgb series
+	rgb = decoder.RGBSerielization();
+
+	LabelImagePrint(rgb);
 }
 
 void Assignment2Code::PushButtonTest() {
@@ -62,7 +83,7 @@ void Assignment2Code::PushButtonTest() {
 	while (testor.isRunning())
 		QCoreApplication::processEvents();
 	testor.wait();
-	TextBrowserOutputPrint("Test Finished");
+	TextBrowserOutputPrint("Test Finished.\n");
 }
 
 void Assignment2Code::PushButtonDCTY() {

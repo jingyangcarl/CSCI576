@@ -12,6 +12,7 @@ public:
 	QByteArray GetYDCT();
 	QByteArray GetCrDCT();
 	QByteArray GetCbDCT();
+	QByteArray YCrCbSerielization();
 
 protected:
 	void run();
