@@ -3,9 +3,9 @@
 void Assignment2Code::PushButtonLoad() {
 	// Initialization
 	filePath = QFileDialog::getOpenFileName(this, tr("Please Select Image"), "./Resources", tr("RGB File(*.rgb)\n BMP File(*.bmp)"));
-	rgb = QByteArray();
+	irgb = QByteArray();
 	bool loadStatus = false;
-	FileLoader fileLoader(filePath, rgb, loadStatus);
+	FileLoader fileLoader(filePath, irgb, loadStatus);
 
 	// Load File
 	fileLoader.start();
@@ -22,12 +22,12 @@ void Assignment2Code::PushButtonLoad() {
 	TextBrowserOutputPrint("Loading Finished.\n");
 
 	// Output Image
-	LabelImagePrint(rgb);
+	LabelImagePrint(irgb);
 }
 
 void Assignment2Code::PushButtonJPEGEncoder() {
 	// Initialization
-	JPEGEncoder encoder(rgb);
+	JPEGEncoder encoder(irgb);
 
 	// Encode
 	encoder.start();
@@ -71,9 +71,9 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 	TextBrowserOutputPrint("Decoding Finished.\n");
 
 	// get rgb series
-	rgb = decoder.RGBSerielization();
+	orgb = decoder.RGBSerielization();
 
-	LabelImagePrint(rgb);
+	LabelImagePrint(orgb);
 }
 
 void Assignment2Code::PushButtonTest() {

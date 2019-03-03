@@ -34,7 +34,8 @@ private:
 
 	// private variable
 	QString filePath;
-	QByteArray rgb;
+	QByteArray irgb;
+	QByteArray orgb;
 	QByteArray ycrcb;
 	QByteArray dctY;
 	QByteArray dctCr;
