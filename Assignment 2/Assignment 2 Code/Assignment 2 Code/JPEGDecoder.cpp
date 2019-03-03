@@ -1,18 +1,16 @@
 #include "JPEGDecoder.h"
 
 JPEGDecoder::JPEGDecoder(QByteArray & ycrcb) :
-	ycrcb(ycrcb) {
+	ycrcb(ycrcb), gear(262114) {
 	y = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	cr = QVector<QVector<float>>(256, QVector<float>(256, 0));
 	cb = QVector<QVector<float>>(256, QVector<float>(256, 0));
 
-	for (int i = 0; i < 512; i++) {
-		for (int j = 0; j < 512; j++) {
-			y[i][j] = ycrcb[i * 512 + j];
-			cr[i / 2][j / 2] = ycrcb[512 * 512 + (i / 2) * 256 + (j / 2)];
-			cb[i / 2][j / 2] = ycrcb[512 * 512 + 256 * 256 + (i / 2) * 256 + (j / 2)];
-		}
-	}
+	YCrCbZigZagDeserielization(gear);
+}
+
+void JPEGDecoder::SetGear(int gear) {
+	this->gear = gear;
 }
 
 void JPEGDecoder::GetRIDCT() {
@@ -70,7 +68,16 @@ void JPEGDecoder::run() {
 	YCrCbToRGB();
 }
 
-QVector<QVector<float>> JPEGDecoder::ZigZagDeseries(QByteArray zigzag) {
+/*
+Description:
+	This function is used to deseries the given zigzag order byte array of size 64
+Input:
+	@ QByteArray zigzag: input array of size 64
+	@ int gear: indicate the coefficient used for deserielization
+Output:
+	@ QVector<QVector<float>>: deserilized matrix
+*/
+QVector<QVector<float>> JPEGDecoder::ZigZagDeserielization(QByteArray zigzag, int gear) {
 	if (zigzag.size() == 0) return QVector<QVector<float>>();
 	QVector<QVector<float>> matrix(sqrt(zigzag.size()), QVector<float>(sqrt(zigzag.size()), 0));
 	QByteArray::const_iterator iter = zigzag.begin();
@@ -79,7 +86,7 @@ QVector<QVector<float>> JPEGDecoder::ZigZagDeseries(QByteArray zigzag) {
 		int j = i;
 		while (j >= 0) {
 			if (direction && (i - j) < matrix.size() && j < matrix.size())
-				matrix[i - j][j] = *iter++;
+				matrix[i - j][j] = (iter - zigzag.begin() < gear / 262144 * zigzag.size()) ? *iter++ : 0;
 			if (!direction && j < matrix.size() && (i - j) < matrix.size())
 				matrix[j][i - j] = *iter++;
 			j--;
@@ -87,6 +94,50 @@ QVector<QVector<float>> JPEGDecoder::ZigZagDeseries(QByteArray zigzag) {
 		direction = !direction;
 	}
 	return matrix;
+}
+
+/*
+Description:
+	This function is used to deseries the zigzag order of y channel, cr channel, as well as cb channel
+Input:
+	@ int gear: indicate the coefficient used for deserielization
+Output:
+	@
+*/
+void JPEGDecoder::YCrCbZigZagDeserielization(int gear) {
+	for (int i = 0; i < y.size() / 8; i++) {
+		for (int j = 0; j < y[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix;
+			subMatrix = ZigZagDeserielization(ycrcb.mid(i * 64 * 64 + j * 64, 64), gear);
+			for (int ii = 0; ii < 8; ii++) {
+				for (int jj = 0; jj < 8; jj++) {
+					y[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+				}
+			}
+		}
+	}
+	for (int i = 0; i < cr.size() / 8; i++) {
+		for (int j = 0; j < cr[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix;
+			subMatrix = ZigZagDeserielization(ycrcb.mid(512 * 512 + i * 32 * 64 + j * 64, 64), gear);
+			for (int ii = 0; ii < 8; ii++) {
+				for (int jj = 0; jj < 8; jj++) {
+					cr[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+				}
+			}
+		}
+	}
+	for (int i = 0; i < cb.size() / 8; i++) {
+		for (int j = 0; j < cb[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix;
+			subMatrix = ZigZagDeserielization(ycrcb.mid(512 * 512 + 256 * 256 + i * 32 * 64 + j * 64, 64), gear);
+			for (int ii = 0; ii < 8; ii++) {
+				for (int jj = 0; jj < 8; jj++) {
+					cb[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+				}
+			}
+		}
+	}
 }
 
 /*

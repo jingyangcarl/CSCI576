@@ -1,3 +1,7 @@
-﻿  Testor.cpp
-d:\csci576\assignment 2\assignment 2 code\assignment 2 code\testor.cpp(209): warning C4715: “Testor::ZigZagDeseries”: 不是所有的控件路径都返回值
+﻿  Assignment2Code.cpp
+  Initialization.cpp
+  JPEGDecoder.cpp
+  main.cpp
+  SlotFunction.cpp
+  moc_Assignment2Code.cpp
   Assignment 2 Code.vcxproj -> D:\CSCI576\Assignment 2\Assignment 2 Code\Win32\Debug\Assignment 2 Code.exe

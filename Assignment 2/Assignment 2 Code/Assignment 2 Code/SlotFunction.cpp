@@ -49,12 +49,14 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	dctCb = encoder.GetCbDCT();
 
 	// get YCrCb series
-	ycrcb = encoder.YCrCbSerielization();
+	// ycrcb = encoder.YCrCbSerielization();
+	ycrcb = encoder.YCrCbZigZagSerielization();
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
 	// Initialization
 	JPEGDecoder decoder(ycrcb);
+	decoder.SetGear(262114);
 
 	// Decode
 	decoder.start();
