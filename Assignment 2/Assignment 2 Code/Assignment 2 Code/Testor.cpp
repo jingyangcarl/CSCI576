@@ -6,7 +6,8 @@
 
 void Testor::run() {
 	//Shrink_2Test();
-	Expand_2Test();
+	//Expand_2Test();
+	SquareBlockDCTIDCTTest();
 }
 
 void Testor::HuffmanEncode() {
@@ -85,7 +86,6 @@ void Testor::HuffmanEncode() {
 }
 
 void Testor::Shrink_2Test() {
-
 	QVector<QVector<float>> matrix = {
 		{1, 2, 3, 4},
 		{5, 6, 7, 8},
@@ -101,11 +101,9 @@ void Testor::Shrink_2Test() {
 				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
 		}
 	}
-
 }
 
 void Testor::Expand_2Test() {
-
 	QVector<QVector<float>> matrix = {
 		{1, 3},
 		{9, 1},
@@ -121,5 +119,45 @@ void Testor::Expand_2Test() {
 			expandMatrix[2 * i + 1][2 * j + 1] = matrix[i][j];
 		}
 	}
+}
 
+void Testor::SquareBlockDCTIDCTTest() {
+	QVector<QVector<float>> matrix = {
+		{226, 226, 223, 223},
+		{226, 226, 223, 223},
+		{226, 226, 223, 223},
+		{226, 226, 223, 223}
+	};
+
+	QVector<QVector<float>> matrixDCT = matrix;
+	int m = matrix.size();
+	int n = matrix[0].size();
+
+	for (int u = 0; u < m; u++) {
+		for (int v = 0; v < n; v++) {
+			matrixDCT[u][v] = 0;
+			for (int i = 0; i < m; i++) {
+				for (int j = 0; j < n; j++) {
+					matrixDCT[u][v] += matrix[i][j] * cos(M_PI / ((float)m)*(i + 1.0 / 2.0) * u) * cos(M_PI / ((float)n)*(j + 1.0 / 2.0) * v);
+				}
+			}
+			matrixDCT[u][v] *= sqrt(2.0 / m) * sqrt(2.0 / n) * (u == 0 ? 1.0 / sqrt(2) : 1) * (v == 0 ? 1.0 / sqrt(2) : 1);
+		}
+	}
+
+	QVector<QVector<float>> inverseMatrixDCT = matrixDCT;
+	m = matrixDCT.size();
+	n = matrixDCT[0].size();
+
+	for (int u = 0; u < m; u++) {
+		for (int v = 0; v < n; v++) {
+			inverseMatrixDCT[u][v] = 0;
+			for (int i = 0; i < m; i++) {
+				for (int j = 0; j < n; j++) {
+					float alpha = (i == 0 ? 1.0 / sqrt(m) : sqrt(2.0 / m)) * (j == 0 ? 1.0 / sqrt(n) : sqrt(2.0 / n));
+					inverseMatrixDCT[u][v] += alpha * matrixDCT[i][j] * cos(M_PI / ((float)m)*(u + 1.0 / 2.0) * i) * cos(M_PI / ((float)n)*(v + 1.0 / 2.0) * j);
+				}
+			}
+		}
+	}
 }

@@ -8,9 +8,9 @@ JPEGDecoder::JPEGDecoder(QByteArray & ycrcb) :
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			y[i][j] = (uchar)ycrcb[i * 512 + j];
-			cr[i / 2][j / 2] = (uchar)ycrcb[512 * 512 + (i / 2) * 256 + (j / 2)];
-			cb[i / 2][j / 2] = (uchar)ycrcb[512 * 512 + 256 * 256 + (i / 2) * 256 + (j / 2)];
+			y[i][j] = ycrcb[i * 512 + j];
+			cr[i / 2][j / 2] = ycrcb[512 * 512 + (i / 2) * 256 + (j / 2)];
+			cb[i / 2][j / 2] = ycrcb[512 * 512 + 256 * 256 + (i / 2) * 256 + (j / 2)];
 		}
 	}
 }
@@ -88,10 +88,10 @@ QVector<QVector<float>> JPEGDecoder::InverseDiscreteCosinTransform(QVector<QVect
 			inverseMatrixDCT[u][v] = 0;
 			for (int i = 0; i < m; i++) {
 				for (int j = 0; j < n; j++) {
-					inverseMatrixDCT[u][v] += matrix[i][j] * cos(M_PI / ((float)m)*(i + 1.0 / 2.0) * u) * cos(M_PI / ((float)n)*(j + 1.0 / 2.0) * v);
+					float alpha = (i == 0 ? 1.0 / sqrt(m) : sqrt(2.0 / m)) * (j == 0 ? 1.0 / sqrt(n) : sqrt(2.0 / n));
+					inverseMatrixDCT[u][v] += alpha * matrix[i][j] * cos(M_PI / ((float)m)*(u + 1.0 / 2.0) * i) * cos(M_PI / ((float)n)*(v + 1.0 / 2.0) * j);
 				}
 			}
-			inverseMatrixDCT[u][v] *= sqrt(2.0 / m) * sqrt(2.0 / n) * (u == 0 ? 1.0 / sqrt(2) : 1) * (v == 0 ? 1.0 / sqrt(2) : 1);
 		}
 	}
 
@@ -162,8 +162,8 @@ QVector<QVector<float>> JPEGDecoder::SquareBlockInverseDCT(QVector<QVector<float
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)
 						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
-				subMatrix = InverseDiscreteCosinTransform(subMatrix);
 				subMatrix = DCTDequantization_8(subMatrix);
+				subMatrix = InverseDiscreteCosinTransform(subMatrix);
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)
 						resultMatrix[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
