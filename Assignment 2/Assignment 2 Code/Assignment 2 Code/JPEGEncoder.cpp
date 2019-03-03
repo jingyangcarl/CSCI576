@@ -66,6 +66,9 @@ void JPEGEncoder::run() {
 	y = SquareBlockDCT(y);
 	cr = SquareBlockDCT(cr);
 	cb = SquareBlockDCT(cb);
+
+	// Serialization
+
 }
 
 /*
@@ -354,31 +357,4 @@ QString JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {
 		}
 	}
 	return QString();
-}
-
-/*
-Description:
-	Ourput the given matrix to main QT thread for display using rgb byte stream
-Input:
-	@ QVector<QVector<float>> matrix: an matrix need to be displayed
-Output:
-	@ void
-*/
-void JPEGEncoder::PrintGrayScale(QVector<QVector<float>> const & matrix) {
-	// print gray scale image
-	rgb = rgb.mid(0, 3 * matrix.size() * matrix[0].size());
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[0].size(); j++) {
-			if (matrix.size() == 512 && matrix[0].size() == 512) {
-				rgb[0 * 512 * 512 + i * 512 + j] = matrix[i][j];
-				rgb[1 * 512 * 512 + i * 512 + j] = matrix[i][j];
-				rgb[2 * 512 * 512 + i * 512 + j] = matrix[i][j];
-			}
-			else if (matrix.size() == 256 && matrix[0].size() == 256) {
-				rgb[0 * 256 * 256 + i * 256 + j] = matrix[i][j];
-				rgb[1 * 256 * 256 + i * 256 + j] = matrix[i][j];
-				rgb[2 * 256 * 256 + i * 256 + j] = matrix[i][j];
-			}
-		}
-	}
 }

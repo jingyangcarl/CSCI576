@@ -40,5 +40,4 @@ private:
 	QMap<QString, QString> HuffmanEncode(QMap<QString, int> input);
 	QString VLIEncode(int number);
 	QString EntropyEncode_512(QVector<QVector<float>> matrix);
-	void PrintGrayScale(QVector<QVector<float>> const & grayScale);
 };

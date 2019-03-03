@@ -5,6 +5,7 @@
 #include "ui_Assignment2Code.h"
 #include "FileLoader.h"
 #include "JPEGEncoder.h"
+#include "JPEGDecoder.h"
 #include "Testor.h"
 
 class Assignment2Code : public QMainWindow {

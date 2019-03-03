@@ -1,7 +1,7 @@
 #include "JPEGDecoder.h"
 
-JPEGDecoder::JPEGDecoder(QByteArray & rgb, bool & decodeStatus) :
-	rgb(rgb), decodeStatus(decodeStatus) {
+JPEGDecoder::JPEGDecoder(QByteArray & ycrcb) :
+	ycrcb(ycrcb) {
 }
 
 void JPEGDecoder::GetRIDCT() {

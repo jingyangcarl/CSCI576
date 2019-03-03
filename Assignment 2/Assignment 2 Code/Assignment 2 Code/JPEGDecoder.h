@@ -5,7 +5,7 @@
 
 class JPEGDecoder : public QThread {
 public:
-	JPEGDecoder(QByteArray & rgb, bool &decodeStatus);
+	JPEGDecoder(QByteArray & rgb);
 	void GetRIDCT();
 	void GetGIDCT();
 	void GetBIDCT();
@@ -15,8 +15,7 @@ protected:
 
 private:
 	// Variable References
-	QByteArray & rgb;
-	bool &decodeStatus;
+	QByteArray & ycrcb;
 
 	// RGB Color Spaces
 	QVector<QVector<float>> r;

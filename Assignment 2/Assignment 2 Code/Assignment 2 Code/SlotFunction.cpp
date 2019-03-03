@@ -51,7 +51,7 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 
 void Assignment2Code::PushButtonJPEGDecoder() {
 	// Initialization
-	bool decodeStatus = false;
+	JPEGDecoder decoder(rgb);
 	
 }
 
