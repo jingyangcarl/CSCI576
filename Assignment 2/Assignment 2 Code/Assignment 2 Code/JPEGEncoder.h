@@ -13,6 +13,7 @@ public:
 	QByteArray GetCrDCT();
 	QByteArray GetCbDCT();
 	QByteArray YCrCbSerielization();
+	QByteArray YCrCbZigZagSerielization();
 
 protected:
 	void run();
@@ -37,7 +38,7 @@ private:
 	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> SquareBlockDCT(QVector<QVector<float>> const & matrix);
-	QVector<float> ZigZagSeries(QVector<QVector<float>> const & matrix);
+	QByteArray ZigZagSeries(QVector<QVector<float>> const & matrix);
 	QMap<QString, QString> HuffmanEncode(QMap<QString, int> input);
 	QString VLIEncode(int number);
 	QString EntropyEncode_512(QVector<QVector<float>> matrix);

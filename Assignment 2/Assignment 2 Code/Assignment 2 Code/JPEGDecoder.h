@@ -29,6 +29,7 @@ private:
 	QVector<QVector<float>> cr;
 
 	// Function
+	QVector<QVector<float>> ZigZagDeseries(QByteArray zigzag);
 	QVector<QVector<float>> InverseDiscreteCosinTransform(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> DCTDequantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> SquareBlockInverseDCT(QVector<QVector<float>> const & matrix);

@@ -7,7 +7,17 @@
 void Testor::run() {
 	//Shrink_2Test();
 	//Expand_2Test();
-	SquareBlockDCTIDCTTest();
+	//SquareBlockDCTIDCTTest();
+
+	QVector<QVector<float>> matrix = {
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9 }
+	};
+	QByteArray zigzag;
+
+	zigzag = ZigZagSeries(matrix);
+	matrix = ZigZagDeseries(zigzag);
 }
 
 void Testor::HuffmanEncode() {
@@ -160,4 +170,41 @@ void Testor::SquareBlockDCTIDCTTest() {
 			}
 		}
 	}
+}
+
+QByteArray Testor::ZigZagSeries(QVector<QVector<float>> const & matrix) {
+	QByteArray zigzag;
+	bool direction(false);
+	if (matrix.size() == 0) return QByteArray();
+	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
+		int j = i;
+		while (j >= 0) {
+			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
+				zigzag.push_back(matrix[j][i - j]);
+			if (direction && (i - j) < matrix.size() && j < matrix[0].size())
+				zigzag.push_back(matrix[i - j][j]);
+			j--;
+		}
+		direction = !direction;
+	}
+	return zigzag;
+}
+
+QVector<QVector<float>> Testor::ZigZagDeseries(QByteArray const & zigzag) {
+	if (zigzag.size() == 0) return QVector<QVector<float>>();
+	QVector<QVector<float>> matrix(sqrt(zigzag.size()), QVector<float>(sqrt(zigzag.size()), 0));
+	QByteArray::const_iterator iter = zigzag.begin();
+	bool direction(false);
+	for (int i = 0; i < 2 * sqrt(zigzag.size()) - 1; i++) {
+		int j = i;
+		while (j >= 0) {
+			if (direction && (i - j) < matrix.size() && j < matrix.size())
+				matrix[i - j][j] = *iter++;
+			if (!direction && j < matrix.size() && (i - j) < matrix.size())
+				matrix[j][i - j] = *iter++;
+			j--;
+		}
+		direction = !direction;
+	}
+	return matrix;
 }

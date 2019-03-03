@@ -70,9 +70,29 @@ void JPEGDecoder::run() {
 	YCrCbToRGB();
 }
 
+QVector<QVector<float>> JPEGDecoder::ZigZagDeseries(QByteArray zigzag) {
+	if (zigzag.size() == 0) return QVector<QVector<float>>();
+	QVector<QVector<float>> matrix(sqrt(zigzag.size()), QVector<float>(sqrt(zigzag.size()), 0));
+	QByteArray::const_iterator iter = zigzag.begin();
+	bool direction(false);
+	for (int i = 0; i < 2 * sqrt(zigzag.size()) - 1; i++) {
+		int j = i;
+		while (j >= 0) {
+			if (direction && (i - j) < matrix.size() && j < matrix.size())
+				matrix[i - j][j] = *iter++;
+			if (!direction && j < matrix.size() && (i - j) < matrix.size())
+				matrix[j][i - j] = *iter++;
+			j--;
+		}
+		direction = !direction;
+	}
+	return matrix;
+}
+
 /*
-Description:
+Description: 
 	This function is used to transform any given matrix from frequency domain to time domain
+	Reference Link: https://www.mathworks.com/help/images/ref/idct2.html
 Input:
 	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix, which needed to be transform to time domain
 Output:

@@ -68,6 +68,46 @@ QByteArray JPEGEncoder::YCrCbSerielization() {
 	return ycrcb;
 }
 
+QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
+	QByteArray ycrcb;
+
+	for (int i = 0; i < y.size() / 8; i++) {
+		for (int j = 0; j < y[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for(int ii = 0; ii < 8; ii++)
+				for(int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = y[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				ycrcb.push_back(subArray[i]);
+		}
+	}
+	for (int i = 0; i < cr.size() / 8; i++) {
+		for (int j = 0; j < cr[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for (int ii = 0; ii < 8; ii++)
+				for (int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = cr[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				ycrcb.push_back(subArray[i]);
+		}
+	}
+	for (int i = 0; i < cb.size() / 8; i++) {
+		for (int j = 0; j < cb[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for (int ii = 0; ii < 8; ii++)
+				for (int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = cb[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				ycrcb.push_back(subArray[i]);
+		}
+	}
+
+	return ycrcb;
+}
+
 void JPEGEncoder::run() {
 	// Convert RGB color space to YCrCb color space
 	RGBToYCrCb();
@@ -130,6 +170,7 @@ QVector<QVector<float>> JPEGEncoder::Shrink_2(QVector<QVector<float>>& matrix) {
 /*
 Description:
 	This function is used to transform any given matrix from time domain to frequency domain
+	Reference Link: https://www.mathworks.com/help/images/ref/dct2.html
 Input:
 	@ QVector<QVector<float>> matrix: an 2D M (rows) by N (cols) matrix, which needed to be transform to frequency domain
 Output:
@@ -238,10 +279,10 @@ Input:
 Output:
 	@ QVector<float> array: array holds entries in matrix in a zig-zag order
 */
-QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
-	QVector<float> zigzag;
+QByteArray JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
+	QByteArray zigzag;
 	bool direction(false);
-	if (matrix.size() == 0) return QVector<float>();
+	if (matrix.size() == 0) return QByteArray();
 	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
 		int j = i;
 		while (j >= 0) {
