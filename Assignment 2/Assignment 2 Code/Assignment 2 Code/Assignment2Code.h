@@ -27,6 +27,9 @@ public slots:
 	void PushButtonShowDCTCr();
 	void PushButtonShowDCTCb();
 	void PushButtonShowOriginalImage();
+	void PushButtonShow262114();
+	void PushButtonShow131072();
+	void PushButtonShow16384();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 

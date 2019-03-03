@@ -9,4 +9,7 @@ void Assignment2Code::ConnectionInitialization() {
 	connect(ui.pushButton_dctcr, SIGNAL(clicked()), this, SLOT(PushButtonShowDCTCr()));
 	connect(ui.pushButton_dctcb, SIGNAL(clicked()), this, SLOT(PushButtonShowDCTCb()));
 	connect(ui.pushButton_original_image, SIGNAL(clicked()), this, SLOT(PushButtonShowOriginalImage()));
+	connect(ui.pushButton_262144, SIGNAL(clicked()), this, SLOT(PushButtonShow262114()));
+	connect(ui.pushButton_131072, SIGNAL(clicked()), this, SLOT(PushButtonShow131072()));
+	connect(ui.pushButton_16384, SIGNAL(clicked()), this, SLOT(PushButtonShow16384()));
 }

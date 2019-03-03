@@ -86,7 +86,7 @@ QVector<QVector<float>> JPEGDecoder::ZigZagDeserielization(QByteArray zigzag, in
 		int j = i;
 		while (j >= 0) {
 			if (direction && (i - j) < matrix.size() && j < matrix.size())
-				matrix[i - j][j] = (iter - zigzag.begin() < gear / 262144 * zigzag.size()) ? *iter++ : 0;
+				matrix[i - j][j] = (iter - zigzag.begin() < gear / 262144.0 * zigzag.size()) ? *iter++ : 0;
 			if (!direction && j < matrix.size() && (i - j) < matrix.size())
 				matrix[j][i - j] = *iter++;
 			j--;
@@ -282,9 +282,9 @@ void JPEGDecoder::YCrCbToRGB() {
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			r[i][j] = y[i][j] + (cr[i][j] - 128) * 1.40200;
-			g[i][j] = y[i][j] + (cb[i][j] - 128) * -0.34414 + (cr[i][j] - 128) * -0.71414;
-			b[i][j] = y[i][j] + (cb[i][j] - 128) * 1.77200;
+			r[i][j] = 0.871 * y[i][j] + -0.233 * cb[i][j] + 1.405 * cr[i][j];
+			g[i][j] = 0.221 * y[i][j] + -1.752 * cb[i][j] + -0.689 * cr[i][j];
+			b[i][j] = 4.236 * y[i][j] + 7.626 * cb[i][j] + -0.108 * cr[i][j];
 		}
 	}
 }

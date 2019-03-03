@@ -19,7 +19,7 @@ void Assignment2Code::PushButtonLoad() {
 
 	// Waite Thread
 	fileLoader.wait();
-	TextBrowserOutputPrint("Loading Finished.\n");
+	TextBrowserOutputPrint("Loading Finished.");
 
 	// Output Image
 	LabelImagePrint(irgb);
@@ -41,7 +41,7 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 
 	// Waite Thread
 	encoder.wait();
-	TextBrowserOutputPrint("Encoding Finished.\n");
+	TextBrowserOutputPrint("Encoding Finished.");
 
 	// get Y matrix, Cr matrix, as well as Cb matrix for display
 	dctY = encoder.GetYDCT();
@@ -90,7 +90,7 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 	orgb_2 = decoder_2.RGBSerielization();
 	orgb_3 = decoder_3.RGBSerielization();
 
-	LabelImagePrint(orgb_3);
+	LabelImagePrint(orgb_1);
 }
 
 void Assignment2Code::PushButtonTest() {
@@ -100,23 +100,42 @@ void Assignment2Code::PushButtonTest() {
 	while (testor.isRunning())
 		QCoreApplication::processEvents();
 	testor.wait();
-	TextBrowserOutputPrint("Test Finished.\n");
+	TextBrowserOutputPrint("Test Finished.");
 }
 
 void Assignment2Code::PushButtonShowDCTY() {
 	LabelImagePrint(dctY);
+	TextBrowserOutputPrint("PushButtonShowDCTY");
 }
 
 void Assignment2Code::PushButtonShowDCTCr() {
 	LabelImagePrint(dctCr);
+	TextBrowserOutputPrint("PushButtonShowDCTCr");
 }
 
 void Assignment2Code::PushButtonShowDCTCb() {
 	LabelImagePrint(dctCb);
+	TextBrowserOutputPrint("PushButtonShowDCTCb");
 }
 
 void Assignment2Code::PushButtonShowOriginalImage() {
 	LabelImagePrint(irgb);
+	TextBrowserOutputPrint("PushButtonShowOriginalImage");
+}
+
+void Assignment2Code::PushButtonShow262114() {
+	LabelImagePrint(orgb_1);
+	TextBrowserOutputPrint("PushButtonShow262114");
+}
+
+void Assignment2Code::PushButtonShow131072() {
+	LabelImagePrint(orgb_2);
+	TextBrowserOutputPrint("PushButtonShow131072");
+}
+
+void Assignment2Code::PushButtonShow16384() {
+	LabelImagePrint(orgb_3);
+	TextBrowserOutputPrint("PushButtonShow16384");
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
