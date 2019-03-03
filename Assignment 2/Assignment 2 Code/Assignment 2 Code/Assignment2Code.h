@@ -23,9 +23,10 @@ public slots:
 	void PushButtonJPEGEncoder();
 	void PushButtonJPEGDecoder();
 	void PushButtonTest();
-	void PushButtonDCTY();
-	void PushButtonDCTCr();
-	void PushButtonDCTCb();
+	void PushButtonShowDCTY();
+	void PushButtonShowDCTCr();
+	void PushButtonShowDCTCb();
+	void PushButtonShowOriginalImage();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 

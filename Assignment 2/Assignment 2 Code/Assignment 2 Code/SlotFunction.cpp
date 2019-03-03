@@ -86,16 +86,20 @@ void Assignment2Code::PushButtonTest() {
 	TextBrowserOutputPrint("Test Finished.\n");
 }
 
-void Assignment2Code::PushButtonDCTY() {
+void Assignment2Code::PushButtonShowDCTY() {
 	LabelImagePrint(dctY);
 }
 
-void Assignment2Code::PushButtonDCTCr() {
+void Assignment2Code::PushButtonShowDCTCr() {
 	LabelImagePrint(dctCr);
 }
 
-void Assignment2Code::PushButtonDCTCb() {
+void Assignment2Code::PushButtonShowDCTCb() {
 	LabelImagePrint(dctCb);
+}
+
+void Assignment2Code::PushButtonShowOriginalImage() {
+	LabelImagePrint(irgb);
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
