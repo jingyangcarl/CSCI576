@@ -42,9 +42,9 @@ public:
     QLabel *label_3;
     QPushButton *pushButton_original_image;
     QPushButton *pushButton_jpeg_decoder;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QPushButton *pushButton_262144;
+    QPushButton *pushButton_131072;
+    QPushButton *pushButton_16384;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -132,20 +132,20 @@ public:
 
         gridLayout_control->addWidget(pushButton_jpeg_decoder, 6, 0, 1, 3);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton_262144 = new QPushButton(centralWidget);
+        pushButton_262144->setObjectName(QString::fromUtf8("pushButton_262144"));
 
-        gridLayout_control->addWidget(pushButton, 7, 0, 1, 1);
+        gridLayout_control->addWidget(pushButton_262144, 7, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_131072 = new QPushButton(centralWidget);
+        pushButton_131072->setObjectName(QString::fromUtf8("pushButton_131072"));
 
-        gridLayout_control->addWidget(pushButton_2, 7, 1, 1, 1);
+        gridLayout_control->addWidget(pushButton_131072, 7, 1, 1, 1);
 
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_16384 = new QPushButton(centralWidget);
+        pushButton_16384->setObjectName(QString::fromUtf8("pushButton_16384"));
 
-        gridLayout_control->addWidget(pushButton_3, 7, 2, 1, 1);
+        gridLayout_control->addWidget(pushButton_16384, 7, 2, 1, 1);
 
 
         gridLayout->addLayout(gridLayout_control, 0, 1, 1, 1);
@@ -183,9 +183,9 @@ public:
         label_3->setText(QApplication::translate("Assignment2CodeClass", "Decoder", nullptr));
         pushButton_original_image->setText(QApplication::translate("Assignment2CodeClass", "Original Image", nullptr));
         pushButton_jpeg_decoder->setText(QApplication::translate("Assignment2CodeClass", "JPEG Decoder", nullptr));
-        pushButton->setText(QApplication::translate("Assignment2CodeClass", "PushButton", nullptr));
-        pushButton_2->setText(QApplication::translate("Assignment2CodeClass", "PushButton", nullptr));
-        pushButton_3->setText(QApplication::translate("Assignment2CodeClass", "PushButton", nullptr));
+        pushButton_262144->setText(QApplication::translate("Assignment2CodeClass", "262144", nullptr));
+        pushButton_131072->setText(QApplication::translate("Assignment2CodeClass", "131072", nullptr));
+        pushButton_16384->setText(QApplication::translate("Assignment2CodeClass", "16384", nullptr));
     } // retranslateUi
 
 };

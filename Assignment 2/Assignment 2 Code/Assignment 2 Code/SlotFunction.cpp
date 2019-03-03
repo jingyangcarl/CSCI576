@@ -49,33 +49,48 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	dctCb = encoder.GetCbDCT();
 
 	// get YCrCb series
-	// ycrcb = encoder.YCrCbSerielization();
 	ycrcb = encoder.YCrCbZigZagSerielization();
+
+	LabelImagePrint(dctY);
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
 	// Initialization
-	JPEGDecoder decoder(ycrcb);
-	decoder.SetGear(262114);
+	JPEGDecoder decoder_1(ycrcb);
+	JPEGDecoder decoder_2(ycrcb);
+	JPEGDecoder decoder_3(ycrcb);
+	decoder_1.SetGear(262114);
+	decoder_2.SetGear(131072);
+	decoder_3.SetGear(16384);
 
 	// Decode
-	decoder.start();
-	TextBrowserOutputPrint("Start Performing JPEG Decoding.");
+	decoder_1.start();
+	TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear 262114.");
+	decoder_2.start();
+	TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear 131072.");
+	decoder_3.start();
+	TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear 16384.");
 
 	// Update UI
 	TextBrowserOutputPrint("Decoding...");
-	while (decoder.isRunning()) {
+	while (decoder_1.isRunning() || decoder_2.isRunning() || decoder_3.isRunning()) {
 		QCoreApplication::processEvents();
 	}
 
 	// Waite Thread
-	decoder.wait();
-	TextBrowserOutputPrint("Decoding Finished.\n");
+	decoder_1.wait();
+	TextBrowserOutputPrint("Decoding Thread for 262114 is Finished.");
+	decoder_2.wait();
+	TextBrowserOutputPrint("Decoding Thread for 131072 is Finished.");
+	decoder_3.wait();
+	TextBrowserOutputPrint("Decoding Thread for 16384 is Finished.");
 
 	// get rgb series
-	orgb = decoder.RGBSerielization();
+	orgb_1 = decoder_1.RGBSerielization();
+	orgb_2 = decoder_2.RGBSerielization();
+	orgb_3 = decoder_3.RGBSerielization();
 
-	LabelImagePrint(orgb);
+	LabelImagePrint(orgb_3);
 }
 
 void Assignment2Code::PushButtonTest() {

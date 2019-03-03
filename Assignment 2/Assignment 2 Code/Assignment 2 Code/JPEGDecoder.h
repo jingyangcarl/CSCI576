@@ -17,7 +17,7 @@ protected:
 
 private:
 	// Variable References
-	QByteArray & ycrcb;
+	const QByteArray & ycrcb;
 
 	// Paramete
 	int gear;

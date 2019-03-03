@@ -111,23 +111,23 @@
        </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_262144">
         <property name="text">
-         <string>PushButton</string>
+         <string>262144</string>
         </property>
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButton_131072">
         <property name="text">
-         <string>PushButton</string>
+         <string>131072</string>
         </property>
        </widget>
       </item>
       <item row="7" column="2">
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pushButton_16384">
         <property name="text">
-         <string>PushButton</string>
+         <string>16384</string>
         </property>
        </widget>
       </item>
