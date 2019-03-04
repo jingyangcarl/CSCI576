@@ -1,0 +1,16 @@
+﻿  Rcc'ing Assignment2Code.qrc...
+  Moc'ing Assignment2Code.h...
+   RCC: Warning: No resources in 'D:\CSCI576\Assignment 2\Assignment 2 Code\Assignment 2 Code\Assignment2Code.qrc'.
+  Assignment2Code.cpp
+  DCTProcessor.cpp
+  FileLoader.cpp
+  IDCTProcessor.cpp
+  Initialization.cpp
+  JPEGDecoder.cpp
+  JPEGEncoder.cpp
+  main.cpp
+  SlotFunction.cpp
+  Testor.cpp
+  qrc_Assignment2Code.cpp
+  moc_Assignment2Code.cpp
+  Assignment 2 Code.vcxproj -> D:\CSCI576\Assignment 2\Assignment 2 Code\Win32\Release\Assignment 2 Code.exe

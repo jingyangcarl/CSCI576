@@ -14,5 +14,8 @@ void Assignment2Code::ConnectionInitialization() {
 	connect(ui.pushButton_original_image, SIGNAL(clicked()), this, SLOT(PushButtonShowOriginalImage()));
 	connect(ui.pushButton_262144, SIGNAL(clicked()), this, SLOT(PushButtonShow262114()));
 	connect(ui.pushButton_131072, SIGNAL(clicked()), this, SLOT(PushButtonShow131072()));
+	connect(ui.pushButton_65535, SIGNAL(clicked()), this, SLOT(PushButtonShow65535()));
 	connect(ui.pushButton_16384, SIGNAL(clicked()), this, SLOT(PushButtonShow16384()));
+	connect(ui.pushButton_8192, SIGNAL(clicked()), this, SLOT(PushButtonShow8192()));
+	connect(ui.pushButton_4096, SIGNAL(clicked()), this, SLOT(PushButtonShow4096()));
 }

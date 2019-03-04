@@ -33,7 +33,10 @@ public slots:
 	void PushButtonShowOriginalImage();
 	void PushButtonShow262114();
 	void PushButtonShow131072();
+	void PushButtonShow65535();
 	void PushButtonShow16384();
+	void PushButtonShow8192();
+	void PushButtonShow4096();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 
@@ -46,6 +49,9 @@ private:
 	QByteArray orgb_1;
 	QByteArray orgb_2;
 	QByteArray orgb_3;
+	QByteArray orgb_4;
+	QByteArray orgb_5;
+	QByteArray orgb_6;
 	QVector<float> orgb;
 	QVector<float> oycbcr;
 	QByteArray dctR;
