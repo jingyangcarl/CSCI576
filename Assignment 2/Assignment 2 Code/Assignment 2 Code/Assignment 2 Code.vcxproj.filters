@@ -23,6 +23,9 @@
     <ClCompile Include="Testor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DCTProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Testor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DCTProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,7 @@
 #include <qbitarray.h>
 #include <qmap.h>
 #include <queue>
+#include "DCTProcessor.h"
 
 class JPEGEncoder : public QThread {
 public:
@@ -17,9 +18,6 @@ public:
 	QByteArray GetBDCT();
 	QByteArray YCrCbSerielization();
 	QByteArray YCrCbZigZagSerielization();
-
-protected:
-	void run();
 
 private:
 	// Variable References
@@ -38,11 +36,11 @@ private:
 	// Function
 	void RGBToYCrCb();
 	QVector<QVector<float>> Shrink_2(QVector<QVector<float>> & matrix);
-	QVector<QVector<float>> DiscreteCosinTransform(QVector<QVector<float>> const & matrix);
-	QVector<QVector<float>> DCTQuantization_8(QVector<QVector<float>> const & matrix);
-	QVector<QVector<float>> SquareBlockDCT(QVector<QVector<float>> const & matrix);
 	QByteArray ZigZagSeries(QVector<QVector<float>> const & matrix);
 
 	QMap<QString, QString> HuffmanEncode(QMap<QString, int> input);
 	QString VLIEncode(int number);
+
+protected:
+	void run();
 };
