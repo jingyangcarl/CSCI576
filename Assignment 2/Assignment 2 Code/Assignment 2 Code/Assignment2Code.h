@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <qfiledialog.h>
+#include <qbytearray.h>
 #include "ui_Assignment2Code.h"
 #include "FileLoader.h"
 #include "JPEGEncoder.h"
@@ -42,15 +43,15 @@ private:
 	// private variable
 	QString filePath;
 	QByteArray irgb;
-	QByteArray orgb;
 	QByteArray orgb_1;
 	QByteArray orgb_2;
 	QByteArray orgb_3;
-	QByteArray ycrcb;
+	QVector<float> orgb;
+	QVector<float> oycbcr;
 	QByteArray dctR;
 	QByteArray dctG;
 	QByteArray dctB;
 	QByteArray dctY;
-	QByteArray dctCr;
 	QByteArray dctCb;
+	QByteArray dctCr;
 };

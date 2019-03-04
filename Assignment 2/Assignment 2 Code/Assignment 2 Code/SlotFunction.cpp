@@ -52,7 +52,7 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	dctB = encoder.GetBDCT();
 
 	// get YCrCb series
-	ycrcb = encoder.YCrCbZigZagSerielization();
+	oycbcr = encoder.YCrCbZigZagSerielization();
 	orgb = encoder.RGBZigZagSerielization();
 
 	LabelImagePrint(dctR);
@@ -60,12 +60,9 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 
 void Assignment2Code::PushButtonJPEGDecoder() {
 	// Initialization
-	JPEGDecoder decoder_1(orgb);
-	JPEGDecoder decoder_2(orgb);
-	JPEGDecoder decoder_3(orgb);
-	decoder_1.SetGear(262114);
-	decoder_2.SetGear(131072);
-	decoder_3.SetGear(16384);
+	JPEGDecoder decoder_1(orgb, 262114);
+	JPEGDecoder decoder_2(orgb, 131072);
+	JPEGDecoder decoder_3(orgb, 16384);
 
 	// Decode
 	decoder_1.start();

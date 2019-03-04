@@ -6,8 +6,7 @@
 
 class JPEGDecoder : public QThread {
 public:
-	JPEGDecoder(QByteArray & rgb);
-	void SetGear(int gear);
+	JPEGDecoder(QVector<float> & rgb, int gear);
 	void GetRIDCT();
 	void GetGIDCT();
 	void GetBIDCT();
@@ -15,7 +14,7 @@ public:
 
 private:
 	// Variable References
-	const QByteArray & rgb;
+	const QVector<float> & rgb;
 
 	// Paramete
 	int gear;
@@ -26,11 +25,8 @@ private:
 	QVector<QVector<float>> b;
 
 	// Function
-	QVector<QVector<float>> ZigZagDeserielization(QByteArray zigzag, int gear);
+	QVector<QVector<float>> ZigZagDeserielization(QVector<float> zigzag, int gear);
 	void RGBZigZagDeserielization(int gear);
-	QVector<QVector<float>> InverseDiscreteCosinTransform(QVector<QVector<float>> const & matrix);
-	QVector<QVector<float>> DCTDequantization_8(QVector<QVector<float>> const & matrix);
-	QVector<QVector<float>> SquareBlockInverseDCT(QVector<QVector<float>> const & matrix);
 
 protected:
 	void run();

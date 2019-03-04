@@ -91,7 +91,7 @@ void IDCTProcessor::SquareBlockInverseDCT() {
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)
 						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
-				subMatrix = DCTDequantization_8(subMatrix);
+				// subMatrix = DCTDequantization_8(subMatrix);
 				subMatrix = InverseDiscreteCosinTransform(subMatrix);
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)

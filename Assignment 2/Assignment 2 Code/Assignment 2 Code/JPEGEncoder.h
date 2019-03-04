@@ -2,7 +2,6 @@
 #include <qthread.h>
 #include <qvector.h>
 #include <qmath.h>
-#include <qbitarray.h>
 #include <qmap.h>
 #include <queue>
 #include "DCTProcessor.h"
@@ -16,9 +15,9 @@ public:
 	QByteArray GetRDCT();
 	QByteArray GetGDCT();
 	QByteArray GetBDCT();
-	QByteArray YCrCbSerielization();
-	QByteArray YCrCbZigZagSerielization();
-	QByteArray RGBZigZagSerielization();
+	QVector<float> YCrCbSerielization();
+	QVector<float> YCrCbZigZagSerielization();
+	QVector<float> RGBZigZagSerielization();
 
 private:
 	// Variable References
@@ -37,7 +36,7 @@ private:
 	// Function
 	void RGBToYCrCb();
 	QVector<QVector<float>> Shrink_2(QVector<QVector<float>> & matrix);
-	QByteArray ZigZagSeries(QVector<QVector<float>> const & matrix);
+	QVector<float> ZigZagSeries(QVector<QVector<float>> const & matrix);
 
 	QMap<QString, QString> HuffmanEncode(QMap<QString, int> input);
 	QString VLIEncode(int number);

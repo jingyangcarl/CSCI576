@@ -93,8 +93,8 @@ QByteArray JPEGEncoder::GetBDCT() {
 	return bByte;
 }
 
-QByteArray JPEGEncoder::YCrCbSerielization() {
-	QByteArray ycrcb;
+QVector<float> JPEGEncoder::YCrCbSerielization() {
+	QVector<float> ycrcb;
 	for (int i = 0; i < y.size(); i++)
 		for (int j = 0; j < y[0].size(); j++)
 			ycrcb.append(y[i][j]);
@@ -107,8 +107,8 @@ QByteArray JPEGEncoder::YCrCbSerielization() {
 	return ycrcb;
 }
 
-QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
-	QByteArray ycrcb;
+QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
+	QVector<float> ycrcb;
 
 	for (int i = 0; i < y.size() / 8; i++) {
 		for (int j = 0; j < y[0].size() / 8; j++) {
@@ -116,7 +116,7 @@ QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
 			for(int ii = 0; ii < 8; ii++)
 				for(int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = y[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				ycrcb.push_back(subArray[i]);
 		}
@@ -127,7 +127,7 @@ QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
 			for (int ii = 0; ii < 8; ii++)
 				for (int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = cr[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				ycrcb.push_back(subArray[i]);
 		}
@@ -138,7 +138,7 @@ QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
 			for (int ii = 0; ii < 8; ii++)
 				for (int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = cb[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				ycrcb.push_back(subArray[i]);
 		}
@@ -147,8 +147,8 @@ QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
 	return ycrcb;
 }
 
-QByteArray JPEGEncoder::RGBZigZagSerielization() {
-	QByteArray rgb;
+QVector<float> JPEGEncoder::RGBZigZagSerielization() {
+	QVector<float> rgb;
 
 	for (int i = 0; i < r.size() / 8; i++) {
 		for (int j = 0; j < r[0].size() / 8; j++) {
@@ -156,7 +156,7 @@ QByteArray JPEGEncoder::RGBZigZagSerielization() {
 			for (int ii = 0; ii < 8; ii++)
 				for (int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = r[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				rgb.push_back(subArray[i]);
 		}
@@ -167,7 +167,7 @@ QByteArray JPEGEncoder::RGBZigZagSerielization() {
 			for (int ii = 0; ii < 8; ii++)
 				for (int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = g[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				rgb.push_back(subArray[i]);
 		}
@@ -178,7 +178,7 @@ QByteArray JPEGEncoder::RGBZigZagSerielization() {
 			for (int ii = 0; ii < 8; ii++)
 				for (int jj = 0; jj < 8; jj++)
 					subMatrix[ii][jj] = b[i * 8 + ii][j * 8 + jj];
-			QByteArray subArray = ZigZagSeries(subMatrix);
+			QVector<float> subArray = ZigZagSeries(subMatrix);
 			for (int i = 0; i < subArray.size(); i++)
 				rgb.push_back(subArray[i]);
 		}
@@ -243,10 +243,10 @@ Input:
 Output:
 	@ QVector<float> array: array holds entries in matrix in a zig-zag order
 */
-QByteArray JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
-	QByteArray zigzag;
+QVector<float> JPEGEncoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
+	QVector<float> zigzag;
 	bool direction(false);
-	if (matrix.size() == 0) return QByteArray();
+	if (matrix.size() == 0) return QVector<float>();
 	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
 		int j = i;
 		while (j >= 0) {

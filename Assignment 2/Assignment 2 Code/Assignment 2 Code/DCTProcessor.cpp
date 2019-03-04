@@ -102,7 +102,7 @@ void DCTProcessor::SquareBlockDCT() {
 					for (int jj = 0; jj < 8; jj++)
 						subMatrix[ii][jj] = matrix[i * 8 + ii][j * 8 + jj];
 				subMatrix = DiscreteCosinTransform(subMatrix);
-				subMatrix = DCTQuantization_8(subMatrix);
+				// subMatrix = DCTQuantization_8(subMatrix);
 				for (int ii = 0; ii < 8; ii++)
 					for (int jj = 0; jj < 8; jj++)
 						resultMatrix[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];

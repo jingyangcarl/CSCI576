@@ -12,4 +12,5 @@ protected:
 	void SquareBlockDCTIDCTTest();
 	QByteArray ZigZagSeries(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> ZigZagDeseries(QByteArray const & zigzag);
+	void DCTIDCTProcessorTest();
 };
