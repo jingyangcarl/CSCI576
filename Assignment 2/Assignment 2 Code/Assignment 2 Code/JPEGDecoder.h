@@ -2,6 +2,7 @@
 #include <qthread.h>
 #include <qvector.h>
 #include <qmath.h>
+#include "IDCTProcessor.h"
 
 class JPEGDecoder : public QThread {
 public:
@@ -30,8 +31,6 @@ private:
 	QVector<QVector<float>> InverseDiscreteCosinTransform(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> DCTDequantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> SquareBlockInverseDCT(QVector<QVector<float>> const & matrix);
-	QVector<QVector<float>> Expand_2(QVector<QVector<float>> & matrix);
-	void YCbCrToRGB();
 
 protected:
 	void run();

@@ -216,6 +216,27 @@ void JPEGEncoder::RGBToYCrCb() {
 
 /*
 Description:
+	This function is used to shrink the matrix to half of its size
+Input:
+	@QVector<QVector<float>> matrix: the given color matrix
+Output:
+	@QVector<QVector<float>> matrix: the matrix after shrinking
+*/
+QVector<QVector<float>> JPEGEncoder::Shrink_2(QVector<QVector<float>>& matrix) {
+	QVector<QVector<float>> shrinkMatrix(matrix.size() / 2, QVector<float>(matrix[0].size() / 2));
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[0].size(); j++) {
+			if (!(i % 2) && !(j % 2))
+				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
+		}
+	}
+
+	return shrinkMatrix;
+}
+
+/*
+Description:
 	This funtion is used to transform the given matrix to an array in zig-zag order
 Input:
 	@ QVector<QVector<float>> matrix: input matrix

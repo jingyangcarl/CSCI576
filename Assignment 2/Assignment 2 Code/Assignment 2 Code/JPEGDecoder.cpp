@@ -230,30 +230,19 @@ QVector<QVector<float>> JPEGDecoder::SquareBlockInverseDCT(QVector<QVector<float
 	}
 }
 
-/*
-Description:
-	This function is used to expand the matrix to twice of its size
-Input:
-	@QVector<QVector<float>> matrix: the given color matrix
-Output:
-	@QVector<QVector<float>> matrix: the matrix after expanding
-*/
-QVector<QVector<float>> JPEGDecoder::Expand_2(QVector<QVector<float>>& matrix) {
-	QVector<QVector<float>> expandMatrix(matrix.size() * 2, QVector<float>(matrix[0].size() * 2));
-
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[0].size(); j++) {
-			expandMatrix[2 * i][2 * j] = matrix[i][j];
-			expandMatrix[2 * i + 1][2 * j] = matrix[i][j];
-			expandMatrix[2 * i][2 * j + 1] = matrix[i][j];
-			expandMatrix[2 * i + 1][2 * j + 1] = matrix[i][j];
-		}
-	}
-
-	return expandMatrix;
-}
-
 void JPEGDecoder::run() {
+	IDCTProcessor idctRProcessor(r);
+	IDCTProcessor idctGProcessor(g);
+	IDCTProcessor idctBProcessor(b);
+
+	idctRProcessor.start();
+	idctGProcessor.start();
+	idctBProcessor.start();
+
+	idctRProcessor.wait();
+	idctGProcessor.wait();
+	idctBProcessor.wait();
+
 	r = SquareBlockInverseDCT(r);
 	g = SquareBlockInverseDCT(g);
 	b = SquareBlockInverseDCT(b);

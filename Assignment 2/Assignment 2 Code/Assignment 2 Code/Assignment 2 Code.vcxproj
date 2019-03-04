@@ -116,6 +116,7 @@
     <ClCompile Include="Assignment2Code.cpp" />
     <ClCompile Include="DCTProcessor.cpp" />
     <ClCompile Include="FileLoader.cpp" />
+    <ClCompile Include="IDCTProcessor.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="JPEGDecoder.cpp" />
     <ClCompile Include="JPEGEncoder.cpp" />
@@ -135,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="DCTProcessor.h" />
     <ClInclude Include="FileLoader.h" />
+    <ClInclude Include="IDCTProcessor.h" />
     <ClInclude Include="JPEGDecoder.h" />
     <ClInclude Include="JPEGEncoder.h" />
     <ClInclude Include="Testor.h" />
