@@ -118,6 +118,7 @@
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="IDCTProcessor.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="JP2Encoder.cpp" />
     <ClCompile Include="JPEGDecoder.cpp" />
     <ClCompile Include="JPEGEncoder.cpp" />
     <ClCompile Include="main.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="DCTProcessor.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="IDCTProcessor.h" />
+    <ClInclude Include="JP2Encoder.h" />
     <ClInclude Include="JPEGDecoder.h" />
     <ClInclude Include="JPEGEncoder.h" />
     <ClInclude Include="Testor.h" />

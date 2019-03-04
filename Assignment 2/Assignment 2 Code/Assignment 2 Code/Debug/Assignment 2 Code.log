@@ -1,8 +1,2 @@
-﻿  Uic'ing Assignment2Code.ui...
-  Moc'ing Assignment2Code.h...
-  Assignment2Code.cpp
-  moc_Assignment2Code.cpp
-  Initialization.cpp
-  SlotFunction.cpp
-  main.cpp
+﻿  qrc_Assignment2Code.cpp
   Assignment 2 Code.vcxproj -> D:\CSCI576\Assignment 2\Assignment 2 Code\Win32\Debug\Assignment 2 Code.exe
