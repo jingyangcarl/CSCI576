@@ -118,6 +118,12 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 	LabelImagePrint(orgb_1);
 }
 
+void Assignment2Code::PushButtonJP2Encoder() {
+}
+
+void Assignment2Code::PushButtonJP2Decoder() {
+}
+
 void Assignment2Code::PushButtonTest() {
 	Testor testor;
 	testor.start();

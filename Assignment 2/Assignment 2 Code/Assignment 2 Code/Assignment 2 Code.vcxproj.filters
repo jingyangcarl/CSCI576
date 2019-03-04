@@ -92,5 +92,8 @@
     <ClInclude Include="JP2Encoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JP2Decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -138,6 +138,7 @@
     <ClInclude Include="DCTProcessor.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="IDCTProcessor.h" />
+    <ClInclude Include="JP2Decoder.h" />
     <ClInclude Include="JP2Encoder.h" />
     <ClInclude Include="JPEGDecoder.h" />
     <ClInclude Include="JPEGEncoder.h" />

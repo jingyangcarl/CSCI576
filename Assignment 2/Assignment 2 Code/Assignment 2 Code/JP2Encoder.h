@@ -14,6 +14,12 @@ private:
 	QVector<QVector<float>> g;
 	QVector<QVector<float>> b;
 
+	// Function
+	void DiscreteWaveletTransformRow(QVector<QVector<float>> const & matrix, QVector<QVector<float>> & resultMatrix, int row);
+	void DiscreteWaveletTransformCol(QVector<QVector<float>> const & matrix, QVector<QVector<float>> & resultMatrix, int row);
+	QVector<QVector<float>> DiscreteWaveletTransform(QVector<QVector<float>> & matrix);
+
+
 protected:
 	void run();
 };

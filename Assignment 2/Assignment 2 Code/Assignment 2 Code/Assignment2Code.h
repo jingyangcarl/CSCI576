@@ -7,6 +7,7 @@
 #include "FileLoader.h"
 #include "JPEGEncoder.h"
 #include "JPEGDecoder.h"
+#include "JP2Encoder.h"
 #include "Testor.h"
 
 class Assignment2Code : public QMainWindow {
@@ -23,6 +24,8 @@ public slots:
 	void PushButtonLoad();
 	void PushButtonJPEGEncoder();
 	void PushButtonJPEGDecoder();
+	void PushButtonJP2Encoder();
+	void PushButtonJP2Decoder();
 	void PushButtonTest();
 	void PushButtonShowDCTY();
 	void PushButtonShowDCTCr();

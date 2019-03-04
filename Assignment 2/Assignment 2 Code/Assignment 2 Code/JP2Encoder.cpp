@@ -15,6 +15,19 @@ JP2Encoder::JP2Encoder(QByteArray & rgb) :
 	}
 }
 
+void JP2Encoder::DiscreteWaveletTransformRow(QVector<QVector<float>> const & matrix, QVector<QVector<float>>& resultMatrix, int row) {
+
+}
+
+void JP2Encoder::DiscreteWaveletTransformCol(QVector<QVector<float>> const & matrix, QVector<QVector<float>>& resultMatrix, int row) {
+
+}
+
+QVector<QVector<float>> JP2Encoder::DiscreteWaveletTransform(QVector<QVector<float>>& matrix) {
+	QVector<QVector<float>> resultMatrix = matrix;
+	DiscreteWaveletTransform(resultMatrix);
+}
+
 void JP2Encoder::run() {
 
 }
