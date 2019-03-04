@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Assignment2Code_t {
-    QByteArrayData data[18];
-    char stringdata0[302];
+    QByteArrayData data[21];
+    char stringdata0[359];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,22 +40,26 @@ QT_MOC_LITERAL(5, 76, 14), // "PushButtonTest"
 QT_MOC_LITERAL(6, 91, 18), // "PushButtonShowDCTY"
 QT_MOC_LITERAL(7, 110, 19), // "PushButtonShowDCTCr"
 QT_MOC_LITERAL(8, 130, 19), // "PushButtonShowDCTCb"
-QT_MOC_LITERAL(9, 150, 27), // "PushButtonShowOriginalImage"
-QT_MOC_LITERAL(10, 178, 20), // "PushButtonShow262114"
-QT_MOC_LITERAL(11, 199, 20), // "PushButtonShow131072"
-QT_MOC_LITERAL(12, 220, 19), // "PushButtonShow16384"
-QT_MOC_LITERAL(13, 240, 22), // "TextBrowserOutputPrint"
-QT_MOC_LITERAL(14, 263, 6), // "output"
-QT_MOC_LITERAL(15, 270, 15), // "LabelImagePrint"
-QT_MOC_LITERAL(16, 286, 11), // "QByteArray&"
-QT_MOC_LITERAL(17, 298, 3) // "rgb"
+QT_MOC_LITERAL(9, 150, 18), // "PushButtonShowDCTR"
+QT_MOC_LITERAL(10, 169, 18), // "PushButtonShowDCTG"
+QT_MOC_LITERAL(11, 188, 18), // "PushButtonShowDCTB"
+QT_MOC_LITERAL(12, 207, 27), // "PushButtonShowOriginalImage"
+QT_MOC_LITERAL(13, 235, 20), // "PushButtonShow262114"
+QT_MOC_LITERAL(14, 256, 20), // "PushButtonShow131072"
+QT_MOC_LITERAL(15, 277, 19), // "PushButtonShow16384"
+QT_MOC_LITERAL(16, 297, 22), // "TextBrowserOutputPrint"
+QT_MOC_LITERAL(17, 320, 6), // "output"
+QT_MOC_LITERAL(18, 327, 15), // "LabelImagePrint"
+QT_MOC_LITERAL(19, 343, 11), // "QByteArray&"
+QT_MOC_LITERAL(20, 355, 3) // "rgb"
 
     },
     "Assignment2Code\0PushButtonLoad\0\0"
     "PushButtonJPEGEncoder\0PushButtonJPEGDecoder\0"
     "PushButtonTest\0PushButtonShowDCTY\0"
     "PushButtonShowDCTCr\0PushButtonShowDCTCb\0"
-    "PushButtonShowOriginalImage\0"
+    "PushButtonShowDCTR\0PushButtonShowDCTG\0"
+    "PushButtonShowDCTB\0PushButtonShowOriginalImage\0"
     "PushButtonShow262114\0PushButtonShow131072\0"
     "PushButtonShow16384\0TextBrowserOutputPrint\0"
     "output\0LabelImagePrint\0QByteArray&\0"
@@ -69,7 +73,7 @@ static const uint qt_meta_data_Assignment2Code[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,19 +81,22 @@ static const uint qt_meta_data_Assignment2Code[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x0a /* Public */,
-       3,    0,   80,    2, 0x0a /* Public */,
-       4,    0,   81,    2, 0x0a /* Public */,
-       5,    0,   82,    2, 0x0a /* Public */,
-       6,    0,   83,    2, 0x0a /* Public */,
-       7,    0,   84,    2, 0x0a /* Public */,
-       8,    0,   85,    2, 0x0a /* Public */,
-       9,    0,   86,    2, 0x0a /* Public */,
-      10,    0,   87,    2, 0x0a /* Public */,
-      11,    0,   88,    2, 0x0a /* Public */,
-      12,    0,   89,    2, 0x0a /* Public */,
-      13,    1,   90,    2, 0x0a /* Public */,
-      15,    1,   93,    2, 0x0a /* Public */,
+       1,    0,   94,    2, 0x0a /* Public */,
+       3,    0,   95,    2, 0x0a /* Public */,
+       4,    0,   96,    2, 0x0a /* Public */,
+       5,    0,   97,    2, 0x0a /* Public */,
+       6,    0,   98,    2, 0x0a /* Public */,
+       7,    0,   99,    2, 0x0a /* Public */,
+       8,    0,  100,    2, 0x0a /* Public */,
+       9,    0,  101,    2, 0x0a /* Public */,
+      10,    0,  102,    2, 0x0a /* Public */,
+      11,    0,  103,    2, 0x0a /* Public */,
+      12,    0,  104,    2, 0x0a /* Public */,
+      13,    0,  105,    2, 0x0a /* Public */,
+      14,    0,  106,    2, 0x0a /* Public */,
+      15,    0,  107,    2, 0x0a /* Public */,
+      16,    1,  108,    2, 0x0a /* Public */,
+      18,    1,  111,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -103,8 +110,11 @@ static const uint qt_meta_data_Assignment2Code[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   14,
-    QMetaType::Void, 0x80000000 | 16,   17,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   17,
+    QMetaType::Void, 0x80000000 | 19,   20,
 
        0        // eod
 };
@@ -122,12 +132,15 @@ void Assignment2Code::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 4: _t->PushButtonShowDCTY(); break;
         case 5: _t->PushButtonShowDCTCr(); break;
         case 6: _t->PushButtonShowDCTCb(); break;
-        case 7: _t->PushButtonShowOriginalImage(); break;
-        case 8: _t->PushButtonShow262114(); break;
-        case 9: _t->PushButtonShow131072(); break;
-        case 10: _t->PushButtonShow16384(); break;
-        case 11: _t->TextBrowserOutputPrint((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 12: _t->LabelImagePrint((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 7: _t->PushButtonShowDCTR(); break;
+        case 8: _t->PushButtonShowDCTG(); break;
+        case 9: _t->PushButtonShowDCTB(); break;
+        case 10: _t->PushButtonShowOriginalImage(); break;
+        case 11: _t->PushButtonShow262114(); break;
+        case 12: _t->PushButtonShow131072(); break;
+        case 13: _t->PushButtonShow16384(); break;
+        case 14: _t->TextBrowserOutputPrint((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 15: _t->LabelImagePrint((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -162,13 +175,13 @@ int Assignment2Code::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 16)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 13;
+        _id -= 16;
     }
     return _id;
 }

@@ -65,7 +65,7 @@ void JPEGDecoder::run() {
 	cb = Expand_2(cb);
 
 	// Convert YCrCb color space to RGB color spac
-	YCrCbToRGB();
+	YCbCrToRGB();
 }
 
 /*
@@ -275,16 +275,19 @@ Input:
 Output:
 	@
 */
-void JPEGDecoder::YCrCbToRGB() {
+void JPEGDecoder::YCbCrToRGB() {
 	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			r[i][j] = 0.871 * y[i][j] + -0.233 * cb[i][j] + 1.405 * cr[i][j];
+			/*r[i][j] = 0.871 * y[i][j] + -0.233 * cb[i][j] + 1.405 * cr[i][j];
 			g[i][j] = 0.221 * y[i][j] + -1.752 * cb[i][j] + -0.689 * cr[i][j];
-			b[i][j] = 4.236 * y[i][j] + 7.626 * cb[i][j] + -0.108 * cr[i][j];
+			b[i][j] = 4.236 * y[i][j] + 7.626 * cb[i][j] + -0.108 * cr[i][j];*/
+			r[i][j] = 1.164 * (y[i][j] - 16) + 1.596 * (cr[i][j] - 128);
+			g[i][j] = 1.164 * (y[i][j] - 16) - 0.392 * (cb[i][j] - 128) - 0.813 * (cr[i][j] - 128);
+			b[i][j] = 1.164 * (y[i][j] - 16) + 2.017 * (cb[i][j] - 128);
 		}
 	}
 }

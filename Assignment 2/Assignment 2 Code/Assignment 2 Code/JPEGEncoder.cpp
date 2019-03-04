@@ -54,6 +54,45 @@ QByteArray JPEGEncoder::GetCbDCT() {
 	return cbByte;
 }
 
+QByteArray JPEGEncoder::GetRDCT() {
+	QByteArray rByte(3 * r.size() * r[0].size(), 0);
+	if (r.size()) {
+		for (int i = 0; i < r.size(); i++)
+			for (int j = 0; j < r[0].size(); j++) {
+				rByte[0 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+				rByte[1 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+				rByte[2 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+			}
+	}
+	return rByte;
+}
+
+QByteArray JPEGEncoder::GetGDCT() {
+	QByteArray gByte(3 * g.size() * g[0].size(), 0);
+	if (g.size()) {
+		for (int i = 0; i < g.size(); i++)
+			for (int j = 0; j < g[0].size(); j++) {
+				gByte[0 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+				gByte[1 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+				gByte[2 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+			}
+	}
+	return gByte;
+}
+
+QByteArray JPEGEncoder::GetBDCT() {
+	QByteArray bByte(3 * b.size() * b[0].size(), 0);
+	if (b.size()) {
+		for (int i = 0; i < b.size(); i++)
+			for (int j = 0; j < b[0].size(); j++) {
+				bByte[0 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+				bByte[1 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+				bByte[2 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+			}
+	}
+	return bByte;
+}
+
 QByteArray JPEGEncoder::YCrCbSerielization() {
 	QByteArray ycrcb;
 	for (int i = 0; i < y.size(); i++)
@@ -120,6 +159,9 @@ void JPEGEncoder::run() {
 	y = SquareBlockDCT(y);
 	cr = SquareBlockDCT(cr);
 	cb = SquareBlockDCT(cb);
+	r = SquareBlockDCT(r);
+	g = SquareBlockDCT(g);
+	b = SquareBlockDCT(b);
 }
 
 /*
@@ -139,9 +181,12 @@ void JPEGEncoder::RGBToYCrCb() {
 
 	for (int i = 0; i < 512; i++) {
 		for (int j = 0; j < 512; j++) {
-			y[i][j] = 0.29900*r[i][j] + 0.58700*g[i][j] + 0.11400*b[i][j];
-			cb[i][j] = -0.16874*r[i][j] - 0.33126*g[i][j] + 0.50000*b[i][j] + 128;
-			cr[i][j] = 0.50000*r[i][j] - 0.41869*g[i][j] - 0.08131*b[i][j] + 128;
+			/*y[i][j] = 0.29900*r[i][j] + 0.58700*g[i][j] + 0.11400*b[i][j];
+			cb[i][j] = -0.16874*r[i][j] - 0.33126*g[i][j] + 0.50000*b[i][j];
+			cr[i][j] = 0.50000*r[i][j] - 0.41869*g[i][j] - 0.08131*b[i][j];*/
+			y[i][j] = 0.257 * r[i][j] + 0.564 * g[i][j] + 0.098 * b[i][j] + 16;
+			cb[i][j] = -0.148 * r[i][j] - 0.291 * g[i][j] + 0.439 * b[i][j] + 128;
+			cr[i][j] = 0.439 * r[i][j] - 0.368 * g[i][j] - 0.071 * b[i][j] + 128;
 		}
 	}
 }
@@ -402,13 +447,4 @@ QString JPEGEncoder::VLIEncode(int number) {
 	return bits;
 }
 
-QString JPEGEncoder::EntropyEncode_512(QVector<QVector<float>> matrix) {
-	// encode submatrix using Huffman and Runlength
-
-	for (int i = 0; i < matrix.size() / 8; i++) {
-		for (int j = 0; j < matrix[0].size() / 8; j++) {
-		}
-	}
-	return QString();
-}
 

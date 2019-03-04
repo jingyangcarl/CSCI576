@@ -39,5 +39,5 @@ private:
 	QVector<QVector<float>> DCTDequantization_8(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> SquareBlockInverseDCT(QVector<QVector<float>> const & matrix);
 	QVector<QVector<float>> Expand_2(QVector<QVector<float>> & matrix);
-	void YCrCbToRGB();
+	void YCbCrToRGB();
 };

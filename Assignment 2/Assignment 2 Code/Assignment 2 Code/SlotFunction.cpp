@@ -47,11 +47,14 @@ void Assignment2Code::PushButtonJPEGEncoder() {
 	dctY = encoder.GetYDCT();
 	dctCr = encoder.GetCrDCT();
 	dctCb = encoder.GetCbDCT();
+	dctR = encoder.GetRDCT();
+	dctG = encoder.GetGDCT();
+	dctB = encoder.GetBDCT();
 
 	// get YCrCb series
 	ycrcb = encoder.YCrCbZigZagSerielization();
 
-	LabelImagePrint(dctY);
+	LabelImagePrint(dctR);
 }
 
 void Assignment2Code::PushButtonJPEGDecoder() {
@@ -116,6 +119,21 @@ void Assignment2Code::PushButtonShowDCTCr() {
 void Assignment2Code::PushButtonShowDCTCb() {
 	LabelImagePrint(dctCb);
 	TextBrowserOutputPrint("PushButtonShowDCTCb");
+}
+
+void Assignment2Code::PushButtonShowDCTR() {
+	LabelImagePrint(dctR);
+	TextBrowserOutputPrint("PushButtonShowDCTR");
+}
+
+void Assignment2Code::PushButtonShowDCTG() {
+	LabelImagePrint(dctG);
+	TextBrowserOutputPrint("PushButtonShowDCTG");
+}
+
+void Assignment2Code::PushButtonShowDCTB() {
+	LabelImagePrint(dctB);
+	TextBrowserOutputPrint("PushButtonShowDCTB");
 }
 
 void Assignment2Code::PushButtonShowOriginalImage() {

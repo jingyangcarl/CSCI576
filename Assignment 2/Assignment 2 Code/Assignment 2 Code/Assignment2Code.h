@@ -26,6 +26,9 @@ public slots:
 	void PushButtonShowDCTY();
 	void PushButtonShowDCTCr();
 	void PushButtonShowDCTCb();
+	void PushButtonShowDCTR();
+	void PushButtonShowDCTG();
+	void PushButtonShowDCTB();
 	void PushButtonShowOriginalImage();
 	void PushButtonShow262114();
 	void PushButtonShow131072();
@@ -43,6 +46,9 @@ private:
 	QByteArray orgb_2;
 	QByteArray orgb_3;
 	QByteArray ycrcb;
+	QByteArray dctR;
+	QByteArray dctG;
+	QByteArray dctB;
 	QByteArray dctY;
 	QByteArray dctCr;
 	QByteArray dctCb;
