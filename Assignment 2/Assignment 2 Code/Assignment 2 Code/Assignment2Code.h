@@ -42,6 +42,7 @@ private:
 	// private variable
 	QString filePath;
 	QByteArray irgb;
+	QByteArray orgb;
 	QByteArray orgb_1;
 	QByteArray orgb_2;
 	QByteArray orgb_3;

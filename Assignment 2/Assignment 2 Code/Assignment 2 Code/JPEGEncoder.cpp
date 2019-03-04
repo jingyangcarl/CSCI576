@@ -147,6 +147,46 @@ QByteArray JPEGEncoder::YCrCbZigZagSerielization() {
 	return ycrcb;
 }
 
+QByteArray JPEGEncoder::RGBZigZagSerielization() {
+	QByteArray rgb;
+
+	for (int i = 0; i < r.size() / 8; i++) {
+		for (int j = 0; j < r[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for (int ii = 0; ii < 8; ii++)
+				for (int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = r[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				rgb.push_back(subArray[i]);
+		}
+	}
+	for (int i = 0; i < g.size() / 8; i++) {
+		for (int j = 0; j < g[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for (int ii = 0; ii < 8; ii++)
+				for (int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = g[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				rgb.push_back(subArray[i]);
+		}
+	}
+	for (int i = 0; i < b.size() / 8; i++) {
+		for (int j = 0; j < b[0].size() / 8; j++) {
+			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
+			for (int ii = 0; ii < 8; ii++)
+				for (int jj = 0; jj < 8; jj++)
+					subMatrix[ii][jj] = b[i * 8 + ii][j * 8 + jj];
+			QByteArray subArray = ZigZagSeries(subMatrix);
+			for (int i = 0; i < subArray.size(); i++)
+				rgb.push_back(subArray[i]);
+		}
+	}
+
+	return rgb;
+}
+
 /*
 Description:
 	This function is used to transform RGB color space to YCrCb color space
@@ -172,27 +212,6 @@ void JPEGEncoder::RGBToYCrCb() {
 			cr[i][j] = 0.439 * r[i][j] - 0.368 * g[i][j] - 0.071 * b[i][j] + 128;
 		}
 	}
-}
-
-/*
-Description:
-	This function is used to shrink the matrix to half of its size
-Input:
-	@QVector<QVector<float>> matrix: the given color matrix
-Output:
-	@QVector<QVector<float>> matrix: the matrix after shrinking
-*/
-QVector<QVector<float>> JPEGEncoder::Shrink_2(QVector<QVector<float>>& matrix) {
-	QVector<QVector<float>> shrinkMatrix(matrix.size() / 2, QVector<float>(matrix[0].size() / 2));
-
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[0].size(); j++) {
-			if (!(i % 2) && !(j % 2))
-				shrinkMatrix[i / 2][j / 2] = matrix[i][j];
-		}
-	}
-
-	return shrinkMatrix;
 }
 
 /*

@@ -1,12 +1,12 @@
 #include "JPEGDecoder.h"
 
-JPEGDecoder::JPEGDecoder(QByteArray & ycrcb) :
-	ycrcb(ycrcb), gear(262114) {
-	y = QVector<QVector<float>>(512, QVector<float>(512, 0));
-	cr = QVector<QVector<float>>(256, QVector<float>(256, 0));
-	cb = QVector<QVector<float>>(256, QVector<float>(256, 0));
+JPEGDecoder::JPEGDecoder(QByteArray & rgb) :
+	rgb(rgb), gear(262114) {
+	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
 
-	YCrCbZigZagDeserielization(gear);
+	RGBZigZagDeserielization(gear);
 }
 
 void JPEGDecoder::SetGear(int gear) {
@@ -54,20 +54,6 @@ QByteArray JPEGDecoder::RGBSerielization() {
 	return rgb;
 }
 
-void JPEGDecoder::run() {
-	// Conduct iDCT
-	y = SquareBlockInverseDCT(y);
-	cr = SquareBlockInverseDCT(cr);
-	cb = SquareBlockInverseDCT(cb);
-
-	// Decode 4:2:0
-	cr = Expand_2(cr);
-	cb = Expand_2(cb);
-
-	// Convert YCrCb color space to RGB color spac
-	YCbCrToRGB();
-}
-
 /*
 Description:
 	This function is used to deseries the given zigzag order byte array of size 64
@@ -98,42 +84,42 @@ QVector<QVector<float>> JPEGDecoder::ZigZagDeserielization(QByteArray zigzag, in
 
 /*
 Description:
-	This function is used to deseries the zigzag order of y channel, cr channel, as well as cb channel
+	This function is used to deseries the zigzag order of r channel, g channel, as well as b channel
 Input:
 	@ int gear: indicate the coefficient used for deserielization
 Output:
 	@
 */
-void JPEGDecoder::YCrCbZigZagDeserielization(int gear) {
-	for (int i = 0; i < y.size() / 8; i++) {
-		for (int j = 0; j < y[0].size() / 8; j++) {
+void JPEGDecoder::RGBZigZagDeserielization(int gear) {
+	for (int i = 0; i < r.size() / 8; i++) {
+		for (int j = 0; j < r[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix;
-			subMatrix = ZigZagDeserielization(ycrcb.mid(i * 64 * 64 + j * 64, 64), gear);
+			subMatrix = ZigZagDeserielization(rgb.mid(0 * 512 * 512 + i * 64 * 64 + j * 64, 64), gear);
 			for (int ii = 0; ii < 8; ii++) {
 				for (int jj = 0; jj < 8; jj++) {
-					y[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+					r[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
 				}
 			}
 		}
 	}
-	for (int i = 0; i < cr.size() / 8; i++) {
-		for (int j = 0; j < cr[0].size() / 8; j++) {
+	for (int i = 0; i < g.size() / 8; i++) {
+		for (int j = 0; j < g[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix;
-			subMatrix = ZigZagDeserielization(ycrcb.mid(512 * 512 + i * 32 * 64 + j * 64, 64), gear);
+			subMatrix = ZigZagDeserielization(rgb.mid(1 * 512 * 512 + i * 64 * 64 + j * 64, 64), gear);
 			for (int ii = 0; ii < 8; ii++) {
 				for (int jj = 0; jj < 8; jj++) {
-					cr[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+					g[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
 				}
 			}
 		}
 	}
-	for (int i = 0; i < cb.size() / 8; i++) {
-		for (int j = 0; j < cb[0].size() / 8; j++) {
+	for (int i = 0; i < b.size() / 8; i++) {
+		for (int j = 0; j < b[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix;
-			subMatrix = ZigZagDeserielization(ycrcb.mid(512 * 512 + 256 * 256 + i * 32 * 64 + j * 64, 64), gear);
+			subMatrix = ZigZagDeserielization(rgb.mid(2 * 512 * 512 + i * 64 * 64 + j * 64, 64), gear);
 			for (int ii = 0; ii < 8; ii++) {
 				for (int jj = 0; jj < 8; jj++) {
-					cb[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
+					b[i * 8 + ii][j * 8 + jj] = subMatrix[ii][jj];
 				}
 			}
 		}
@@ -267,27 +253,8 @@ QVector<QVector<float>> JPEGDecoder::Expand_2(QVector<QVector<float>>& matrix) {
 	return expandMatrix;
 }
 
-/*
-Description:
-	This function is used to transform YCrCb color space to RGB color space
-Input:
-	@
-Output:
-	@
-*/
-void JPEGDecoder::YCbCrToRGB() {
-	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
-	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
-	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
-
-	for (int i = 0; i < 512; i++) {
-		for (int j = 0; j < 512; j++) {
-			/*r[i][j] = 0.871 * y[i][j] + -0.233 * cb[i][j] + 1.405 * cr[i][j];
-			g[i][j] = 0.221 * y[i][j] + -1.752 * cb[i][j] + -0.689 * cr[i][j];
-			b[i][j] = 4.236 * y[i][j] + 7.626 * cb[i][j] + -0.108 * cr[i][j];*/
-			r[i][j] = 1.164 * (y[i][j] - 16) + 1.596 * (cr[i][j] - 128);
-			g[i][j] = 1.164 * (y[i][j] - 16) - 0.392 * (cb[i][j] - 128) - 0.813 * (cr[i][j] - 128);
-			b[i][j] = 1.164 * (y[i][j] - 16) + 2.017 * (cb[i][j] - 128);
-		}
-	}
+void JPEGDecoder::run() {
+	r = SquareBlockInverseDCT(r);
+	g = SquareBlockInverseDCT(g);
+	b = SquareBlockInverseDCT(b);
 }
