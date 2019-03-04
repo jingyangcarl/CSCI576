@@ -31,6 +31,8 @@ QVector<QVector<float>> IDCTProcessor::InverseDiscreteCosinTransform(QVector<QVe
 					inverseMatrixDCT[u][v] += alpha * matrix[i][j] * cos(M_PI / ((float)m)*(u + 1.0 / 2.0) * i) * cos(M_PI / ((float)n)*(v + 1.0 / 2.0) * j);
 				}
 			}
+			if (inverseMatrixDCT[u][v] > 255) inverseMatrixDCT[u][v] = 255;
+			if (inverseMatrixDCT[u][v] < 0) inverseMatrixDCT[u][v] = 0;
 		}
 	}
 
