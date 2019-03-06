@@ -9,6 +9,14 @@ JP2Decoder::JP2Decoder(QVector<float>& rgb, int gear) :
 	RGBZigZagDeserielization(gear);
 }
 
+/*
+Description:
+	This function is used to serielize rgb channels for main bus
+Input:
+	@
+Output:
+	@ QByteArray rgb: rgb byte array used for main bus
+*/
 QByteArray JP2Decoder::RGBSerielization() {
 	QByteArray rgb;
 	for (int i = 0; i < r.size(); i++)

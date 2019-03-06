@@ -15,7 +15,6 @@ public:
 	QByteArray GetRDCT();
 	QByteArray GetGDCT();
 	QByteArray GetBDCT();
-	QVector<float> YCrCbSerielization();
 	QVector<float> YCrCbZigZagSerielization();
 	QVector<float> RGBZigZagSerielization();
 

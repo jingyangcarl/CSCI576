@@ -93,23 +93,18 @@ QByteArray JPEGEncoder::GetBDCT() {
 	return bByte;
 }
 
-QVector<float> JPEGEncoder::YCrCbSerielization() {
-	QVector<float> ycrcb;
-	for (int i = 0; i < y.size(); i++)
-		for (int j = 0; j < y[0].size(); j++)
-			ycrcb.append(y[i][j]);
-	for (int i = 0; i < cr.size(); i++)
-		for (int j = 0; j < cr[0].size(); j++)
-			ycrcb.append(cr[i][j]);
-	for (int i = 0; i < cb.size(); i++)
-		for (int j = 0; j < cb[0].size(); j++)
-			ycrcb.append(cb[i][j]);
-	return ycrcb;
-}
-
+/*
+Description:
+	This function is used to serielize a zigzag order of y channel, cb channel, as well as cr channel
+Input:
+	@
+Output:
+	@ QVector<float> ycrcb: serielized ycrcb
+*/
 QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
 	QVector<float> ycrcb;
 
+	// y channel
 	for (int i = 0; i < y.size() / 8; i++) {
 		for (int j = 0; j < y[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
@@ -121,6 +116,7 @@ QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
 				ycrcb.push_back(subArray[i]);
 		}
 	}
+	// cr channel
 	for (int i = 0; i < cr.size() / 8; i++) {
 		for (int j = 0; j < cr[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
@@ -132,6 +128,7 @@ QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
 				ycrcb.push_back(subArray[i]);
 		}
 	}
+	// cb channel
 	for (int i = 0; i < cb.size() / 8; i++) {
 		for (int j = 0; j < cb[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
@@ -147,6 +144,14 @@ QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
 	return ycrcb;
 }
 
+/*
+Description:
+	This function is used to serielize a zigzag order of r channel, g channel, as well as b channel
+Input:
+	@
+Output:
+	@ QVector<float> rgb: serielized ycrcb
+*/
 QVector<float> JPEGEncoder::RGBZigZagSerielization() {
 	QVector<float> rgb;
 
@@ -276,8 +281,6 @@ Input:
 		@ QString: huffman code for vocabulary
 */
 QMap<QString, QString> JPEGEncoder::HuffmanEncode(QMap<QString, int> input) {
-	// input contains "<2, 3>" with its frequency
-	// output will transform frequency to its code in QString form
 
 	struct BinaryTreeNode {
 		QString content;

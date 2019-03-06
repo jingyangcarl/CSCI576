@@ -54,6 +54,14 @@ QByteArray JP2Encoder::GetBDWT() {
 	return bByte;
 }
 
+/*
+Description:
+	This function is used to serielize a zigzag order of r channel, g channel, as well as b channel
+Input:
+	@
+Output:
+	@ QVector<float> rgb: serielized ycrcb
+*/
 QVector<float> JP2Encoder::RGBZigZagSerielization() {
 	QVector<float> rgb;
 

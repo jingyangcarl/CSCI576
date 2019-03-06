@@ -82,6 +82,16 @@ QVector<QVector<float>> IDCTProcessor::DCTDequantization_8(QVector<QVector<float
 	else return QVector<QVector<float>>();
 }
 
+/*
+Description:
+	This function is used to divide an given 512 by 512 matrix into several blocks of size 8 by 8.
+	For each block, an InverseDiscreteCosinTransform(IDCT) is conducted to transform the block from frequency domain to time domain.
+	Next, a quantization is performed on the block using the quantization table
+Input:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix needed to be transformed
+Output:
+	@ QVector<QVector<float>> matrix: an 512 by 512 matrix after block IDCT transformation and dequantization
+*/
 void IDCTProcessor::SquareBlockInverseDCT() {
 	if (matrix.size() % 8 != 0) return;
 	else if (matrix[0].size() % 8 != 0) return;

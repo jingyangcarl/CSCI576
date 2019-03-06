@@ -36,6 +36,14 @@ void JPEGDecoder::GetBIDCT() {
 	}
 }
 
+/*
+Description:
+	This function is used to serielize rgb channels for main bus
+Input:
+	@
+Output:
+	@ QByteArray rgb: rgb byte array used for main bus
+*/
 QByteArray JPEGDecoder::RGBSerielization() {
 	QByteArray rgb;
 	for (int i = 0; i < r.size(); i++)
