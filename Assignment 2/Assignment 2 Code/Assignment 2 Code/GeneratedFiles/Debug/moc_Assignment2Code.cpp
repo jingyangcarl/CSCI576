@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Assignment2Code_t {
-    QByteArrayData data[35];
-    char stringdata0[690];
+    QByteArrayData data[39];
+    char stringdata0[798];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,11 +61,15 @@ QT_MOC_LITERAL(26, 534, 23), // "PushButtonShowJP2_65535"
 QT_MOC_LITERAL(27, 558, 23), // "PushButtonShowJP2_16384"
 QT_MOC_LITERAL(28, 582, 22), // "PushButtonShowJP2_8192"
 QT_MOC_LITERAL(29, 605, 22), // "PushButtonShowJP2_4096"
-QT_MOC_LITERAL(30, 628, 22), // "TextBrowserOutputPrint"
-QT_MOC_LITERAL(31, 651, 6), // "output"
-QT_MOC_LITERAL(32, 658, 15), // "LabelImagePrint"
-QT_MOC_LITERAL(33, 674, 11), // "QByteArray&"
-QT_MOC_LITERAL(34, 686, 3) // "rgb"
+QT_MOC_LITERAL(30, 628, 33), // "PushButtonJPEGProgressiveAnal..."
+QT_MOC_LITERAL(31, 662, 20), // "PushButtonJPEGPAPlay"
+QT_MOC_LITERAL(32, 683, 32), // "PushButtonJP2ProgressiveAnalysis"
+QT_MOC_LITERAL(33, 716, 19), // "PushButtonJP2PAPlay"
+QT_MOC_LITERAL(34, 736, 22), // "TextBrowserOutputPrint"
+QT_MOC_LITERAL(35, 759, 6), // "output"
+QT_MOC_LITERAL(36, 766, 15), // "LabelImagePrint"
+QT_MOC_LITERAL(37, 782, 11), // "QByteArray&"
+QT_MOC_LITERAL(38, 794, 3) // "rgb"
 
     },
     "Assignment2Code\0PushButtonLoad\0\0"
@@ -86,8 +90,12 @@ QT_MOC_LITERAL(34, 686, 3) // "rgb"
     "PushButtonShowJP2_131072\0"
     "PushButtonShowJP2_65535\0PushButtonShowJP2_16384\0"
     "PushButtonShowJP2_8192\0PushButtonShowJP2_4096\0"
-    "TextBrowserOutputPrint\0output\0"
-    "LabelImagePrint\0QByteArray&\0rgb"
+    "PushButtonJPEGProgressiveAnalysis\0"
+    "PushButtonJPEGPAPlay\0"
+    "PushButtonJP2ProgressiveAnalysis\0"
+    "PushButtonJP2PAPlay\0TextBrowserOutputPrint\0"
+    "output\0LabelImagePrint\0QByteArray&\0"
+    "rgb"
 };
 #undef QT_MOC_LITERAL
 
@@ -97,7 +105,7 @@ static const uint qt_meta_data_Assignment2Code[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      30,   14, // methods
+      34,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -105,36 +113,40 @@ static const uint qt_meta_data_Assignment2Code[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  164,    2, 0x0a /* Public */,
-       3,    0,  165,    2, 0x0a /* Public */,
-       4,    0,  166,    2, 0x0a /* Public */,
-       5,    0,  167,    2, 0x0a /* Public */,
-       6,    0,  168,    2, 0x0a /* Public */,
-       7,    0,  169,    2, 0x0a /* Public */,
-       8,    0,  170,    2, 0x0a /* Public */,
-       9,    0,  171,    2, 0x0a /* Public */,
-      10,    0,  172,    2, 0x0a /* Public */,
-      11,    0,  173,    2, 0x0a /* Public */,
-      12,    0,  174,    2, 0x0a /* Public */,
-      13,    0,  175,    2, 0x0a /* Public */,
-      14,    0,  176,    2, 0x0a /* Public */,
-      15,    0,  177,    2, 0x0a /* Public */,
-      16,    0,  178,    2, 0x0a /* Public */,
-      17,    0,  179,    2, 0x0a /* Public */,
-      18,    0,  180,    2, 0x0a /* Public */,
-      19,    0,  181,    2, 0x0a /* Public */,
-      20,    0,  182,    2, 0x0a /* Public */,
-      21,    0,  183,    2, 0x0a /* Public */,
-      22,    0,  184,    2, 0x0a /* Public */,
-      23,    0,  185,    2, 0x0a /* Public */,
-      24,    0,  186,    2, 0x0a /* Public */,
-      25,    0,  187,    2, 0x0a /* Public */,
-      26,    0,  188,    2, 0x0a /* Public */,
-      27,    0,  189,    2, 0x0a /* Public */,
-      28,    0,  190,    2, 0x0a /* Public */,
-      29,    0,  191,    2, 0x0a /* Public */,
-      30,    1,  192,    2, 0x0a /* Public */,
-      32,    1,  195,    2, 0x0a /* Public */,
+       1,    0,  184,    2, 0x0a /* Public */,
+       3,    0,  185,    2, 0x0a /* Public */,
+       4,    0,  186,    2, 0x0a /* Public */,
+       5,    0,  187,    2, 0x0a /* Public */,
+       6,    0,  188,    2, 0x0a /* Public */,
+       7,    0,  189,    2, 0x0a /* Public */,
+       8,    0,  190,    2, 0x0a /* Public */,
+       9,    0,  191,    2, 0x0a /* Public */,
+      10,    0,  192,    2, 0x0a /* Public */,
+      11,    0,  193,    2, 0x0a /* Public */,
+      12,    0,  194,    2, 0x0a /* Public */,
+      13,    0,  195,    2, 0x0a /* Public */,
+      14,    0,  196,    2, 0x0a /* Public */,
+      15,    0,  197,    2, 0x0a /* Public */,
+      16,    0,  198,    2, 0x0a /* Public */,
+      17,    0,  199,    2, 0x0a /* Public */,
+      18,    0,  200,    2, 0x0a /* Public */,
+      19,    0,  201,    2, 0x0a /* Public */,
+      20,    0,  202,    2, 0x0a /* Public */,
+      21,    0,  203,    2, 0x0a /* Public */,
+      22,    0,  204,    2, 0x0a /* Public */,
+      23,    0,  205,    2, 0x0a /* Public */,
+      24,    0,  206,    2, 0x0a /* Public */,
+      25,    0,  207,    2, 0x0a /* Public */,
+      26,    0,  208,    2, 0x0a /* Public */,
+      27,    0,  209,    2, 0x0a /* Public */,
+      28,    0,  210,    2, 0x0a /* Public */,
+      29,    0,  211,    2, 0x0a /* Public */,
+      30,    0,  212,    2, 0x0a /* Public */,
+      31,    0,  213,    2, 0x0a /* Public */,
+      32,    0,  214,    2, 0x0a /* Public */,
+      33,    0,  215,    2, 0x0a /* Public */,
+      34,    1,  216,    2, 0x0a /* Public */,
+      36,    1,  219,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -165,8 +177,12 @@ static const uint qt_meta_data_Assignment2Code[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   31,
-    QMetaType::Void, 0x80000000 | 33,   34,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   35,
+    QMetaType::Void, 0x80000000 | 37,   38,
 
        0        // eod
 };
@@ -205,8 +221,12 @@ void Assignment2Code::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 25: _t->PushButtonShowJP2_16384(); break;
         case 26: _t->PushButtonShowJP2_8192(); break;
         case 27: _t->PushButtonShowJP2_4096(); break;
-        case 28: _t->TextBrowserOutputPrint((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 29: _t->LabelImagePrint((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 28: _t->PushButtonJPEGProgressiveAnalysis(); break;
+        case 29: _t->PushButtonJPEGPAPlay(); break;
+        case 30: _t->PushButtonJP2ProgressiveAnalysis(); break;
+        case 31: _t->PushButtonJP2PAPlay(); break;
+        case 32: _t->TextBrowserOutputPrint((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 33: _t->LabelImagePrint((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -241,13 +261,13 @@ int Assignment2Code::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 30)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 30;
+        _id -= 34;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 30)
+        if (_id < 34)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 30;
+        _id -= 34;
     }
     return _id;
 }

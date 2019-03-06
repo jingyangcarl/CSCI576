@@ -84,11 +84,11 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 	// Update UI
 	TextBrowserOutputPrint("Decoding...");
 	while (
-		decoder_1.isRunning() || 
-		decoder_2.isRunning() || 
+		decoder_1.isRunning() ||
+		decoder_2.isRunning() ||
 		decoder_3.isRunning() ||
-		decoder_4.isRunning() || 
-		decoder_5.isRunning() || 
+		decoder_4.isRunning() ||
+		decoder_5.isRunning() ||
 		decoder_6.isRunning()) {
 		QCoreApplication::processEvents();
 	}
@@ -325,6 +325,59 @@ void Assignment2Code::PushButtonShowJP2_4096() {
 	TextBrowserOutputPrint("PushButtonShowJP2_4096");
 }
 
+void Assignment2Code::PushButtonJPEGProgressiveAnalysis() {
+	// Initialization
+	JPEGDecoder decoder_1(orgb);
+	JPEGDecoder decoder_2(orgb);
+	JPEGDecoder decoder_3(orgb);
+	JPEGDecoder decoder_4(orgb);
+
+	for (int i = 0; i < 64 / 4; i++) {
+		decoder_1.SetGear((4 * i + 1) * 4096);
+		decoder_2.SetGear((4 * i + 2) * 4096);
+		decoder_3.SetGear((4 * i + 3) * 4096);
+		decoder_4.SetGear((4 * i + 4) * 4096);
+		// Decode
+		decoder_1.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 1) * 4096));
+		decoder_2.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 2) * 4096));
+		decoder_3.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 3) * 4096));
+		decoder_4.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 4) * 4096));
+		while (
+			decoder_1.isRunning() ||
+			decoder_2.isRunning() ||
+			decoder_3.isRunning() ||
+			decoder_4.isRunning()) {
+			QCoreApplication::processEvents();
+		}
+		// Waite Thread
+		decoder_1.wait();
+		decoder_2.wait();
+		decoder_3.wait();
+		decoder_4.wait();
+		// get rgb series
+		orgb_jpeg_pa.append(decoder_1.RGBSerielization());
+		orgb_jpeg_pa.append(decoder_2.RGBSerielization());
+		orgb_jpeg_pa.append(decoder_3.RGBSerielization());
+		orgb_jpeg_pa.append(decoder_4.RGBSerielization());
+	}
+}
+
+void Assignment2Code::PushButtonJPEGPAPlay() {
+	for (int i = 0; i < orgb_jpeg_pa.size(); i++) {
+		LabelImagePrint(orgb_jpeg_pa[i]);
+	}
+}
+
+void Assignment2Code::PushButtonJP2ProgressiveAnalysis() {
+}
+
+void Assignment2Code::PushButtonJP2PAPlay() {
+}
+
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
 	ui.textBrowser_output->append(output);
 }
@@ -332,9 +385,9 @@ void Assignment2Code::TextBrowserOutputPrint(QString output) {
 void Assignment2Code::LabelImagePrint(QByteArray & imageData) {
 	// Initialization
 	QImage image;
-	if (imageData.size() / 3 == 512*512)
+	if (imageData.size() / 3 == 512 * 512)
 		image = QImage(512, 512, QImage::Format_RGB32);
-	else if (imageData.size() / 3 == 256*256)
+	else if (imageData.size() / 3 == 256 * 256)
 		image = QImage(256, 256, QImage::Format_RGB32);
 	int height = image.height();
 	int width = image.width();

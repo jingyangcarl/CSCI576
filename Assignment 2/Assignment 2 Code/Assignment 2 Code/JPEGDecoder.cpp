@@ -1,39 +1,19 @@
 #include "JPEGDecoder.h"
 
+JPEGDecoder::JPEGDecoder(QVector<float>& rgb) :
+	rgb(rgb) {
+	gear = 0;
+}
+
 JPEGDecoder::JPEGDecoder(QVector<float> & rgb, int gear) :
 	rgb(rgb), gear(gear) {
 	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
-
-	RGBZigZagDeserielization(gear);
 }
 
-void JPEGDecoder::GetRIDCT() {
-	QByteArray rByte(r.size() * r[0].size(), 0);
-	if (r.size()) {
-		for (int i = 0; i < r.size(); i++)
-			for (int j = 0; j < r[0].size(); j++)
-				rByte.append(r[i][j]);
-	}
-}
-
-void JPEGDecoder::GetGIDCT() {
-	QByteArray gByte(g.size() * g[0].size(), 0);
-	if (g.size()) {
-		for (int i = 0; i < g.size(); i++)
-			for (int j = 0; j < g[0].size(); j++)
-				gByte.append(g[i][j]);
-	}
-}
-
-void JPEGDecoder::GetBIDCT() {
-	QByteArray bByte(b.size() * b[0].size(), 0);
-	if (b.size()) {
-		for (int i = 0; i < b.size(); i++)
-			for (int j = 0; j < b[0].size(); j++)
-				bByte.append(b[i][j]);
-	}
+void JPEGDecoder::SetGear(int gear) {
+	this->gear = gear;
 }
 
 /*
@@ -131,6 +111,9 @@ void JPEGDecoder::RGBZigZagDeserielization(int gear) {
 }
 
 void JPEGDecoder::run() {
+
+	RGBZigZagDeserielization(gear);
+
 	IDCTProcessor idctRProcessor(r);
 	IDCTProcessor idctGProcessor(g);
 	IDCTProcessor idctBProcessor(b);

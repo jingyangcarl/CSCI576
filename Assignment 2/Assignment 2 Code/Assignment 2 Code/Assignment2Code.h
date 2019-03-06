@@ -50,6 +50,10 @@ public slots:
 	void PushButtonShowJP2_16384();
 	void PushButtonShowJP2_8192();
 	void PushButtonShowJP2_4096();
+	void PushButtonJPEGProgressiveAnalysis();
+	void PushButtonJPEGPAPlay();
+	void PushButtonJP2ProgressiveAnalysis();
+	void PushButtonJP2PAPlay();
 	void TextBrowserOutputPrint(QString output);
 	void LabelImagePrint(QByteArray & rgb);
 
@@ -65,12 +69,14 @@ private:
 	QByteArray orgb_jpeg_4;
 	QByteArray orgb_jpeg_5;
 	QByteArray orgb_jpeg_6;
+	QVector<QByteArray> orgb_jpeg_pa;
 	QByteArray orgb_jp2_1;
 	QByteArray orgb_jp2_2;
 	QByteArray orgb_jp2_3;
 	QByteArray orgb_jp2_4;
 	QByteArray orgb_jp2_5;
 	QByteArray orgb_jp2_6;
+	QVector<QByteArray> orgb_jp2_pa;
 	QVector<float> orgb;
 	QVector<float> oycbcr;
 	QByteArray dctR;

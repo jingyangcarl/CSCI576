@@ -6,10 +6,9 @@
 
 class JPEGDecoder : public QThread {
 public:
+	JPEGDecoder(QVector<float> & rgb);
 	JPEGDecoder(QVector<float> & rgb, int gear);
-	void GetRIDCT();
-	void GetGIDCT();
-	void GetBIDCT();
+	void SetGear(int gear);
 	QByteArray RGBSerielization();
 
 private:
