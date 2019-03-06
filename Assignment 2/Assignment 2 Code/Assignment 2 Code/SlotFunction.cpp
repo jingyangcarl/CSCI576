@@ -160,6 +160,15 @@ void Assignment2Code::PushButtonJP2Decoder() {
 		decoder.isRunning()) {
 		QCoreApplication::processEvents();
 	}
+
+	// Waite Thread
+	decoder.wait();
+	TextBrowserOutputPrint("Decoding Thread for 262114 is Finished.");
+
+	// get rgb series
+	orgb_1 = decoder.RGBSerielization();
+
+	LabelImagePrint(orgb_1);
 }
 
 void Assignment2Code::PushButtonTest() {

@@ -5,6 +5,7 @@ void Assignment2Code::ConnectionInitialization() {
 	connect(ui.pushButton_jpeg_encoder, SIGNAL(clicked()), this, SLOT(PushButtonJPEGEncoder()));
 	connect(ui.pushButton_jpeg_decoder, SIGNAL(clicked()), this, SLOT(PushButtonJPEGDecoder()));
 	connect(ui.pushButton_jp2_encoder, SIGNAL(clicked()), this, SLOT(PushButtonJP2Encoder()));
+	connect(ui.pushButton_jp2_decoder, SIGNAL(clicked()), this, SLOT(PushButtonJP2Decoder()));
 	connect(ui.pushButton_test, SIGNAL(clicked()), this, SLOT(PushButtonTest()));
 	connect(ui.pushButton_dctr, SIGNAL(clicked()), this, SLOT(PushButtonShowDCTR()));
 	connect(ui.pushButton_dctg, SIGNAL(clicked()), this, SLOT(PushButtonShowDCTG()));

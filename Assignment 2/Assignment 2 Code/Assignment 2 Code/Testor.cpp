@@ -317,10 +317,10 @@ void Testor::DWTIDWTTest() {
 
 void Testor::DWTIDWTProcessorTest() {
 	QVector<QVector<float>> matrix = {
-		{9, 7, 3, 5},
-		{7, 3, 5, 9},
-		{3, 5, 9, 7},
-		{5, 9, 7, 3},
+		{1, 3, 5, 7},
+		{2, 4, 6, 8},
+		{1, 3, 5, 7},
+		{2, 4, 6, 8}
 	};
 	QVector<QVector<float>> resultMatrix;
 
@@ -329,5 +329,8 @@ void Testor::DWTIDWTProcessorTest() {
 	pwt.wait();
 	resultMatrix = pwt.GetResultMatrix();
 
-
+	IDWTProcessor ipwt(resultMatrix);
+	ipwt.start();
+	ipwt.wait();
+	resultMatrix = ipwt.GetResultMatrix();
 }

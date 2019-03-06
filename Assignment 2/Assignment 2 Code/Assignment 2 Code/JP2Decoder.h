@@ -6,6 +6,7 @@
 class JP2Decoder : public QThread {
 public:
 	JP2Decoder(QVector<float> & rgb, int gear);
+	QByteArray RGBSerielization();
 
 private:
 	// Variable References
@@ -21,6 +22,9 @@ private:
 	QVector<QVector<float>> b;
 
 	// Function
+	QVector<QVector<float>> ZigZagDeserielization(QVector<float> zigzag, int gear);
+	void RGBZigZagDeserielization(int gear);
+
 	
 protected:
 	void run();
