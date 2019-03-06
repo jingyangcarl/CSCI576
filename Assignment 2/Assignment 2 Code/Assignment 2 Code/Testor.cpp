@@ -5,6 +5,8 @@
 #include "qstack.h"
 #include "DCTProcessor.h"
 #include "IDCTProcessor.h"
+#include "JP2Encoder.h"
+#include "JP2Decoder.h"
 
 void Testor::run() {
 	//Shrink_2Test();
@@ -21,7 +23,9 @@ void Testor::run() {
 	zigzag = ZigZagSeries(matrix);
 	matrix = ZigZagDeseries(zigzag);*/
 
-	DCTIDCTProcessorTest();
+	//DCTIDCTProcessorTest();
+
+	DWTIDWTTest();
 }
 
 void Testor::HuffmanEncode() {
@@ -264,4 +268,54 @@ void Testor::DCTIDCTProcessorTest() {
 			if (abs(matrix[i][j] - resultMatrix[i][j]) > 0.01) count++;
 		}
 	}
+}
+
+void Testor::DWTIDWTTest() {
+	QVector<QVector<float>> matrix = {
+		{9, 7, 3, 5},
+		{7, 3, 5, 9},
+		{3, 5, 9, 7},
+		{5, 9, 7, 3},
+	};
+
+	QVector<QVector<float>> resultMatrix = matrix;
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[i].size() / 2; j++) {
+			resultMatrix[i][j] = (matrix[i][2 * j] + matrix[i][2 * j + 1]) / 2;
+			resultMatrix[i][matrix[i].size() / 2 + j] = (matrix[i][2 * j] - matrix[i][2 * j + 1]) / 2;
+		}
+	}
+
+	matrix = resultMatrix;
+
+	for (int j = 0; j < matrix[0].size(); j++) {
+		for (int i = 0; i < matrix.size() / 2; i++) {
+			resultMatrix[i][j] = (matrix[2 * i][j] + matrix[2 * i + 1][j]) / 2;
+			resultMatrix[matrix[0].size() / 2 + i][j] = (matrix[2 * i][j] - matrix[2 * i + 1][j]) / 2;
+		}
+	}
+
+	matrix = resultMatrix;
+
+	for (int j = 0; j < matrix[0].size(); j++) {
+		for (int i = 0; i < matrix.size() / 2; i++) {
+			resultMatrix[2 * i + 0][j] = matrix[i][j] + matrix[matrix[0].size() / 2 + i][j];
+			resultMatrix[2 * i + 1][j] = matrix[i][j] - matrix[matrix[0].size() / 2 + i][j];
+		}
+	}
+
+	matrix = resultMatrix;
+
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[i].size() / 2; j++) {
+			resultMatrix[i][2 * j + 0] = matrix[i][j] + matrix[i][matrix[0].size() / 2 + j];
+			resultMatrix[i][2 * j + 1] = matrix[i][j] - matrix[i][matrix[0].size() / 2 + j];
+		}
+	}
+}
+
+void Testor::DWTIDWTProcessorTest() {
+	JP2Encoder encoder();
+
 }
