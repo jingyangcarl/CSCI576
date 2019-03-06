@@ -31,6 +31,9 @@
     </item>
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_control">
+      <item row="15" column="0" colspan="3">
+       <widget class="QTextBrowser" name="textBrowser_output"/>
+      </item>
       <item row="5" column="2">
        <widget class="QPushButton" name="pushButton_dctcb">
         <property name="text">
@@ -38,13 +41,118 @@
         </property>
        </widget>
       </item>
-      <item row="11" column="0" colspan="3">
-       <widget class="QTextBrowser" name="textBrowser_output"/>
+      <item row="14" column="0" colspan="3">
+       <widget class="QPushButton" name="pushButton_test">
+        <property name="text">
+         <string>Test</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QPushButton" name="pushButton_131072">
+        <property name="text">
+         <string>131072</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="3">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Decoder</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QPushButton" name="pushButton_8192">
+        <property name="text">
+         <string>8192</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="pushButton_dctcr">
+        <property name="text">
+         <string>DCTCr</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="pushButton_dctb">
+        <property name="text">
+         <string>DCTB</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QPushButton" name="pushButton_16384">
+        <property name="text">
+         <string>16384</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_dctg">
+        <property name="text">
+         <string>DCTG</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="pushButton_dcty">
+        <property name="text">
+         <string>DCTY</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QPushButton" name="pushButton_original_image">
+        <property name="text">
+         <string>Original Image</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QPushButton" name="pushButton_load">
+        <property name="text">
+         <string>Load Image</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="2">
+       <widget class="QPushButton" name="pushButton_4096">
+        <property name="text">
+         <string>4096</string>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0" colspan="3">
        <widget class="QPushButton" name="pushButton_jpeg_encoder">
         <property name="text">
          <string>JPEG Encoder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0" colspan="3">
+       <widget class="QPushButton" name="pushButton_jpeg_decoder">
+        <property name="text">
+         <string>JPEG Decoder</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QPushButton" name="pushButton_262144">
+        <property name="text">
+         <string>262144</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0" colspan="3">
+       <widget class="QPushButton" name="pushButton_jp2_decoder">
+        <property name="text">
+         <string>JPEG 2000 Decoder</string>
         </property>
        </widget>
       </item>
@@ -58,13 +166,6 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_jpeg_decoder">
-        <property name="text">
-         <string>JPEG Decoder</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0">
        <widget class="QPushButton" name="pushButton_dctr">
         <property name="text">
@@ -72,104 +173,38 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QPushButton" name="pushButton_dctb">
-        <property name="text">
-         <string>DCTB</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_original_image">
-        <property name="text">
-         <string>Original Image</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QPushButton" name="pushButton_dcty">
-        <property name="text">
-         <string>DCTY</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_load">
-        <property name="text">
-         <string>Load Image</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="pushButton_dctg">
-        <property name="text">
-         <string>DCTG</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QPushButton" name="pushButton_dctcr">
-        <property name="text">
-         <string>DCTCr</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QPushButton" name="pushButton_262144">
-        <property name="text">
-         <string>262144</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_test">
-        <property name="text">
-         <string>Test</string>
-        </property>
-       </widget>
-      </item>
       <item row="6" column="0" colspan="3">
-       <widget class="QLabel" name="label_3">
+       <widget class="QPushButton" name="pushButton_jp2_encoder">
         <property name="text">
-         <string>Decoder</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>JPEG 2000 Encoder</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
-       <widget class="QPushButton" name="pushButton_131072">
-        <property name="text">
-         <string>131072</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="2">
-       <widget class="QPushButton" name="pushButton_4096">
-        <property name="text">
-         <string>4096</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QPushButton" name="pushButton_16384">
-        <property name="text">
-         <string>16384</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="2">
+      <item row="11" column="2">
        <widget class="QPushButton" name="pushButton_65535">
         <property name="text">
          <string>65535</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
-       <widget class="QPushButton" name="pushButton_8192">
+      <item row="7" column="0">
+       <widget class="QPushButton" name="pushButton_dwtr">
         <property name="text">
-         <string>8192</string>
+         <string>DWTR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QPushButton" name="pushButton_dwtg">
+        <property name="text">
+         <string>DWTG</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QPushButton" name="pushButton_dwtb">
+        <property name="text">
+         <string>DWTB</string>
         </property>
        </widget>
       </item>

@@ -33,6 +33,9 @@ public slots:
 	void PushButtonShowDCTR();
 	void PushButtonShowDCTG();
 	void PushButtonShowDCTB();
+	void PushButtonShowDWTR();
+	void PushButtonShowDWTG();
+	void PushButtonShowDWTB();
 	void PushButtonShowOriginalImage();
 	void PushButtonShow262114();
 	void PushButtonShow131072();
@@ -63,4 +66,7 @@ private:
 	QByteArray dctY;
 	QByteArray dctCb;
 	QByteArray dctCr;
+	QByteArray dwtR;
+	QByteArray dwtG;
+	QByteArray dwtB;
 };

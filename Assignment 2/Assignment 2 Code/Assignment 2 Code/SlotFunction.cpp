@@ -119,6 +119,27 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 }
 
 void Assignment2Code::PushButtonJP2Encoder() {
+	// Initialization
+	JP2Encoder encoder(irgb);
+
+	// Encode
+	encoder.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Encoding.");
+
+	// Update UI
+	TextBrowserOutputPrint("Encoding...");
+	while (encoder.isRunning()) {
+		QCoreApplication::processEvents();
+	}
+
+	// Waite Thread
+	encoder.wait();
+	TextBrowserOutputPrint("Encoding Finished.");
+
+	// get R matrix, G matrix, as well as B matrix for display
+	dwtR = encoder.GetRDWT();
+	dwtG = encoder.GetGDWT();
+	dwtB = encoder.GetBDWT();
 }
 
 void Assignment2Code::PushButtonJP2Decoder() {
@@ -162,6 +183,21 @@ void Assignment2Code::PushButtonShowDCTG() {
 void Assignment2Code::PushButtonShowDCTB() {
 	LabelImagePrint(dctB);
 	TextBrowserOutputPrint("PushButtonShowDCTB");
+}
+
+void Assignment2Code::PushButtonShowDWTR() {
+	LabelImagePrint(dwtR);
+	TextBrowserOutputPrint("PushButtonShowDWTR");
+}
+
+void Assignment2Code::PushButtonShowDWTG() {
+	LabelImagePrint(dwtG);
+	TextBrowserOutputPrint("PushButtonShowDWTG");
+}
+
+void Assignment2Code::PushButtonShowDWTB() {
+	LabelImagePrint(dwtB);
+	TextBrowserOutputPrint("PushButtonShowDWTB");
 }
 
 void Assignment2Code::PushButtonShowOriginalImage() {

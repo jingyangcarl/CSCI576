@@ -25,7 +25,7 @@ void Testor::run() {
 
 	//DCTIDCTProcessorTest();
 
-	DWTIDWTTest();
+	DWTIDWTProcessorTest();
 }
 
 void Testor::HuffmanEncode() {
@@ -316,5 +316,18 @@ void Testor::DWTIDWTTest() {
 }
 
 void Testor::DWTIDWTProcessorTest() {
+	QVector<QVector<float>> matrix = {
+		{9, 7, 3, 5},
+		{7, 3, 5, 9},
+		{3, 5, 9, 7},
+		{5, 9, 7, 3},
+	};
+	QVector<QVector<float>> resultMatrix;
+
+	DWTProcessor pwt(matrix);
+	pwt.start();
+	pwt.wait();
+	resultMatrix = pwt.GetResultMatrix();
+
 
 }

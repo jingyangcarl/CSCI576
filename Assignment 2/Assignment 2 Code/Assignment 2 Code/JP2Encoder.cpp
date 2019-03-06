@@ -15,34 +15,59 @@ JP2Encoder::JP2Encoder(QByteArray & rgb) :
 	}
 }
 
-void JP2Encoder::DiscreteWaveletTransformRow(QVector<QVector<float>> const & matrix, QVector<QVector<float>>& resultMatrix, int size) {
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[i].size() / 2; j++) {
-			resultMatrix[i][j] = (matrix[i][2 * j] + matrix[i][2 * j + 1]) / 2;
-			resultMatrix[i][matrix[i].size() / 2 + j] = (matrix[i][2 * j] - matrix[i][2 * j + 1]) / 2;
-		}
+QByteArray JP2Encoder::GetRDWT() {
+	QByteArray rByte(3 * r.size() * r[0].size(), 0);
+	if (r.size()) {
+		for (int i = 0; i < r.size(); i++)
+			for (int j = 0; j < r[0].size(); j++) {
+				rByte[0 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+				rByte[1 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+				rByte[2 * r.size() * r[0].size() + i * r.size() + j] = r[i][j];
+			}
 	}
+	return rByte;
 }
 
-void JP2Encoder::DiscreteWaveletTransformCol(QVector<QVector<float>> const & matrix, QVector<QVector<float>>& resultMatrix, int size) {
-	for (int j = 0; j < matrix[0].size(); j++) {
-		for (int i = 0; i < matrix.size() / 2; i++) {
-			resultMatrix[i][j] = (matrix[2 * i][j] + matrix[2 * i + 1][j]) / 2;
-			resultMatrix[matrix[0].size() / 2 + i][j] = (matrix[2 * i][j] - matrix[2 * i + 1][j]) / 2;
-		}
+QByteArray JP2Encoder::GetGDWT() {
+	QByteArray gByte(3 * g.size() * g[0].size(), 0);
+	if (g.size()) {
+		for (int i = 0; i < g.size(); i++)
+			for (int j = 0; j < g[0].size(); j++) {
+				gByte[0 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+				gByte[1 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+				gByte[2 * g.size() * g[0].size() + i * g.size() + j] = g[i][j];
+			}
 	}
+	return gByte;
 }
 
-QVector<QVector<float>> JP2Encoder::DiscreteWaveletTransform(QVector<QVector<float>>& matrix) {
-	QVector<QVector<float>> resultMatrix = matrix;
-	int size = matrix.size();
-	while (size != 1) {
-		DiscreteWaveletTransformRow(matrix, resultMatrix, size);
-		DiscreteWaveletTransformCol(matrix, resultMatrix, size);
-		size /= 2;
+QByteArray JP2Encoder::GetBDWT() {
+	QByteArray bByte(3 * b.size() * b[0].size(), 0);
+	if (b.size()) {
+		for (int i = 0; i < b.size(); i++)
+			for (int j = 0; j < b[0].size(); j++) {
+				bByte[0 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+				bByte[1 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+				bByte[2 * b.size() * b[0].size() + i * b.size() + j] = b[i][j];
+			}
 	}
-	return resultMatrix;
+	return bByte;
 }
 
 void JP2Encoder::run() {
+	DWTProcessor dwtRProcessor(r);
+	DWTProcessor dwtGProcessor(g);
+	DWTProcessor dwtBProcessor(b);
+
+	dwtRProcessor.start();
+	dwtGProcessor.start();
+	dwtBProcessor.start();
+
+	dwtRProcessor.wait();
+	dwtGProcessor.wait();
+	dwtBProcessor.wait();
+
+	r = dwtRProcessor.GetResultMatrix();
+	g = dwtGProcessor.GetResultMatrix();
+	b = dwtBProcessor.GetResultMatrix();
 }
