@@ -5,8 +5,8 @@
 #include "qstack.h"
 #include "DCTProcessor.h"
 #include "IDCTProcessor.h"
-#include "JP2Encoder.h"
-#include "JP2Decoder.h"
+#include "DWTProcessor.h"
+#include "IDWTProcessor.h"
 
 void Testor::run() {
 	//Shrink_2Test();
@@ -316,6 +316,5 @@ void Testor::DWTIDWTTest() {
 }
 
 void Testor::DWTIDWTProcessorTest() {
-	JP2Encoder encoder();
 
 }

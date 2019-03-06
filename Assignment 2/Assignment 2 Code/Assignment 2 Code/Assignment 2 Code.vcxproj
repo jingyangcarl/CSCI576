@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="Assignment2Code.cpp" />
     <ClCompile Include="DCTProcessor.cpp" />
+    <ClCompile Include="DWTProcessor.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="IDCTProcessor.cpp" />
     <ClCompile Include="Initialization.cpp" />
@@ -137,8 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DCTProcessor.h" />
+    <ClInclude Include="DWTProcessor.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="IDCTProcessor.h" />
+    <ClInclude Include="IDWTProcessor.h" />
     <ClInclude Include="JP2Decoder.h" />
     <ClInclude Include="JP2Encoder.h" />
     <ClInclude Include="JPEGDecoder.h" />
