@@ -118,6 +118,7 @@
     <ClCompile Include="DWTProcessor.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="IDCTProcessor.cpp" />
+    <ClCompile Include="IDWTProcessor.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="JP2Decoder.cpp" />
     <ClCompile Include="JP2Encoder.cpp" />
