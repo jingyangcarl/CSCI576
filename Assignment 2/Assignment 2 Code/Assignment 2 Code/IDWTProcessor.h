@@ -16,6 +16,7 @@ private:
 	void InverseDiscreteWaveletTransformRow(int size);
 	void InverseDiscreteWaveletTransformCol(int size);
 	void InverseDiscreteWaveletTransform();
+	void ColorCheck();
 
 protected:
 	void run();

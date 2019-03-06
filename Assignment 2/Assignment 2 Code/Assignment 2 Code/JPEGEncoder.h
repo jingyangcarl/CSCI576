@@ -9,12 +9,12 @@
 class JPEGEncoder : public QThread {
 public:
 	JPEGEncoder(QByteArray &rgb);
-	QByteArray GetYDCT();
-	QByteArray GetCrDCT();
-	QByteArray GetCbDCT();
 	QByteArray GetRDCT();
 	QByteArray GetGDCT();
 	QByteArray GetBDCT();
+	QByteArray GetYDCT();
+	QByteArray GetCbDCT();
+	QByteArray GetCrDCT();
 	QVector<float> YCrCbZigZagSerielization();
 	QVector<float> RGBZigZagSerielization();
 

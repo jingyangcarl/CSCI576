@@ -62,6 +62,16 @@ void IDWTProcessor::InverseDiscreteWaveletTransform() {
 		InverseDiscreteWaveletTransformCol(size);
 		InverseDiscreteWaveletTransformRow(size);
 	}
+	ColorCheck();
+}
+
+void IDWTProcessor::ColorCheck() {
+	for (int i = 0; i < resultMatrix.size(); i++) {
+		for (int j = 0; j < resultMatrix[0].size(); j++) {
+			if (resultMatrix[i][j] < 0) resultMatrix[i][j] = 0;
+			if (resultMatrix[i][j] > 255) resultMatrix[i][j] = 255;
+		}
+	}
 }
 
 void IDWTProcessor::run() {

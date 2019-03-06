@@ -108,14 +108,14 @@ void Assignment2Code::PushButtonJPEGDecoder() {
 	TextBrowserOutputPrint("Decoding Thread for 4096 is Finished.");
 
 	// get rgb series
-	orgb_1 = decoder_1.RGBSerielization();
-	orgb_2 = decoder_2.RGBSerielization();
-	orgb_3 = decoder_3.RGBSerielization();
-	orgb_4 = decoder_4.RGBSerielization();
-	orgb_5 = decoder_5.RGBSerielization();
-	orgb_6 = decoder_6.RGBSerielization();
+	orgb_jpeg_1 = decoder_1.RGBSerielization();
+	orgb_jpeg_2 = decoder_2.RGBSerielization();
+	orgb_jpeg_3 = decoder_3.RGBSerielization();
+	orgb_jpeg_4 = decoder_4.RGBSerielization();
+	orgb_jpeg_5 = decoder_5.RGBSerielization();
+	orgb_jpeg_6 = decoder_6.RGBSerielization();
 
-	LabelImagePrint(orgb_1);
+	LabelImagePrint(orgb_jpeg_1);
 }
 
 void Assignment2Code::PushButtonJP2Encoder() {
@@ -147,28 +147,62 @@ void Assignment2Code::PushButtonJP2Encoder() {
 
 void Assignment2Code::PushButtonJP2Decoder() {
 	// Initialization
-	JP2Decoder decoder(orgb, 262114);
+	JP2Decoder decoder_1(orgb, 262114);
+	JP2Decoder decoder_2(orgb, 131072);
+	JP2Decoder decoder_3(orgb, 65535);
+	JP2Decoder decoder_4(orgb, 16384);
+	JP2Decoder decoder_5(orgb, 8192);
+	JP2Decoder decoder_6(orgb, 4096);
 
 	// Decode
-	decoder.start();
+	decoder_1.start();
 	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 262114.");
+	decoder_2.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 131072.");
+	decoder_3.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 65535.");
+	decoder_4.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 16384.");
+	decoder_5.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 8192.");
+	decoder_6.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 4096.");
 
 	// Update UI
 	TextBrowserOutputPrint("Decoding...");
 	while (
-		decoder.isRunning() ||
-		decoder.isRunning()) {
+		decoder_1.isRunning() ||
+		decoder_2.isRunning() ||
+		decoder_3.isRunning() ||
+		decoder_4.isRunning() ||
+		decoder_5.isRunning() ||
+		decoder_6.isRunning()) {
 		QCoreApplication::processEvents();
 	}
 
 	// Waite Thread
-	decoder.wait();
+	decoder_1.wait();
 	TextBrowserOutputPrint("Decoding Thread for 262114 is Finished.");
+	decoder_2.wait();
+	TextBrowserOutputPrint("Decoding Thread for 131072 is Finished.");
+	decoder_3.wait();
+	TextBrowserOutputPrint("Decoding Thread for 65535 is Finished.");
+	decoder_4.wait();
+	TextBrowserOutputPrint("Decoding Thread for 16384 is Finished.");
+	decoder_5.wait();
+	TextBrowserOutputPrint("Decoding Thread for 8192 is Finished.");
+	decoder_6.wait();
+	TextBrowserOutputPrint("Decoding Thread for 4096 is Finished.");
 
 	// get rgb series
-	orgb_1 = decoder.RGBSerielization();
+	orgb_jp2_1 = decoder_1.RGBSerielization();
+	orgb_jp2_2 = decoder_2.RGBSerielization();
+	orgb_jp2_3 = decoder_3.RGBSerielization();
+	orgb_jp2_4 = decoder_4.RGBSerielization();
+	orgb_jp2_5 = decoder_5.RGBSerielization();
+	orgb_jp2_6 = decoder_6.RGBSerielization();
 
-	LabelImagePrint(orgb_1);
+	LabelImagePrint(orgb_jp2_1);
 }
 
 void Assignment2Code::PushButtonTest() {
@@ -231,34 +265,64 @@ void Assignment2Code::PushButtonShowOriginalImage() {
 	TextBrowserOutputPrint("PushButtonShowOriginalImage");
 }
 
-void Assignment2Code::PushButtonShow262114() {
-	LabelImagePrint(orgb_1);
-	TextBrowserOutputPrint("PushButtonShow262114");
+void Assignment2Code::PushButtonShowJPEG_262114() {
+	LabelImagePrint(orgb_jpeg_1);
+	TextBrowserOutputPrint("PushButtonShowJPEG_262114");
 }
 
-void Assignment2Code::PushButtonShow131072() {
-	LabelImagePrint(orgb_2);
-	TextBrowserOutputPrint("PushButtonShow131072");
+void Assignment2Code::PushButtonShowJPEG_131072() {
+	LabelImagePrint(orgb_jpeg_2);
+	TextBrowserOutputPrint("PushButtonShowJPEG_131072");
 }
 
-void Assignment2Code::PushButtonShow65535() {
-	LabelImagePrint(orgb_3);
-	TextBrowserOutputPrint("PushButtonShow65535");
+void Assignment2Code::PushButtonShowJPEG_65535() {
+	LabelImagePrint(orgb_jpeg_3);
+	TextBrowserOutputPrint("PushButtonShowJPEG_65535");
 }
 
-void Assignment2Code::PushButtonShow16384() {
-	LabelImagePrint(orgb_4);
-	TextBrowserOutputPrint("PushButtonShow16384");
+void Assignment2Code::PushButtonShowJPEG_16384() {
+	LabelImagePrint(orgb_jpeg_4);
+	TextBrowserOutputPrint("PushButtonShowJPEG_16384");
 }
 
-void Assignment2Code::PushButtonShow8192() {
-	LabelImagePrint(orgb_5);
-	TextBrowserOutputPrint("PushButtonShow8192");
+void Assignment2Code::PushButtonShowJPEG_8192() {
+	LabelImagePrint(orgb_jpeg_5);
+	TextBrowserOutputPrint("PushButtonShowJPEG_8192");
 }
 
-void Assignment2Code::PushButtonShow4096() {
-	LabelImagePrint(orgb_6);
-	TextBrowserOutputPrint("PushButtonShow4096");
+void Assignment2Code::PushButtonShowJPEG_4096() {
+	LabelImagePrint(orgb_jpeg_6);
+	TextBrowserOutputPrint("PushButtonShowJPEG_4096");
+}
+
+void Assignment2Code::PushButtonShowJP2_262114() {
+	LabelImagePrint(orgb_jp2_1);
+	TextBrowserOutputPrint("PushButtonShowJP2_262114");
+}
+
+void Assignment2Code::PushButtonShowJP2_131072() {
+	LabelImagePrint(orgb_jp2_2);
+	TextBrowserOutputPrint("PushButtonShowJP2_131072");
+}
+
+void Assignment2Code::PushButtonShowJP2_65535() {
+	LabelImagePrint(orgb_jp2_3);
+	TextBrowserOutputPrint("PushButtonShowJP2_65535");
+}
+
+void Assignment2Code::PushButtonShowJP2_16384() {
+	LabelImagePrint(orgb_jp2_4);
+	TextBrowserOutputPrint("PushButtonShowJP2_16384");
+}
+
+void Assignment2Code::PushButtonShowJP2_8192() {
+	LabelImagePrint(orgb_jp2_5);
+	TextBrowserOutputPrint("PushButtonShowJP2_8192");
+}
+
+void Assignment2Code::PushButtonShowJP2_4096() {
+	LabelImagePrint(orgb_jp2_6);
+	TextBrowserOutputPrint("PushButtonShowJP2_4096");
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {
