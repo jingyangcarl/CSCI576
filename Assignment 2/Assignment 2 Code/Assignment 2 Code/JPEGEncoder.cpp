@@ -150,6 +150,7 @@ QVector<float> JPEGEncoder::YCrCbZigZagSerielization() {
 QVector<float> JPEGEncoder::RGBZigZagSerielization() {
 	QVector<float> rgb;
 
+	// r channel
 	for (int i = 0; i < r.size() / 8; i++) {
 		for (int j = 0; j < r[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
@@ -161,6 +162,7 @@ QVector<float> JPEGEncoder::RGBZigZagSerielization() {
 				rgb.push_back(subArray[i]);
 		}
 	}
+	// g channel
 	for (int i = 0; i < g.size() / 8; i++) {
 		for (int j = 0; j < g[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));
@@ -172,6 +174,7 @@ QVector<float> JPEGEncoder::RGBZigZagSerielization() {
 				rgb.push_back(subArray[i]);
 		}
 	}
+	// b channel
 	for (int i = 0; i < b.size() / 8; i++) {
 		for (int j = 0; j < b[0].size() / 8; j++) {
 			QVector<QVector<float>> subMatrix(8, QVector<float>(8, 0));

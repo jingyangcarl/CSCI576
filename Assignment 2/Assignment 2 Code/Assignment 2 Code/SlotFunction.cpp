@@ -140,9 +140,26 @@ void Assignment2Code::PushButtonJP2Encoder() {
 	dwtR = encoder.GetRDWT();
 	dwtG = encoder.GetGDWT();
 	dwtB = encoder.GetBDWT();
+
+	// get RGB series
+	orgb = encoder.RGBZigZagSerielization();
 }
 
 void Assignment2Code::PushButtonJP2Decoder() {
+	// Initialization
+	JP2Decoder decoder(orgb, 262114);
+
+	// Decode
+	decoder.start();
+	TextBrowserOutputPrint("Start Performing JPEG 2000 Decoding Thread on Gear 262114.");
+
+	// Update UI
+	TextBrowserOutputPrint("Decoding...");
+	while (
+		decoder.isRunning() ||
+		decoder.isRunning()) {
+		QCoreApplication::processEvents();
+	}
 }
 
 void Assignment2Code::PushButtonTest() {

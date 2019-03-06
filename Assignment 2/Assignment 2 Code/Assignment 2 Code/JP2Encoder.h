@@ -9,6 +9,7 @@ public:
 	QByteArray GetRDWT();
 	QByteArray GetGDWT();
 	QByteArray GetBDWT();
+	QVector<float> RGBZigZagSerielization();
 
 private:
 	// Variable References
@@ -20,6 +21,7 @@ private:
 	QVector<QVector<float>> b;
 
 	// Function
+	QVector<float> ZigZagSeries(QVector<QVector<float>> const & matrix);
 
 protected:
 	void run();

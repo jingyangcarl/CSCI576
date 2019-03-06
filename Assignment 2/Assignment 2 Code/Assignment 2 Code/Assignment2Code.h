@@ -8,6 +8,7 @@
 #include "JPEGEncoder.h"
 #include "JPEGDecoder.h"
 #include "JP2Encoder.h"
+#include "JP2Decoder.h"
 #include "Testor.h"
 
 class Assignment2Code : public QMainWindow {

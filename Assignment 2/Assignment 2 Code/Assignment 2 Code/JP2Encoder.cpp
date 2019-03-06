@@ -54,6 +54,49 @@ QByteArray JP2Encoder::GetBDWT() {
 	return bByte;
 }
 
+QVector<float> JP2Encoder::RGBZigZagSerielization() {
+	QVector<float> rgb;
+
+	QVector<float> rArray = ZigZagSeries(r);
+	QVector<float> gArray = ZigZagSeries(g);
+	QVector<float> bArray = ZigZagSeries(b);
+
+	for (int i = 0; i < rArray.size(); i++)
+		rgb.append(rArray[i]);
+	for (int i = 0; i < gArray.size(); i++)
+		rgb.append(gArray[i]);
+	for (int i = 0; i < bArray.size(); i++)
+		rgb.append(bArray[i]);
+
+	return rgb;
+}
+
+/*
+Description:
+	This funtion is used to transform the given matrix to an array in zig-zag order
+Input:
+	@ QVector<QVector<float>> matrix: input matrix
+Output:
+	@ QVector<float> array: array holds entries in matrix in a zig-zag order
+*/
+QVector<float> JP2Encoder::ZigZagSeries(QVector<QVector<float>> const & matrix) {
+	QVector<float> zigzag;
+	bool direction(false);
+	if (matrix.size() == 0) return QVector<float>();
+	for (int i = 0; i < matrix.size() + matrix[0].size() - 1; i++) {
+		int j = i;
+		while (j >= 0) {
+			if (!direction && j < matrix.size() && (i - j) < matrix[0].size())
+				zigzag.push_back(matrix[j][i - j]);
+			if (direction && (i - j) < matrix.size() && j < matrix[0].size())
+				zigzag.push_back(matrix[i - j][j]);
+			j--;
+		}
+		direction = !direction;
+	}
+	return zigzag;
+}
+
 void JP2Encoder::run() {
 	DWTProcessor dwtRProcessor(r);
 	DWTProcessor dwtGProcessor(g);

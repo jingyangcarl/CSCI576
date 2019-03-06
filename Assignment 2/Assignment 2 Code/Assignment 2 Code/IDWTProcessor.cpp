@@ -39,5 +39,5 @@ void IDWTProcessor::InverseDiscreteWaveletTransform() {
 }
 
 void IDWTProcessor::run() {
-	InverseDiscreteWaveletTransform
+	InverseDiscreteWaveletTransform();
 }
