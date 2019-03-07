@@ -1,12 +1,21 @@
 #include "JP2Decoder.h"
 
+JP2Decoder::JP2Decoder(QVector<float>& rgb) :
+	rgb(rgb) {
+	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
+}
+
 JP2Decoder::JP2Decoder(QVector<float>& rgb, int gear) :
 	rgb(rgb), gear(gear) {
 	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
 	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
+}
 
-	RGBZigZagDeserielization(gear);
+void JP2Decoder::SetGear(int gear) {
+	this->gear = gear;
 }
 
 /*
@@ -74,6 +83,9 @@ void JP2Decoder::RGBZigZagDeserielization(int gear) {
 }
 
 void JP2Decoder::run() {
+
+	RGBZigZagDeserielization(gear);
+
 	IDWTProcessor idwtRProcessor(r);
 	IDWTProcessor idwtGProcessor(g);
 	IDWTProcessor idwtBProcessor(b);

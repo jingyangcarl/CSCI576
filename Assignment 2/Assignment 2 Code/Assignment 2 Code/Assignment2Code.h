@@ -10,6 +10,7 @@
 #include "JP2Encoder.h"
 #include "JP2Decoder.h"
 #include "Testor.h"
+#include <Windows.h>
 
 class Assignment2Code : public QMainWindow {
 	Q_OBJECT

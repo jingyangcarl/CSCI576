@@ -5,7 +5,9 @@
 
 class JP2Decoder : public QThread {
 public:
+	JP2Decoder(QVector<float> & rgb);
 	JP2Decoder(QVector<float> & rgb, int gear);
+	void SetGear(int gear);
 	QByteArray RGBSerielization();
 
 private:

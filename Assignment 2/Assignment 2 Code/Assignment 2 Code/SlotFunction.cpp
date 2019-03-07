@@ -369,13 +369,58 @@ void Assignment2Code::PushButtonJPEGProgressiveAnalysis() {
 void Assignment2Code::PushButtonJPEGPAPlay() {
 	for (int i = 0; i < orgb_jpeg_pa.size(); i++) {
 		LabelImagePrint(orgb_jpeg_pa[i]);
+		QCoreApplication::processEvents();
+		Sleep(100);
 	}
 }
 
 void Assignment2Code::PushButtonJP2ProgressiveAnalysis() {
+	// Initialization
+	JP2Decoder decoder_1(orgb);
+	JP2Decoder decoder_2(orgb);
+	JP2Decoder decoder_3(orgb);
+	JP2Decoder decoder_4(orgb);
+
+	for (int i = 0; i < 64 / 4; i++) {
+		decoder_1.SetGear((4 * i + 1) * 4096);
+		decoder_2.SetGear((4 * i + 2) * 4096);
+		decoder_3.SetGear((4 * i + 3) * 4096);
+		decoder_4.SetGear((4 * i + 4) * 4096);
+		// Decode
+		decoder_1.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 1) * 4096));
+		decoder_2.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 2) * 4096));
+		decoder_3.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 3) * 4096));
+		decoder_4.start();
+		TextBrowserOutputPrint("Start Performing JPEG Decoding Thread on Gear " + QString::number((4 * i + 4) * 4096));
+		while (
+			decoder_1.isRunning() ||
+			decoder_2.isRunning() ||
+			decoder_3.isRunning() ||
+			decoder_4.isRunning()) {
+			QCoreApplication::processEvents();
+		}
+		// Waite Thread
+		decoder_1.wait();
+		decoder_2.wait();
+		decoder_3.wait();
+		decoder_4.wait();
+		// get rgb series
+		orgb_jp2_pa.append(decoder_1.RGBSerielization());
+		orgb_jp2_pa.append(decoder_2.RGBSerielization());
+		orgb_jp2_pa.append(decoder_3.RGBSerielization());
+		orgb_jp2_pa.append(decoder_4.RGBSerielization());
+	}
 }
 
 void Assignment2Code::PushButtonJP2PAPlay() {
+	for (int i = 0; i < orgb_jp2_pa.size(); i++) {
+		LabelImagePrint(orgb_jp2_pa[i]);
+		QCoreApplication::processEvents();
+		Sleep(100);
+	}
 }
 
 void Assignment2Code::TextBrowserOutputPrint(QString output) {

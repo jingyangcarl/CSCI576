@@ -2,7 +2,9 @@
 
 JPEGDecoder::JPEGDecoder(QVector<float>& rgb) :
 	rgb(rgb) {
-	gear = 0;
+	r = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	g = QVector<QVector<float>>(512, QVector<float>(512, 0));
+	b = QVector<QVector<float>>(512, QVector<float>(512, 0));
 }
 
 JPEGDecoder::JPEGDecoder(QVector<float> & rgb, int gear) :
