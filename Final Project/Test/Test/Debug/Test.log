@@ -1,3 +1,2 @@
 ﻿  main.cpp
-d:\csci576\final project\test\test\main.cpp(22): error C3867: 'QAudioBuffer::data': non-standard syntax; use '&' to create a pointer to member
-d:\csci576\final project\test\test\main.cpp(22): error C2109: subscript requires array or pointer type
+  Test.vcxproj -> D:\CSCI576\Final Project\Test\Win32\Debug\Test.exe

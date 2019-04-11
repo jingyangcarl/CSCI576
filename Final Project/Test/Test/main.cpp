@@ -20,5 +20,13 @@ int main(int argc, char *argv[])
 
 	const quint16 *data = wavBuffer.constData<quint16>();
 
+	// "data_test1.wav" has 14394335 samples
+	qDebug() << "QAudioBuffer Byte Count:" << wavBuffer.byteCount();
+	// output: 28788670
+	qDebug() << "QAudioBuffer Sample Count:" << wavBuffer.sampleCount();
+	// output: 14394335
+	qDebug() << "QAudioBuffer Frame Count:" << wavBuffer.frameCount();
+	// output: 14394335
+
 	return a.exec();
 }
