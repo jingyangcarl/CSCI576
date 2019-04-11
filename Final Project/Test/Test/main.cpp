@@ -4,8 +4,7 @@
 #include "wavfile.h"
 #include <qdebug.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	QCoreApplication a(argc, argv);
 
 	WavFile wavFile;
@@ -18,7 +17,9 @@ int main(int argc, char *argv[])
 
 	QAudioBuffer wavBuffer(wavFile.readAll(), wavFile.fileFormat());
 
-	const quint16 *data = wavBuffer.constData<quint16>();
+	const qint16 *data = wavBuffer.constData<qint16>();
+	//const short *data = wavBuffer.constData<short>();
+	//const float *data = wavBuffer.constData<float>();
 
 	// "data_test1.wav" has 14394335 samples
 	qDebug() << "QAudioBuffer Byte Count:" << wavBuffer.byteCount();
@@ -27,6 +28,9 @@ int main(int argc, char *argv[])
 	// output: 14394335
 	qDebug() << "QAudioBuffer Frame Count:" << wavBuffer.frameCount();
 	// output: 14394335
+
+	for (int i = 0; i < 10; i++)
+		qDebug() << (double)data[927 + i];
 
 	return a.exec();
 }
