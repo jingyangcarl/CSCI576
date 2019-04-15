@@ -47,7 +47,7 @@ void FileLoader::load() {
 		}
 		else if (fileInfo.suffix() == "wav") {
 			WavFile wavFile;
-			wavFile.setFileName(filePath);
+			//wavFile.setFileName(filePath);
 
 		}
 	}

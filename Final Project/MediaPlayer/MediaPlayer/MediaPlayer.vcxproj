@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;D:\CSCI576\Final Project\MediaPlayer\Win32\Debug;..\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;D:\CSCI576\Final Project\MediaPlayer\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5Multimediad.lib;WavFile.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -130,11 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WavFile\WavFile.vcxproj">
-      <Project>{f8040be6-a109-4b7f-9511-2c7505ec8a13}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

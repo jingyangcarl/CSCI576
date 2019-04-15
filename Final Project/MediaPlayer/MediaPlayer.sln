@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MediaPlayer", "MediaPlayer\MediaPlayer.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WavFile", "WavFile\WavFile.vcxproj", "{F8040BE6-A109-4B7F-9511-2C7505EC8A13}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WavFile", "WavFile\WavFile.vcxproj", "{F28629E7-BB87-4742-918E-413DDD9C78E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
-		{F8040BE6-A109-4B7F-9511-2C7505EC8A13}.Debug|x86.ActiveCfg = Debug|Win32
-		{F8040BE6-A109-4B7F-9511-2C7505EC8A13}.Debug|x86.Build.0 = Debug|Win32
-		{F8040BE6-A109-4B7F-9511-2C7505EC8A13}.Release|x86.ActiveCfg = Release|Win32
-		{F8040BE6-A109-4B7F-9511-2C7505EC8A13}.Release|x86.Build.0 = Release|Win32
+		{F28629E7-BB87-4742-918E-413DDD9C78E2}.Debug|x86.ActiveCfg = Debug|Win32
+		{F28629E7-BB87-4742-918E-413DDD9C78E2}.Debug|x86.Build.0 = Debug|Win32
+		{F28629E7-BB87-4742-918E-413DDD9C78E2}.Release|x86.ActiveCfg = Release|Win32
+		{F28629E7-BB87-4742-918E-413DDD9C78E2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

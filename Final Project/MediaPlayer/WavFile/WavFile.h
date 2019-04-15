@@ -56,7 +56,7 @@
 
 #include "wavfile_global.h"
 
-class WAVFILE_EXPORT WavFile :  public QFile {
+class WAVFILE_EXPORT WavFile : public QFile {
 public:
 	WavFile(QObject *parent = 0);
 
