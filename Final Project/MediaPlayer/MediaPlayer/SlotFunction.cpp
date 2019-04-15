@@ -1,5 +1,12 @@
 #include "MediaPlayer.h"
 
+/*
+Introduction:
+	This function is a slot function used to respond to the click event on the Load Button,
+	which will open a file dialog for file selection
+Input;
+Output;
+*/
 void MediaPlayer::PushButtonLoad() {
 	// Initialization
 	filePath = QFileDialog::getOpenFileName(this, tr("Please Select File"), "../../Data/dataset/Ads", tr("RGB File(*.rgb)\n"));
@@ -26,6 +33,13 @@ void MediaPlayer::PushButtonLoad() {
 	play = false;
 }
 
+/*
+Introduction:
+	This function is a slot function used to respond to the click event on the Play Button.
+	which will continue playing the given video
+Input;
+Output;
+*/
 void MediaPlayer::PushButtonPlay() {
 	// Set Status
 	play = true;
@@ -66,11 +80,28 @@ void MediaPlayer::PushButtonPlay() {
 	}
 }
 
+/*
+Introduction:
+	This function is a slot function used to respond to the click event on the Stop Button, 
+	which will stop the playing video
+Input;
+Output;
+*/
 void MediaPlayer::PushButtonStop() {
 	// Set Status
 	play = false;
 }
 
+/*
+Introduction:
+	This function is used to display the first frame in the given frameData
+Input:
+	@ QByteArray & frameData: the given frame data
+Output;
+Example:
+	Suppose QByteArray frameData stores five frames,
+	LabelImagePrint(frameData); will display the 1st frame in the frameData
+*/
 void MediaPlayer::LabelImagePrint(QByteArray & frameData) {
 	// Initialization
 	QImage image = QImage(480, 270, QImage::Format_RGB32);
@@ -93,12 +124,14 @@ void MediaPlayer::LabelImagePrint(QByteArray & frameData) {
 
 /*
 Introduction: 
-	this function is used to display a frame stored in the given imageData with a frame offset
+	This function is used to display a frame stored in the given frameData with a frame offset
 Input:
-	@ QByteArray & imageData: the given frame
-	@ int frameOffset: 
-Output
+	@ QByteArray & frameData: the given frame data
+	@ int frameOffset: frame offset in the given frame data
+Output;
 Example: 
+	Suppose QByteArray frameData stores five frames,
+	LabelImagePrint(frameData, 3); will display the 3rd frame in the frameData
 */
 void MediaPlayer::LabelImagePrint(QByteArray & frameData, int frameOffset) {
 	// Initalization
