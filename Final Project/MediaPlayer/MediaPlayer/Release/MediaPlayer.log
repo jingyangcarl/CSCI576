@@ -1,0 +1,3 @@
+﻿FileLoader.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall WavFile::WavFile(class QObject *)" (__imp_??0WavFile@@QAE@PAVQObject@@@Z) referenced in function "private: void __thiscall FileLoader::load(void)" (?load@FileLoader@@AAEXXZ)
+FileLoader.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall WavFile::~WavFile(void)" (__imp_??1WavFile@@UAE@XZ) referenced in function "private: void __thiscall FileLoader::load(void)" (?load@FileLoader@@AAEXXZ)
+D:\CSCI576\Final Project\MediaPlayer\Win32\Release\\MediaPlayer.exe : fatal error LNK1120: 2 unresolved externals

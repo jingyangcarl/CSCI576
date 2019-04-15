@@ -28,7 +28,7 @@ private:
 	// Private Variables
 	QString filePath;
 	QByteArray rgb;
-	QByteArray orgb;
+	QByteArray wav;
 
 	bool play = true;
 	int totalFrame = 0;

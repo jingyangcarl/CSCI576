@@ -11,7 +11,8 @@ void MediaPlayer::PushButtonLoad() {
 	// Initialization
 	filePath = QFileDialog::getOpenFileName(this, tr("Please Select File"), "../../Data/dataset/Ads", tr("RGB File(*.rgb)\n"));
 	rgb = QByteArray();
-	FileLoader fileLoader(filePath, rgb, 0, 1);
+	wav = QByteArray();
+	FileLoader fileLoader(filePath, rgb, wav, 0, 1);
 
 	// Load File
 	fileLoader.start();
@@ -45,7 +46,7 @@ void MediaPlayer::PushButtonPlay() {
 	play = true;
 
 	// Load frames in bufffer for display
-	FileLoader fileLoader(filePath, rgb, framePlayedIndex, 150);
+	FileLoader fileLoader(filePath, rgb, wav, framePlayedIndex, 150);
 	fileLoader.start();
 	while (fileLoader.isRunning())
 		QCoreApplication::processEvents();
