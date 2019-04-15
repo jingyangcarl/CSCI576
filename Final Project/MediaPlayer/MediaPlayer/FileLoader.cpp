@@ -7,7 +7,7 @@ FileLoader::FileLoader(QString &filePath, QByteArray & rgb) :
 	return;
 }
 
-FileLoader::FileLoader(QString & filePath, QByteArray & rgb, int startFrameIndex, int frameCount) :
+FileLoader::FileLoader(QString & filePath, QByteArray & rgb, qint64 startFrameIndex, qint64 frameCount) :
 	filePath(filePath), rgb(rgb), startFrameIndex(startFrameIndex), frameCount(frameCount) {
 	return;
 }

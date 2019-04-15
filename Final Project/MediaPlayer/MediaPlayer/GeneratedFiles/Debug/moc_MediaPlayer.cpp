@@ -38,13 +38,13 @@ QT_MOC_LITERAL(3, 28, 14), // "PushButtonPlay"
 QT_MOC_LITERAL(4, 43, 14), // "PushButtonStop"
 QT_MOC_LITERAL(5, 58, 15), // "LabelImagePrint"
 QT_MOC_LITERAL(6, 74, 11), // "QByteArray&"
-QT_MOC_LITERAL(7, 86, 9), // "imageData"
+QT_MOC_LITERAL(7, 86, 9), // "frameData"
 QT_MOC_LITERAL(8, 96, 10) // "frameIndex"
 
     },
     "MediaPlayer\0PushButtonLoad\0\0PushButtonPlay\0"
     "PushButtonStop\0LabelImagePrint\0"
-    "QByteArray&\0imageData\0frameIndex"
+    "QByteArray&\0frameData\0frameIndex"
 };
 #undef QT_MOC_LITERAL
 

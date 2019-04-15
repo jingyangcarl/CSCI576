@@ -6,7 +6,7 @@
 class FileLoader : public QThread {
 public:
 	FileLoader(QString &filePath, QByteArray &rgb);
-	FileLoader(QString &filePath, QByteArray &rgb, int startFrameIndex, int frameCount);
+	FileLoader(QString &filePath, QByteArray &rgb, qint64 startFrameIndex, qint64 frameCount);
 	void SetStartFrameIndex(int startFrameIndex);
 	int GetTotalFrames();
 
@@ -17,10 +17,10 @@ private:
 	// Variable References
 	QString &filePath;
 	QByteArray &rgb;
-	int startFrameIndex;
-	int frameCount;
-	int frameSize = 3 * 480 * 270;
-	int totalFrames = -1;
+	qint64 startFrameIndex;
+	qint64 frameCount;
+	qint64 frameSize = 3 * 480 * 270;
+	qint64 totalFrames = -1;
 
 	// Function
 	void load();
