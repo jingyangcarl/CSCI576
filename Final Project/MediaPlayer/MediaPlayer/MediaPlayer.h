@@ -17,6 +17,8 @@ public:
 	/*-----------------SlotFunction.cpp---------------------*/
 public slots:
 	void PushButtonLoad();
+	void PushButtonPlay();
+	void PushButtonStop();
 	void LabelImagePrint(QByteArray & imageData);
 
 private:
@@ -26,4 +28,5 @@ private:
 	QString filePath;
 	QByteArray irgb;
 	QByteArray orgb;
+	bool play = true;
 };

@@ -31,12 +31,57 @@
     </item>
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_control">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_load">
-        <property name="text">
-         <string>Load File</string>
-        </property>
-       </widget>
+      <item row="0" column="0" colspan="2">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButton_play">
+          <property name="text">
+           <string>Play</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_stop">
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_control">
+          <property name="text">
+           <string>Control</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_load">
+          <property name="text">
+           <string>Load File</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label_status">
+          <property name="text">
+           <string>Status</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTextBrowser" name="textBrowser_output"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>

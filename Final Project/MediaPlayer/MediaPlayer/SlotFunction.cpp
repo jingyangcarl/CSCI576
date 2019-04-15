@@ -21,6 +21,18 @@ void MediaPlayer::PushButtonLoad() {
 	LabelImagePrint(irgb.mid(0, 480 * 270 * 3));
 }
 
+void MediaPlayer::PushButtonPlay() {
+	play = true;
+	while (play) {
+		ui.textBrowser_output->append(QString::number(1));
+		QCoreApplication::processEvents();
+	}
+}
+
+void MediaPlayer::PushButtonStop() {
+	play = false;
+}
+
 void MediaPlayer::LabelImagePrint(QByteArray & imageData) {
 	// Initialization
 	QImage image = QImage(480, 270, QImage::Format_RGB32);
