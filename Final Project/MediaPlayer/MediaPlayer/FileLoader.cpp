@@ -47,30 +47,13 @@ void FileLoader::load() {
 		}
 		else if (fileInfo.suffix() == "wav") {
 			WavFile wavFile;
-			//wavFile.setFileName(filePath);
+			wavFile.setFileName(filePath);
 
+			if (wavFile.open(QIODevice::ReadOnly)) return;
+			else {
+				// the file is opened successfully
+				wav = wavFile.readAll();
+			}
 		}
 	}
-
-	//if (!file.exists()) return;
-	//else if (!file.open(QIODevice::ReadOnly)) return;
-	//else {
-	//	// the file is exist and opened successfully
-
-	//	if (fileInfo.suffix() == "rgb") {
-	//		// move the pointer to startFrameIndex
-	//		file.seek(startFrameIndex * frameSize);
-	//		// read the following frameCount frames
-	//		rgb = file.read(frameCount * frameSize);
-	//		// count total frames
-	//		totalFrames = file.size() / frameSize;
-	//	}
-	//	else if (fileInfo.suffix() == "wav") {
-	//		WavFile wavFile;
-	//		wavFile.setFileName(filePath);
-	//		wav = file.readAll();
-	//	}
-	//}
-
-	//return;
 }

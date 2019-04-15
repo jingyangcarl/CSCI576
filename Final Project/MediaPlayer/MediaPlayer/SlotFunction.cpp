@@ -52,6 +52,9 @@ void MediaPlayer::PushButtonPlay() {
 		QCoreApplication::processEvents();
 	fileLoader.wait();
 
+	// try play sound here
+	// TODO
+
 	// Display the following frames while loading the following frames
 	while (framePlayedIndex < totalFrame && play) {
 		// Save current rgbBuffer for display in the for loop 
