@@ -10,6 +10,17 @@ class MediaPlayer : public QMainWindow
 public:
 	MediaPlayer(QWidget *parent = Q_NULLPTR);
 
+	/*-----------------Initialization.cpp---------------------*/
+	void ConnectionInitialization();
+	/*-----------------SlotFunction.cpp---------------------*/
+public slots:
+	void PushButtonLoad();
+
 private:
 	Ui::MediaPlayerClass ui;
+
+	// Private Variables
+	QString filePath;
+	QByteArray irgb;
+	QByteArray orgb;
 };

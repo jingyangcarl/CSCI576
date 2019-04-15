@@ -29,9 +29,9 @@
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_control">
       <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_load">
         <property name="text">
-         <string>Open File</string>
+         <string>Load File</string>
         </property>
        </widget>
       </item>
