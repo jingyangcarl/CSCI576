@@ -19,9 +19,10 @@ void FileLoader::load() {
 	else if (!file.open(QIODevice::ReadOnly)) return;
 	else {
 		// the file is exist and opened successfully
-
 		if (fileInfo.suffix() == "rgb") {
-			rgb = file.readAll();
+			int frameSize = 3 * 480 * 270;
+			int frameCount = 150;
+			rgb = file.read(frameSize * frameCount);
 		}
 		else if (fileInfo.suffix() == "bmp") {
 			rgb = file.readAll();
