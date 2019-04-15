@@ -3,3 +3,5 @@
 **/*.ipch
 
 # big files
+**/*.rgb
+**/*.zip
