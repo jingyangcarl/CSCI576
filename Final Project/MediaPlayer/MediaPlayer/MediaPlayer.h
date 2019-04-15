@@ -2,6 +2,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MediaPlayer.h"
+#include <qfiledialog.h>
+#include "FileLoader.h"
 
 class MediaPlayer : public QMainWindow
 {
@@ -15,6 +17,7 @@ public:
 	/*-----------------SlotFunction.cpp---------------------*/
 public slots:
 	void PushButtonLoad();
+	void LabelImagePrint(QByteArray & imageData);
 
 private:
 	Ui::MediaPlayerClass ui;
