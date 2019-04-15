@@ -19,18 +19,18 @@ public slots:
 	void PushButtonLoad();
 	void PushButtonPlay();
 	void PushButtonStop();
-	void LabelImagePrint(QByteArray & imageData);
-	void LabelImagePrint(QByteArray & imageData, int frameIndex);
+	void LabelImagePrint(QByteArray & frameData);
+	void LabelImagePrint(QByteArray & frameData, int frameIndex);
 
 private:
 	Ui::MediaPlayerClass ui;
 
 	// Private Variables
 	QString filePath;
-	QByteArray irgb;
+	QByteArray rgb;
 	QByteArray orgb;
 
 	bool play = true;
 	int totalFrame = 0;
-	int currentFrame = 0;
+	int framePlayedIndex = 0;
 };
