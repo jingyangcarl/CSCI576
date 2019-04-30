@@ -9,11 +9,11 @@ Output;
 */
 void MediaPlayer::PushButtonLoad() {
 	// Initialization
-	filePath = QFileDialog::getOpenFileName(this, tr("Please Select File"), "../../Data/dataset/Ads", tr("RGB File(*.rgb)\n"));
+	filePath = QFileDialog::getOpenFileName(this, tr("Please Select File"), "../../Data/dataset/Ads", tr("RGB File(*.rgb)\n WAV File(*.wav)\n"));
+	QFileInfo fileInfo(filePath);
 	rgb = QByteArray();
 	wav = QByteArray();
 
-	QFileInfo fileInfo(filePath);
 	if (fileInfo.suffix() == "rgb") {
 		VideoLoader videoLoader(filePath, rgb, 0, 1);
 
@@ -21,7 +21,7 @@ void MediaPlayer::PushButtonLoad() {
 		videoLoader.start();
 
 		// update UI
-		while(videoLoader.isRunning())
+		while (videoLoader.isRunning())
 			QCoreApplication::processEvents();
 
 		// Wait Thread
@@ -31,30 +31,31 @@ void MediaPlayer::PushButtonLoad() {
 		LabelImagePrint(rgb.mid(0, 480 * 270 * 3));
 
 		// Update Gloable Variables
+		rgbLoadStatus = videoLoader.GetLoadStatus();
 		totalFrame = videoLoader.GetTotalFrames();
 		framePlayedIndex = 0;
 		play = false;
 	}
-	//FileLoader fileLoader(filePath, rgb, wav, 0, 1);
+	else if (fileInfo.suffix() == "wav") {
+		AudioLoader audioLoader(filePath, wav);
 
-	//// Load File
-	//fileLoader.start();
+		// Load File
+		audioLoader.start();
 
-	//// Update UI
-	//while (fileLoader.isRunning()) {
-	//	QCoreApplication::processEvents();
-	//}
+		// update UI
+		while (audioLoader.isRunning())
+			QCoreApplication::processEvents();
 
-	//// Wait Thread
-	//fileLoader.wait();
+		// wait thread
+		audioLoader.wait();
 
-	//// Output Image
-	//LabelImagePrint(rgb.mid(0, 480 * 270 * 3));
-
-	//// Update Gloable Variables
-	//totalFrame = fileLoader.GetTotalFrames();
-	//framePlayedIndex = 0;
-	//play = false;
+		// update global variables
+		wavLoadStatus = audioLoader.GetLoadStatus();
+		format = audioLoader.GetAudioFormat();
+	}
+	
+	// update variable status on user interface;
+	UpdateVariableStatus();
 }
 
 /*
@@ -69,7 +70,6 @@ void MediaPlayer::PushButtonPlay() {
 	play = true;
 
 	// Load frames in bufffer for display
-	//videoLoader videoLoader(filePath, rgb, wav, framePlayedIndex, 150);
 	VideoLoader videoLoader(filePath, rgb, framePlayedIndex, 150);
 	videoLoader.start();
 	while (videoLoader.isRunning())
@@ -77,11 +77,14 @@ void MediaPlayer::PushButtonPlay() {
 	videoLoader.wait();
 
 	// try play sound here
-	// TODO
+	QBuffer buffer(&wav);
+	buffer.open(QIODevice::ReadOnly);
+	QAudioOutput *audio = new QAudioOutput(QAudioDeviceInfo::defaultInputDevice(), format);
+	audio->start(&buffer);
 
 	// Display the following frames while loading the following frames
 	while (framePlayedIndex < totalFrame && play) {
-		// Save current rgbBuffer for display in the for loop 
+		// Save current rgbBuffer for display in the for loop
 		QByteArray tempRgb = rgb;
 
 		// Load following frames using another thread
@@ -90,16 +93,28 @@ void MediaPlayer::PushButtonPlay() {
 
 		// display frames saved in the buffer
 		int frameBufferSize = tempRgb.size() / (480 * 270 * 3);
+
+		// set up a timer
+		QElapsedTimer timer;
+
 		for (int i = 0; i < frameBufferSize; i++) {
 			if (play) {
+				// start timer
+				timer.start();
+
+				// print rgb values
 				LabelImagePrint(tempRgb, i);
+
+				// sleep
+				Sleep(22);
+
+				// update variables
 				framePlayedIndex++;
 				ui.textBrowser_output->append(QString::number(framePlayedIndex));
+				frameRate = 1000.0 / timer.elapsed();
 			}
-			else {
-				ui.textBrowser_output->append("!" + QString::number(framePlayedIndex));
-				return;
-			}
+			// update variable status on user interface;
+			UpdateVariableStatus();
 			QCoreApplication::processEvents();
 		}
 
@@ -110,7 +125,7 @@ void MediaPlayer::PushButtonPlay() {
 
 /*
 Introduction:
-	This function is a slot function used to respond to the click event on the Stop Button, 
+	This function is a slot function used to respond to the click event on the Stop Button,
 	which will stop the playing video
 Input;
 Output;
@@ -151,13 +166,13 @@ void MediaPlayer::LabelImagePrint(QByteArray & frameData) {
 }
 
 /*
-Introduction: 
+Introduction:
 	This function is used to display a frame stored in the given frameData with a frame offset
 Input:
 	@ QByteArray & frameData: the given frame data
 	@ int frameOffset: frame offset in the given frame data
 Output;
-Example: 
+Example:
 	Suppose QByteArray frameData stores five frames,
 	LabelImagePrint(frameData, 3); will display the 3rd frame in the frameData
 */
@@ -179,4 +194,14 @@ void MediaPlayer::LabelImagePrint(QByteArray & frameData, int frameOffset) {
 
 	// Print Image
 	ui.label_image->setPixmap(QPixmap::fromImage(image));
+}
+
+void MediaPlayer::UpdateVariableStatus() {
+	ui.label_rgb_status_value->setText(rgbLoadStatus ? "Loaded" : "Unloaded");
+	ui.label_wav_status_value->setText(wavLoadStatus ? "Loaded" : "Unloaded");
+	ui.label_frame_width_value->setText(QString::number(480));
+	ui.label_frame_height_value->setText(QString::number(270));
+	ui.label_frame_status_value->setText(QString::number(framePlayedIndex) + " : " + QString::number(totalFrame));
+	ui.label_frame_rate_value->setText(QString::number(frameRate));
+
 }

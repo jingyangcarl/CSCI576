@@ -9,6 +9,7 @@ public:
 	VideoLoader(QString filePath, QByteArray &rgb, qint64 startFrameIndex, qint64 frameCount);
 	void SetStartFrameIndex(int startFrameIndex);
 	int GetTotalFrames();
+	bool GetLoadStatus();
 
 protected:
 	void run();
@@ -23,6 +24,7 @@ private:
 	qint64 frameCount;
 	qint64 frameSize = 3 * 480 * 270;
 	qint64 totalFrames = -1;
+	bool loadStatus;
 
 	// Function
 	void load();

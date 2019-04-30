@@ -68,6 +68,79 @@
       </item>
       <item row="2" column="0" colspan="2">
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="8" column="0" colspan="2">
+         <widget class="QTextBrowser" name="textBrowser_output"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_wav_status">
+          <property name="text">
+           <string>WAV Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_frame_status">
+          <property name="text">
+           <string>Frame Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_frame_rate">
+          <property name="text">
+           <string>Frame Rate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_rgb_status_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_frame_width_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_frame_rate_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_rgb_status">
+          <property name="text">
+           <string>RGB Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_wav_status_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_frame_status_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_frame_width">
+          <property name="text">
+           <string>Frame Width</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_status">
           <property name="text">
@@ -78,8 +151,33 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QTextBrowser" name="textBrowser_output"/>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_frame_height">
+          <property name="text">
+           <string>Frame Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_frame_height_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

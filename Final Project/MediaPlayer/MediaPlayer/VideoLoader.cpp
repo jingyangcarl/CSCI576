@@ -19,6 +19,10 @@ int VideoLoader::GetTotalFrames() {
 	return totalFrames;
 }
 
+bool VideoLoader::GetLoadStatus() {
+	return loadStatus;
+}
+
 void VideoLoader::run() {
 	load();
 	return;
@@ -41,6 +45,8 @@ void VideoLoader::load() {
 		rgb = file.read(frameCount * frameSize);
 		// count total frames
 		totalFrames = file.size() / frameSize;
+		// change load status;
+		loadStatus = true;
 	}
 	else {
 

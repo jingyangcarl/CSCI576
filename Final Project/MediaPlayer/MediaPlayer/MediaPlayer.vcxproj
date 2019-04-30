@@ -113,6 +113,7 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioLoader.cpp" />
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="Initialization.cpp" />
     <ClCompile Include="main.cpp" />
@@ -130,6 +131,7 @@
     <QtRcc Include="MediaPlayer.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioLoader.h" />
     <ClInclude Include="FileLoader.h" />
     <ClInclude Include="VideoLoader.h" />
   </ItemGroup>
