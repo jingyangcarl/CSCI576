@@ -3,7 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_MediaPlayer.h"
 #include <qfiledialog.h>
-#include "FileLoader.h"
+//#include "FileLoader.h"
+#include "VideoLoader.h"
 
 class MediaPlayer : public QMainWindow
 {

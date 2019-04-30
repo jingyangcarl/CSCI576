@@ -45,6 +45,9 @@
     <ClCompile Include="FileLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VideoLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MediaPlayer.h">
@@ -63,6 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,26 +12,49 @@ void MediaPlayer::PushButtonLoad() {
 	filePath = QFileDialog::getOpenFileName(this, tr("Please Select File"), "../../Data/dataset/Ads", tr("RGB File(*.rgb)\n"));
 	rgb = QByteArray();
 	wav = QByteArray();
-	FileLoader fileLoader(filePath, rgb, wav, 0, 1);
 
-	// Load File
-	fileLoader.start();
+	QFileInfo fileInfo(filePath);
+	if (fileInfo.suffix() == "rgb") {
+		VideoLoader videoLoader(filePath, rgb, 0, 1);
 
-	// Update UI
-	while (fileLoader.isRunning()) {
-		QCoreApplication::processEvents();
+		// Load File
+		videoLoader.start();
+
+		// update UI
+		while(videoLoader.isRunning())
+			QCoreApplication::processEvents();
+
+		// Wait Thread
+		videoLoader.wait();
+
+		// Output Image
+		LabelImagePrint(rgb.mid(0, 480 * 270 * 3));
+
+		// Update Gloable Variables
+		totalFrame = videoLoader.GetTotalFrames();
+		framePlayedIndex = 0;
+		play = false;
 	}
+	//FileLoader fileLoader(filePath, rgb, wav, 0, 1);
 
-	// Wait Thread
-	fileLoader.wait();
+	//// Load File
+	//fileLoader.start();
 
-	// Output Image
-	LabelImagePrint(rgb.mid(0, 480 * 270 * 3));
+	//// Update UI
+	//while (fileLoader.isRunning()) {
+	//	QCoreApplication::processEvents();
+	//}
 
-	// Update Gloable Variables
-	totalFrame = fileLoader.GetTotalFrames();
-	framePlayedIndex = 0;
-	play = false;
+	//// Wait Thread
+	//fileLoader.wait();
+
+	//// Output Image
+	//LabelImagePrint(rgb.mid(0, 480 * 270 * 3));
+
+	//// Update Gloable Variables
+	//totalFrame = fileLoader.GetTotalFrames();
+	//framePlayedIndex = 0;
+	//play = false;
 }
 
 /*
@@ -46,11 +69,12 @@ void MediaPlayer::PushButtonPlay() {
 	play = true;
 
 	// Load frames in bufffer for display
-	FileLoader fileLoader(filePath, rgb, wav, framePlayedIndex, 150);
-	fileLoader.start();
-	while (fileLoader.isRunning())
+	//videoLoader videoLoader(filePath, rgb, wav, framePlayedIndex, 150);
+	VideoLoader videoLoader(filePath, rgb, framePlayedIndex, 150);
+	videoLoader.start();
+	while (videoLoader.isRunning())
 		QCoreApplication::processEvents();
-	fileLoader.wait();
+	videoLoader.wait();
 
 	// try play sound here
 	// TODO
@@ -61,8 +85,8 @@ void MediaPlayer::PushButtonPlay() {
 		QByteArray tempRgb = rgb;
 
 		// Load following frames using another thread
-		fileLoader.SetStartFrameIndex(framePlayedIndex + 150);
-		fileLoader.start();
+		videoLoader.SetStartFrameIndex(framePlayedIndex + 150);
+		videoLoader.start();
 
 		// display frames saved in the buffer
 		int frameBufferSize = tempRgb.size() / (480 * 270 * 3);
@@ -80,7 +104,7 @@ void MediaPlayer::PushButtonPlay() {
 		}
 
 		// wait thread
-		fileLoader.wait();
+		videoLoader.wait();
 	}
 }
 

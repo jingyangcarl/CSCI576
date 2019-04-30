@@ -118,6 +118,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
     <ClCompile Include="SlotFunction.cpp" />
+    <ClCompile Include="VideoLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MediaPlayer.h" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileLoader.h" />
+    <ClInclude Include="VideoLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WavFile\WavFile.vcxproj">

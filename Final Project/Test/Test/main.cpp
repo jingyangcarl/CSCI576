@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
 
 	// read WAV file
 	WavFile wavFile;
-	QString filePath = "D:/CSCI576/Final Project/Data/dataset/Ads/Starbucks_Ad_15s.wav";
+	//QString filePath = "D:/CSCI576/Final Project/Data/dataset/Ads/Starbucks_Ad_15s.wav";
+	QString filePath = "D:/CSCI576/Final Project/Data/dataset/Videos/data_test1.wav";
 	wavFile.setFileName(filePath);
 
 	// open WAV file
