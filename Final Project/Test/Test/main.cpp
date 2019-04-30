@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 
 	// read WAV file
 	WavFile wavFile;
-	//QString filePath = "D:/CSCI576/Final Project/Data/dataset/Ads/Starbucks_Ad_15s.wav";
-	QString filePath = "D:/CSCI576/Final Project/Data/dataset/Videos/data_test1.wav";
+	QString filePath = "D:/CSCI576/Final Project/Data/dataset/Ads/Starbucks_Ad_15s.wav";
+	//QString filePath = "D:/CSCI576/Final Project/Data/dataset/Videos/data_test1.wav";
 	wavFile.setFileName(filePath);
 
 	// open WAV file
@@ -31,7 +31,8 @@ int main(int argc, char *argv[]) {
 
 	//QByteArray wavArray(wavBuffer.constData<char>(), wavBuffer.byteCount());
 	QByteArray wavArray;
-	wavArray = wavArray.fromRawData((char *)wavBuffer.data(), wavBuffer.byteCount());
+	//wavArray = wavArray.fromRawData((char *)wavBuffer.data(), wavBuffer.byteCount());
+	wavArray = QByteArray((char *)wavBuffer.data(), wavBuffer.byteCount());
 	QBuffer buffer(&wavArray);
 	buffer.open(QIODevice::ReadOnly);
 

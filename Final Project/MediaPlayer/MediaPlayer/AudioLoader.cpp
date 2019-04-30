@@ -26,11 +26,13 @@ void AudioLoader::load() {
 
 	if (fileInfo.suffix() == "wav") {
 
-		if (file.open(QIODevice::ReadOnly)) return;
+		if (!file.open(filePath)) return;
 
 		// Read samples
 		QAudioBuffer buffer(file.readAll(), file.fileFormat());
-		wav = wav.fromRawData((char *)buffer.data(), buffer.byteCount());
+		//wav = QByteArray::fromRawData((char *)buffer.data(), buffer.byteCount());
+
+		wav = QByteArray((char *)buffer.data(), buffer.byteCount());
 		
 		// set variables
 		format = file.fileFormat();

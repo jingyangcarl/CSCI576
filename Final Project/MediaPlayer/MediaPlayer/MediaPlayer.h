@@ -4,6 +4,7 @@
 #include "ui_MediaPlayer.h"
 #include <qfiledialog.h>
 #include <qaudiooutput.h>
+#include <qbuffer.h>
 #include <qelapsedtimer.h>
 #include <qbuffer.h>
 #include "VideoLoader.h"
@@ -33,9 +34,9 @@ private:
 
 	// Private Variables
 	QString filePath;
-	QByteArray rgb;
+	QByteArray rgb = QByteArray();
 	bool rgbLoadStatus = 0;
-	QByteArray wav;
+	QByteArray wav = QByteArray();
 	bool wavLoadStatus = 0;
 
 	bool play = true;

@@ -240,7 +240,7 @@ public:
         label_status->setText(QApplication::translate("MediaPlayerClass", "Status", nullptr));
         label_frame_height->setText(QApplication::translate("MediaPlayerClass", "Frame Height", nullptr));
         label_frame_height_value->setText(QApplication::translate("MediaPlayerClass", "TextLabel", nullptr));
-        label_9->setText(QApplication::translate("MediaPlayerClass", "TextLabel", nullptr));
+        label_9->setText(QApplication::translate("MediaPlayerClass", "Sample Rate", nullptr));
         label_10->setText(QApplication::translate("MediaPlayerClass", "TextLabel", nullptr));
     } // retranslateUi
 
