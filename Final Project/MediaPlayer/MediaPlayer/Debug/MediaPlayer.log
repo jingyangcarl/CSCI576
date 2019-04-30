@@ -1,2 +1,7 @@
 ﻿  FileLoader.cpp
+  moc_MediaPlayer.cpp
+  Initialization.cpp
+  MediaPlayer.cpp
+  SlotFunction.cpp
+  main.cpp
   MediaPlayer.vcxproj -> D:\CSCI576\Final Project\MediaPlayer\Win32\Debug\MediaPlayer.exe

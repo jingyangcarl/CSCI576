@@ -1,4 +1,5 @@
 #pragma once
+#include <qaudiobuffer.h>
 #include <qthread.h>
 #include <qfile.h>
 #include <qfileinfo.h>

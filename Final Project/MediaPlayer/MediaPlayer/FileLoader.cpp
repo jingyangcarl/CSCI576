@@ -52,7 +52,8 @@ void FileLoader::load() {
 			if (wavFile.open(QIODevice::ReadOnly)) return;
 			else {
 				// the file is opened successfully
-				wav = wavFile.readAll();
+				//wav = wavFile.readAll();
+				QAudioBuffer audioBuffer(wavFile.readAll(), wavFile.fileFormat());
 			}
 		}
 	}
