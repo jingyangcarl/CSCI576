@@ -116,15 +116,18 @@ void MediaPlayer::PushButtonPlay() {
 				samplePlayedIndex = wavLoadStatus ? framePlayedIndex * 1600 : 0;
 			}
 
-			// Sleep
-			int sleepTime = 1000.0 / givenFrameRate - timer.elapsed();
-			if (sleepTime > 0) Sleep(sleepTime);
-
 			// Update variable status on user interface;
-			frameRate = 1000.0 / timer.elapsed();
-			sampleRate = wavLoadStatus ? frameRate * 1600 : 0;
 			UpdateVariableStatus();
 			QCoreApplication::processEvents();
+
+			// Sleep
+			int sleepTime = 1000.0 / givenFrameRate - timer.elapsed();
+			sleepTime += (rand() % 1) + (rand() % 2) * (rand() % 2) * 1;
+			if (sleepTime > 0) Sleep(sleepTime);
+
+			// update framerate
+			frameRate = 1000.0 / timer.elapsed();
+			sampleRate = wavLoadStatus ? frameRate * 1600 : 0;
 		}
 
 		// Wait thread

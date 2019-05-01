@@ -1,9 +1,2 @@
-﻿  Moc'ing MediaPlayer.h...
-  AudioLoader.cpp
-  Initialization.cpp
-  main.cpp
-  MediaPlayer.cpp
-  SlotFunction.cpp
-  VideoLoader.cpp
-  moc_MediaPlayer.cpp
+﻿  SlotFunction.cpp
   MediaPlayer.vcxproj -> D:\CSCI576\Final Project\MediaPlayer\Win32\Release\MediaPlayer.exe

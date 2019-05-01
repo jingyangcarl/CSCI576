@@ -54,5 +54,5 @@ private:
 	QAudioFormat format;
 	QBuffer *buffer;
 	QAudioOutput *audio;
-	int givenFrameRate = 34.9999;
+	int givenFrameRate = 31;
 };
