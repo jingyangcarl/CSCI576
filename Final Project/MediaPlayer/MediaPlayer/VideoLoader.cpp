@@ -3,7 +3,7 @@
 VideoLoader::VideoLoader(QString filePath, QByteArray & rgb) : 
 	filePath(filePath), rgb(rgb) {
 	startFrameIndex = 0;
-	frameCount = 150;
+	frameCount = 30;
 }
 
 VideoLoader::VideoLoader(QString filePath, QByteArray & rgb, qint64 startFrameIndex, qint64 frameCount) :

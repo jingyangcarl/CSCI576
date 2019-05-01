@@ -33,9 +33,10 @@ private:
 	Ui::MediaPlayerClass ui;
 
 	// Private Variables
-	QString filePath;
+	QString rgbFilePath;
 	QByteArray rgb = QByteArray();
 	bool rgbLoadStatus = 0;
+	QString wavFilePath;
 	QByteArray wav = QByteArray();
 	bool wavLoadStatus = 0;
 
@@ -44,4 +45,6 @@ private:
 	int framePlayedIndex = 0;
 	double frameRate = 0;
 	QAudioFormat format;
+	QBuffer *buffer;
+	QAudioOutput *audio;
 };

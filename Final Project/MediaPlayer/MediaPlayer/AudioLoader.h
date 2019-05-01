@@ -8,6 +8,8 @@
 class AudioLoader : public QThread {
 public:
 	AudioLoader(QString filePath, QByteArray &wav);
+	AudioLoader(QString filePath, QByteArray &wav, qint64 startSampleIndex);
+	void SetStartSampleIndex(qint64 startSampleIndex);
 	QAudioFormat GetAudioFormat();
 	bool GetLoadStatus();
 
@@ -20,6 +22,7 @@ private:
 
 	// variables
 	QString filePath;
+	qint64 startSampleIndex;
 	QAudioFormat format;
 	bool loadStatus;
 

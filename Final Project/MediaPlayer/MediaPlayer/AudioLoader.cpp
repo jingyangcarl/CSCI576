@@ -2,6 +2,15 @@
 
 AudioLoader::AudioLoader(QString filePath, QByteArray & wav) : 
 	filePath(filePath), wav(wav) {
+	startSampleIndex = 0;
+}
+
+AudioLoader::AudioLoader(QString filePath, QByteArray & wav, qint64 startSampleIndex) : 
+	filePath(filePath), wav(wav), startSampleIndex(startSampleIndex) {
+}
+
+void AudioLoader::SetStartSampleIndex(qint64 startSampleIndex) {
+	this->startSampleIndex = startSampleIndex;
 }
 
 QAudioFormat AudioLoader::GetAudioFormat() {
@@ -29,7 +38,8 @@ void AudioLoader::load() {
 		if (!file.open(filePath)) return;
 
 		// Read samples
-		QAudioBuffer buffer(file.readAll(), file.fileFormat());
+		file.seek(startSampleIndex);
+		QAudioBuffer buffer(file.read(file.size() - startSampleIndex), file.fileFormat());
 		//wav = QByteArray::fromRawData((char *)buffer.data(), buffer.byteCount());
 
 		wav = QByteArray((char *)buffer.data(), buffer.byteCount());

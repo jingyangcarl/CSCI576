@@ -30,10 +30,12 @@ int main(int argc, char *argv[]) {
 	const char *data8 = wavBuffer.constData<char>();
 
 	//QByteArray wavArray(wavBuffer.constData<char>(), wavBuffer.byteCount());
-	QByteArray wavArray;
+	QByteArray wavArray, tempWav;
 	//wavArray = wavArray.fromRawData((char *)wavBuffer.data(), wavBuffer.byteCount());
 	wavArray = QByteArray((char *)wavBuffer.data(), wavBuffer.byteCount());
-	QBuffer buffer(&wavArray);
+	tempWav = QByteArray::fromRawData(wavArray, 1600 * 10);
+	//QBuffer buffer(&wavArray);
+	QBuffer buffer(&tempWav);
 	buffer.open(QIODevice::ReadOnly);
 
 	// test on buffer
