@@ -51,6 +51,7 @@ void MediaPlayer::PushButtonLoad() {
 		// Update global variables
 		wavLoadStatus = audioLoader.GetLoadStatus();
 		format = audioLoader.GetAudioFormat();
+		totalSample = audioLoader.GetTotalSamples();
 	}
 
 	// Update variable status on user interface;
@@ -74,7 +75,9 @@ void MediaPlayer::PushButtonPlay() {
 	while (videoLoader.isRunning())
 		videoLoader.wait();
 
+	// Audio choices
 	if (!framePlayedIndex) {
+		// Load audio samples in buffer for the first click
 		buffer = new QBuffer(&wav);
 		buffer->open(QIODevice::ReadOnly);
 		audio = new QAudioOutput(QAudioDeviceInfo::defaultInputDevice(), format);
@@ -82,6 +85,7 @@ void MediaPlayer::PushButtonPlay() {
 		QCoreApplication::processEvents();
 	}
 	else {
+		// Continue playing audio samples
 		audio->resume();
 		QCoreApplication::processEvents();
 	}
@@ -96,7 +100,7 @@ void MediaPlayer::PushButtonPlay() {
 		videoLoader.start();
 
 		// Display frames saved in the buffer
-		int frameBufferSize = tempRgb.size() / (480 * 270 * 3);
+		int frameBufferSize = tempRgb.size() / (width * height * 3);
 
 		// Set up a timer
 		QElapsedTimer timer;
@@ -107,19 +111,18 @@ void MediaPlayer::PushButtonPlay() {
 			if (play) {
 				// Print rgb values
 				LabelImagePrint(tempRgb, i);
-
 				// Update variables
 				framePlayedIndex++;
+				samplePlayedIndex = wavLoadStatus ? framePlayedIndex * 1600 : 0;
 			}
 
 			// Sleep
-			int sleepTime = 1000.0 / 34 - timer.elapsed();
+			int sleepTime = 1000.0 / givenFrameRate - timer.elapsed();
 			if (sleepTime > 0) Sleep(sleepTime);
-			else ui.textBrowser_output->append(QString::number(sleepTime));
-
-			frameRate = 1000.0 / timer.elapsed();
 
 			// Update variable status on user interface;
+			frameRate = 1000.0 / timer.elapsed();
+			sampleRate = wavLoadStatus ? frameRate * 1600 : 0;
 			UpdateVariableStatus();
 			QCoreApplication::processEvents();
 		}
@@ -144,12 +147,19 @@ void MediaPlayer::PushButtonStop() {
 	audio->suspend();
 }
 
+/*
+Introduction: 
+	This function is a slot function used to reset status of the player
+Input;
+Output;
+*/
 void MediaPlayer::PushButtonReplay() {
 	// reset status
 	framePlayedIndex = 0;
 	play = false;
 	audio->stop();
 
+	// hit play button again
 	emit PushButtonPlay();
 }
 
@@ -217,8 +227,10 @@ void MediaPlayer::LabelImagePrint(QByteArray & frameData, int frameOffset) {
 void MediaPlayer::UpdateVariableStatus() {
 	ui.label_rgb_status_value->setText(rgbLoadStatus ? "Loaded" : "Unloaded");
 	ui.label_wav_status_value->setText(wavLoadStatus ? "Loaded" : "Unloaded");
-	ui.label_frame_width_value->setText(QString::number(480));
-	ui.label_frame_height_value->setText(QString::number(270));
+	ui.label_frame_width_value->setText(QString::number(width));
+	ui.label_frame_height_value->setText(QString::number(height));
 	ui.label_frame_status_value->setText(QString::number(framePlayedIndex) + " : " + QString::number(totalFrame));
 	ui.label_frame_rate_value->setText(QString::number(frameRate));
+	ui.label_sample_status_value->setText(QString::number(samplePlayedIndex) + " : " + QString::number(totalSample));
+	ui.label_sample_rate_value->setText(QString::number(sampleRate));
 }

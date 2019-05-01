@@ -17,6 +17,10 @@ QAudioFormat AudioLoader::GetAudioFormat() {
 	return format;
 }
 
+qint64 AudioLoader::GetTotalSamples() {
+	return totalSamples;
+}
+
 bool AudioLoader::GetLoadStatus() {
 	return loadStatus;
 }
@@ -46,6 +50,7 @@ void AudioLoader::load() {
 		
 		// set variables
 		format = file.fileFormat();
+		totalSamples = buffer.sampleCount();
 		loadStatus = true;
 	}
 }

@@ -11,8 +11,7 @@
 #include "AudioLoader.h"
 #include "qt_windows.h"
 
-class MediaPlayer : public QMainWindow
-{
+class MediaPlayer : public QMainWindow {
 	Q_OBJECT
 
 public:
@@ -36,16 +35,24 @@ private:
 	// Private Variables
 	QString rgbFilePath;
 	QByteArray rgb = QByteArray();
-	bool rgbLoadStatus = 0;
 	QString wavFilePath;
 	QByteArray wav = QByteArray();
-	bool wavLoadStatus = 0;
 
+	// Status variables
 	bool play = true;
-	int totalFrame = 0;
+	bool rgbLoadStatus = 0;
+	bool wavLoadStatus = 0;
+	int width = 480;
+	int height = 270;
 	int framePlayedIndex = 0;
+	int totalFrame = 0;
 	double frameRate = 0;
+	int samplePlayedIndex = 0;
+	int totalSample = 0;
+	double sampleRate = 0;
+
 	QAudioFormat format;
 	QBuffer *buffer;
 	QAudioOutput *audio;
+	int givenFrameRate = 34.9999;
 };

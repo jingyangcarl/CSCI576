@@ -11,6 +11,7 @@ public:
 	AudioLoader(QString filePath, QByteArray &wav, qint64 startSampleIndex);
 	void SetStartSampleIndex(qint64 startSampleIndex);
 	QAudioFormat GetAudioFormat();
+	qint64 GetTotalSamples();
 	bool GetLoadStatus();
 
 protected:
@@ -25,6 +26,7 @@ private:
 	qint64 startSampleIndex;
 	QAudioFormat format;
 	bool loadStatus;
+	qint64 totalSamples;
 
 	// Function
 	void load();

@@ -14,7 +14,7 @@
    <string>MediaPlayer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout" columnstretch="4,1">
+   <layout class="QGridLayout" name="gridLayout" columnstretch="3,1">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout_display">
       <item row="0" column="0">
@@ -75,20 +75,10 @@
       </item>
       <item row="2" column="0" colspan="2">
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="8" column="0" colspan="2">
-         <widget class="QTextBrowser" name="textBrowser_output"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_wav_status">
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_wav_status_value">
           <property name="text">
-           <string>WAV Status</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_frame_status">
-          <property name="text">
-           <string>Frame Status</string>
+           <string>TextLabel</string>
           </property>
          </widget>
         </item>
@@ -99,36 +89,15 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_rgb_status_value">
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_sample_status">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Sample Status</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_frame_width_value">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="label_frame_rate_value">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_rgb_status">
-          <property name="text">
-           <string>RGB Status</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="label_wav_status_value">
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_frame_height_value">
           <property name="text">
            <string>TextLabel</string>
           </property>
@@ -138,13 +107,6 @@
          <widget class="QLabel" name="label_frame_status_value">
           <property name="text">
            <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_frame_width">
-          <property name="text">
-           <string>Frame Width</string>
           </property>
          </widget>
         </item>
@@ -158,6 +120,72 @@
           </property>
          </widget>
         </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_frame_width_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_sample_rate">
+          <property name="text">
+           <string>Sample Rate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0" colspan="2">
+         <widget class="QTextBrowser" name="textBrowser_output"/>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_frame_rate_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_frame_status">
+          <property name="text">
+           <string>Frame Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_sample_rate_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_rgb_status_value">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_rgb_status">
+          <property name="text">
+           <string>RGB Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_frame_width">
+          <property name="text">
+           <string>Frame Width</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_wav_status">
+          <property name="text">
+           <string>WAV Status</string>
+          </property>
+         </widget>
+        </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_frame_height">
           <property name="text">
@@ -165,24 +193,20 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_frame_height_value">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Sample Rate</string>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="1">
-         <widget class="QLabel" name="label_10">
+         <widget class="QLabel" name="label_sample_status_value">
           <property name="text">
            <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Debug</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>

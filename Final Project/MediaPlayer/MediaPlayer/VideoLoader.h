@@ -8,7 +8,7 @@ public:
 	VideoLoader(QString filePath, QByteArray &rgb);
 	VideoLoader(QString filePath, QByteArray &rgb, qint64 startFrameIndex, qint64 frameCount);
 	void SetStartFrameIndex(int startFrameIndex);
-	int GetTotalFrames();
+	qint64 GetTotalFrames();
 	bool GetLoadStatus();
 
 protected:

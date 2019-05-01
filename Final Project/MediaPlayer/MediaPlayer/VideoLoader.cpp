@@ -15,7 +15,7 @@ void VideoLoader::SetStartFrameIndex(int startFrameIndex) {
 	this->startFrameIndex = startFrameIndex;
 }
 
-int VideoLoader::GetTotalFrames() {
+qint64 VideoLoader::GetTotalFrames() {
 	return totalFrames;
 }
 
