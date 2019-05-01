@@ -14,18 +14,15 @@ void MediaPlayer::PushButtonLoad() {
 
 	if (fileInfo.suffix() == "rgb") {
 
-		
+		// Save path
 		rgbFilePath = filePath;
 
+		// Load file
 		VideoLoader videoLoader(rgbFilePath, rgb, 0, 1);
-
-		// Load File
 		videoLoader.start();
-
 		// update UI
 		while (videoLoader.isRunning())
 			QCoreApplication::processEvents();
-
 		// Wait Thread
 		videoLoader.wait();
 
@@ -39,26 +36,24 @@ void MediaPlayer::PushButtonLoad() {
 		play = false;
 	}
 	else if (fileInfo.suffix() == "wav") {
+		// Save path
 		wavFilePath = filePath;
 
+		// Load file
 		AudioLoader audioLoader(wavFilePath, wav);
-
-		// Load File
 		audioLoader.start();
-
 		// update UI
 		while (audioLoader.isRunning())
 			QCoreApplication::processEvents();
-
-		// wait thread
+		// Wait thread
 		audioLoader.wait();
 
-		// update global variables
+		// Update global variables
 		wavLoadStatus = audioLoader.GetLoadStatus();
 		format = audioLoader.GetAudioFormat();
 	}
 
-	// update variable status on user interface;
+	// Update variable status on user interface;
 	UpdateVariableStatus();
 }
 
@@ -73,23 +68,21 @@ void MediaPlayer::PushButtonPlay() {
 	// Set Status
 	play = true;
 
-	// Load frames in bufffer for display
+	// Load video frames in bufffer for display
 	VideoLoader videoLoader(rgbFilePath, rgb, framePlayedIndex, 30);
 	videoLoader.start();
 	while (videoLoader.isRunning())
 		videoLoader.wait();
 
-	AudioLoader audioLoader(wavFilePath, wav, framePlayedIndex * 1600);
-	audioLoader.start();
-	while (audioLoader.isRunning())
-		audioLoader.wait();
-
-	// try play sound here
-	if (framePlayedIndex < totalFrame && play) {
+	if (!framePlayedIndex) {
 		buffer = new QBuffer(&wav);
 		buffer->open(QIODevice::ReadOnly);
 		audio = new QAudioOutput(QAudioDeviceInfo::defaultInputDevice(), format);
 		audio->start(buffer);
+		QCoreApplication::processEvents();
+	}
+	else {
+		audio->resume();
 		QCoreApplication::processEvents();
 	}
 
@@ -102,36 +95,36 @@ void MediaPlayer::PushButtonPlay() {
 		videoLoader.SetStartFrameIndex(framePlayedIndex + 30);
 		videoLoader.start();
 
-		// display frames saved in the buffer
+		// Display frames saved in the buffer
 		int frameBufferSize = tempRgb.size() / (480 * 270 * 3);
 
-		// set up a timer
+		// Set up a timer
 		QElapsedTimer timer;
 
 		for (int i = 0; i < frameBufferSize; i++) {
-			// start timer
+			// Start timer
 			timer.start();
 			if (play) {
-				// print rgb values
+				// Print rgb values
 				LabelImagePrint(tempRgb, i);
 
-				// update variables
+				// Update variables
 				framePlayedIndex++;
 			}
 
-			// sleep
+			// Sleep
 			int sleepTime = 1000.0 / 34 - timer.elapsed();
 			if (sleepTime > 0) Sleep(sleepTime);
 			else ui.textBrowser_output->append(QString::number(sleepTime));
 
 			frameRate = 1000.0 / timer.elapsed();
 
-			// update variable status on user interface;
+			// Update variable status on user interface;
 			UpdateVariableStatus();
 			QCoreApplication::processEvents();
 		}
 
-		// wait thread
+		// Wait thread
 		videoLoader.wait();
 	}
 }
@@ -144,10 +137,20 @@ Input;
 Output;
 */
 void MediaPlayer::PushButtonStop() {
-	// Set Status
+	// Stop video status
 	play = false;
 
+	// Stop audio status
+	audio->suspend();
+}
+
+void MediaPlayer::PushButtonReplay() {
+	// reset status
+	framePlayedIndex = 0;
+	play = false;
 	audio->stop();
+
+	emit PushButtonPlay();
 }
 
 /*

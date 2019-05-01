@@ -33,7 +33,6 @@ int main(int argc, char *argv[]) {
 	QByteArray wavArray, tempWav;
 	//wavArray = wavArray.fromRawData((char *)wavBuffer.data(), wavBuffer.byteCount());
 	wavArray = QByteArray((char *)wavBuffer.data(), wavBuffer.byteCount());
-	tempWav = QByteArray::fromRawData(wavArray, 1600 * 10);
 	//QBuffer buffer(&wavArray);
 	QBuffer buffer(&tempWav);
 	buffer.open(QIODevice::ReadOnly);

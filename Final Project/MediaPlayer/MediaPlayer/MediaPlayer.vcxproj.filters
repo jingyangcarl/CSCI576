@@ -42,9 +42,6 @@
     <ClCompile Include="SlotFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VideoLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -68,9 +65,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VideoLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

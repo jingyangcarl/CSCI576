@@ -32,10 +32,11 @@ public:
     QLabel *label_image;
     QGridLayout *gridLayout_control;
     QGridLayout *gridLayout_2;
-    QPushButton *pushButton_play;
-    QPushButton *pushButton_stop;
     QLabel *label_control;
+    QPushButton *pushButton_stop;
     QPushButton *pushButton_load;
+    QPushButton *pushButton_play;
+    QPushButton *pushButton_replay;
     QGridLayout *gridLayout_3;
     QTextBrowser *textBrowser_output;
     QLabel *label_wav_status;
@@ -86,26 +87,31 @@ public:
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        pushButton_play = new QPushButton(centralWidget);
-        pushButton_play->setObjectName(QString::fromUtf8("pushButton_play"));
-
-        gridLayout_2->addWidget(pushButton_play, 2, 0, 1, 1);
-
-        pushButton_stop = new QPushButton(centralWidget);
-        pushButton_stop->setObjectName(QString::fromUtf8("pushButton_stop"));
-
-        gridLayout_2->addWidget(pushButton_stop, 2, 1, 1, 1);
-
         label_control = new QLabel(centralWidget);
         label_control->setObjectName(QString::fromUtf8("label_control"));
         label_control->setAlignment(Qt::AlignCenter);
 
         gridLayout_2->addWidget(label_control, 0, 0, 1, 2);
 
+        pushButton_stop = new QPushButton(centralWidget);
+        pushButton_stop->setObjectName(QString::fromUtf8("pushButton_stop"));
+
+        gridLayout_2->addWidget(pushButton_stop, 2, 1, 1, 1);
+
         pushButton_load = new QPushButton(centralWidget);
         pushButton_load->setObjectName(QString::fromUtf8("pushButton_load"));
 
         gridLayout_2->addWidget(pushButton_load, 1, 0, 1, 2);
+
+        pushButton_play = new QPushButton(centralWidget);
+        pushButton_play->setObjectName(QString::fromUtf8("pushButton_play"));
+
+        gridLayout_2->addWidget(pushButton_play, 2, 0, 1, 1);
+
+        pushButton_replay = new QPushButton(centralWidget);
+        pushButton_replay->setObjectName(QString::fromUtf8("pushButton_replay"));
+
+        gridLayout_2->addWidget(pushButton_replay, 3, 0, 1, 2);
 
 
         gridLayout_control->addLayout(gridLayout_2, 0, 0, 1, 2);
@@ -223,10 +229,11 @@ public:
     {
         MediaPlayerClass->setWindowTitle(QApplication::translate("MediaPlayerClass", "MediaPlayer", nullptr));
         label_image->setText(QApplication::translate("MediaPlayerClass", "TextLabel", nullptr));
-        pushButton_play->setText(QApplication::translate("MediaPlayerClass", "Play", nullptr));
-        pushButton_stop->setText(QApplication::translate("MediaPlayerClass", "Stop", nullptr));
         label_control->setText(QApplication::translate("MediaPlayerClass", "Control", nullptr));
+        pushButton_stop->setText(QApplication::translate("MediaPlayerClass", "Stop", nullptr));
         pushButton_load->setText(QApplication::translate("MediaPlayerClass", "Load File", nullptr));
+        pushButton_play->setText(QApplication::translate("MediaPlayerClass", "Play", nullptr));
+        pushButton_replay->setText(QApplication::translate("MediaPlayerClass", "Replay", nullptr));
         label_wav_status->setText(QApplication::translate("MediaPlayerClass", "WAV Status", nullptr));
         label_frame_status->setText(QApplication::translate("MediaPlayerClass", "Frame Status", nullptr));
         label_frame_rate->setText(QApplication::translate("MediaPlayerClass", "Frame Rate", nullptr));

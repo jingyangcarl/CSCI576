@@ -25,6 +25,7 @@ public slots:
 	void PushButtonLoad();
 	void PushButtonPlay();
 	void PushButtonStop();
+	void PushButtonReplay();
 	void LabelImagePrint(QByteArray & frameData);
 	void LabelImagePrint(QByteArray & frameData, int frameIndex);
 	void UpdateVariableStatus();

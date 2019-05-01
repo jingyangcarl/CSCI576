@@ -33,20 +33,6 @@
      <layout class="QGridLayout" name="gridLayout_control">
       <item row="0" column="0" colspan="2">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButton_play">
-          <property name="text">
-           <string>Play</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_stop">
-          <property name="text">
-           <string>Stop</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="label_control">
           <property name="text">
@@ -57,10 +43,31 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_stop">
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0" colspan="2">
          <widget class="QPushButton" name="pushButton_load">
           <property name="text">
            <string>Load File</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButton_play">
+          <property name="text">
+           <string>Play</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_replay">
+          <property name="text">
+           <string>Replay</string>
           </property>
          </widget>
         </item>
